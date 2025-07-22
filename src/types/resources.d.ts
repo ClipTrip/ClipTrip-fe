@@ -6,7 +6,7 @@ import buttonChip from "@/locales/ko/buttonChip.json";
 import chip from "@/locales/ko/chip.json";
 import headline from "@/locales/ko/headline.json";
 import info from "@/locales/ko/info.json";
-import listItem from "@/locales/ko/info.json";
+import listItem from "@/locales/ko/listItem.json";
 import menu from "@/locales/ko/menu.json";
 import modal from "@/locales/ko/modal.json";
 import naviItem from "@/locales/ko/naviItem.json";
@@ -20,7 +20,7 @@ import textField from "@/locales/ko/textField.json";
 declare module "i18next" {
   interface CustomTypeOptions {
     resources: {
-      appbar: typeof appBar;
+      appBar: typeof appBar;
       accessibility: typeof accessibility;
       buttonAction: typeof buttonAction;
       buttonChip: typeof buttonChip;
