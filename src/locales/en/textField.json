@@ -1,0 +1,11 @@
+{
+  "textField_logIn-id": "Your Email",
+  "textField_logIn-password": "Your Password",
+  "textField_signUp-id": "Your Email",
+  "textField_signUp-password": "Your Password",
+  "textField_currentPassword": "Current Password",
+  "textField_newPassword": "New Password",
+  "textField_url": "Paste Video URL",
+  "textField_likesList": "Likes List name",
+  "textField_addMember": "Email"
+}

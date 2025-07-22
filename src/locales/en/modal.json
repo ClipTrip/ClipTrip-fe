@@ -1,0 +1,8 @@
+{
+  "modal_title_error": "Unsupported video. ",
+  "modal_title_deleteTrip": "Delete this trip?",
+  "modal_title_logOut": "Are you sure you want to log out?",
+  "modal_title_deleteAccount": "Delete account permanently?",
+  "modal_supportingText_error": "Please upload a video with subtitles or attach a valid link.",
+  "modal_supportingText_deleteAccount": "Once deleted, it can’t be restored."
+}

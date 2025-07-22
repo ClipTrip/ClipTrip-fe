@@ -1,0 +1,19 @@
+{
+  "selectField_gender": "성별",
+  "selectField_gender-01": "남성",
+  "selectField_gender-02": "여성",
+  "selectField_age": "나이",
+  "selectField_age-01": "10대",
+  "selectField_age-02": "20대",
+  "selectField_age-03": "30대",
+  "selectField_age-04": "40대",
+  "selectField_age-05": "50대 이상",
+  "selectField_language": "언어",
+  "selectField_language-01": "영어",
+  "selectField_language-02": "한국어",
+  "selectField_country": "나라",
+  "selectField_country-01": "미국",
+  "selectField_country-02": "한국",
+  "selectField_country-03": "중국",
+  "selectField_country-04": "일본"
+}

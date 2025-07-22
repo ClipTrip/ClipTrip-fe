@@ -1,0 +1,8 @@
+{
+  "modal_title_error": "지원하지 않는 영상이에요.",
+  "modal_title_deleteTrip": "일정을 지울까요?",
+  "modal_title_logOut": "로그아웃 할까요?",
+  "modal_title_deleteAccount": "계정을 탈퇴할까요?",
+  "modal_supportingText_error": "자막이 있는 영상 링크로 넣어주세요.",
+  "modal_supportingText_deleteAccount": "계정을 지우면, 다시 되돌릴 수 없어요."
+}
