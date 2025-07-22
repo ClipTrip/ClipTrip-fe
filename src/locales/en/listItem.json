@@ -1,0 +1,15 @@
+{
+  "listItem_term-all": "Agree to All Terms",
+  "listItem_term-01": "Privacy Policy (Required)",
+  "listItem_term-02": "Terms of Service (Required)",
+  "listItem_set-01": "Language Settings",
+  "listItem_set-02": "Change Password",
+  "listItem_set-03": "Privacy Policy",
+  "listItem_set-04": "Terms of Service",
+  "listItem_set-05": "Log out",
+  "listItem_set-06": "Delete Account",
+  "listItem_placeName": "Place Name",
+  "listItem_descriptionPlace": "Description of the Place",
+  "listItem_newTrip": "New Trip",
+  "listItem_descriptionNewTrip": "Description of the Trip"
+}

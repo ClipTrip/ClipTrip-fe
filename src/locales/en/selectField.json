@@ -1,0 +1,19 @@
+{
+  "selectField_gender": "Gender",
+  "selectField_gender-01": "Male",
+  "selectField_gender-02": "Female",
+  "selectField_age": "Age",
+  "selectField_age-01": "10s",
+  "selectField_age-02": "20s",
+  "selectField_age-03": "30s",
+  "selectField_age-04": "40s",
+  "selectField_age-05": "50+",
+  "selectField_language": "Language",
+  "selectField_language-01": "English",
+  "selectField_language-02": "Korean",
+  "selectField_country": "Country",
+  "selectField_country-01": "United States",
+  "selectField_country-02": "Korea",
+  "selectField_country-03": "China",
+  "selectField_country-04": "Japan"
+}

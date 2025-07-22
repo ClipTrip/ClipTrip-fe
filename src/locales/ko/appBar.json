@@ -1,0 +1,13 @@
+{
+  "appBar_signUp": "회원가입",
+  "appBar_logIn": "로그인",
+  "appBar_create": "일정 생성하기",
+  "appBar_navi-01": "홈",
+  "appBar_navi-02": "일정",
+  "appBar_navi-03": "북마크",
+  "appBar_navi-04": "마이",
+  "appBar_set-01": "언어 설정",
+  "appBar_set-02": "비밀번호 변경",
+  "appBar_set-03": "개인정보처리방침",
+  "appBar_set-04": "이용약관동의"
+}
