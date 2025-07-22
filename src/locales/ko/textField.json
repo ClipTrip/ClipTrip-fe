@@ -1,0 +1,11 @@
+{
+  "textField_logIn-id": "이메일을 입력해주세요",
+  "textField_logIn-password": "비밀번호를 입력해주세요",
+  "textField_signUp-id": "이메일을 입력해주세요",
+  "textField_signUp-password": "비밀번호를 입력해주세요",
+  "textField_currentPassword": "현재 비밀번호를 입력해주세요",
+  "textField_newPassword": "새로운 비밀번호를 입력해주세요",
+  "textField_url": "영상 링크를 입력해주세요",
+  "textField_likesList": "북마크 리스트 이름",
+  "textField_addMember": "이메일을 입력해주세요"
+}
