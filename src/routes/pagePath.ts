@@ -1,6 +1,6 @@
 export const pagePath = {
-  HOME: "home",
+  HOME: "",
   TRIPS: "trips",
   PLACES: "places",
   PROFILE: "profile"
-}
+} as const;
