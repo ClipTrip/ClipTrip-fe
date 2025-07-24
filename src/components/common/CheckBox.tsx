@@ -5,7 +5,7 @@ import CheckCircleIcon from "@/components/icons/system/CheckCircleIcon.tsx";
 interface CheckBoxProps {
     label: string,
     type?: "default" | "primary",
-    isActive: boolean,
+    isActive?: boolean,
 }
 
 const CheckBox = ({label, type = "default", isActive = false}: CheckBoxProps) => {
