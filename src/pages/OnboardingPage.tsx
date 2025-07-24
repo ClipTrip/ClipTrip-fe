@@ -10,6 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const ONBOARDING_IMG = [
   { src: "/illustration.png", alt: "illustration", title: "headline_title_onb-01" },
@@ -22,6 +23,7 @@ const OnboardingPage = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
   const { t, i18n } = useTranslation(["headline", "buttonAction"]);
+  const navigate = useNavigate();
 
   const lang = document.documentElement.lang;
 
@@ -76,7 +78,10 @@ const OnboardingPage = () => {
               {currentPage === totalPage && (
                 <>
                   <ButtonActionFill>{t("buttonAction:button-action_start")}</ButtonActionFill>
-                  <button className="body_m-prominent w-[312px] h-12 cursor-pointer text-sy_label-alternative">
+                  <button
+                    onClick={() => navigate("/login")}
+                    className="body_m-prominent w-[312px] h-12 cursor-pointer text-sy_label-alternative"
+                  >
                     {t("buttonAction:button-action_signUp")}
                   </button>
                 </>
