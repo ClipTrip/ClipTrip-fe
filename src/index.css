@@ -200,7 +200,6 @@
   --font-family-brand: "Montserrat, sans-serif";
   --font-family-system: "PretendardVariable, sans-serif";
 
-  --font-weight-heavy: 900;
   --font-weight-extraBold: 800;
   --font-weight-bold: 700;
   --font-weight-semiBold: 600;
@@ -211,17 +210,17 @@
   --text-014: 14px;
   --text-016: 16px;
   --text-018: 18px;
-  --text-022: 2px;
+  --text-022: 22px;
   --text-024: 24px;
-  --text-044: 44px;
+  --text-034: 34px;
 
-  --leading-lineHeight-012: 16px;
-  --leading-lineHeight-014: 21px;
+  --leading-lineHeight-012: 18px;
+  --leading-lineHeight-014: 22px;
   --leading-lineHeight-016: 24px;
   --leading-lineHeight-018: 27px;
   --leading-lineHeight-022: 33px;
   --leading-lineHeight-024: 36px;
-  --leading-lineHeight-044: 54px;
+  --leading-lineHeight-034: 40px;
 
   --tracking-letterSpacing-012: -0.3px;
   --tracking-letterSpacing-014: -0.4px;
@@ -229,7 +228,7 @@
   --tracking-letterSpacing-018: -0.4px;
   --tracking-letterSpacing-022: -0.4px;
   --tracking-letterSpacing-024: -0.6px;
-  --tracking-letterSpacing-044: -0.5px;
+  --tracking-letterSpacing-034: -0.5px;
 
   --color-common-0: #000000;
   --color-common-100: #ffffff;
@@ -323,20 +322,44 @@
   --color-sy_status-positive-normal: var(--color-blue-50);
 
   --color-sy_dim: var(--color-black/74);
+
+  --shadow-elevation: 0px 0px 20px rgba(51, 51, 51, 0.08);
 }
 
 html[lang="en"] {
   --font-family-brand: "Montserrat, sans-serif";
+  --leading-lineHeight-012: 18px;
+  --leading-lineHeight-014: 22px;
+  --leading-lineHeight-016: 24px;
+  --leading-lineHeight-018: 27px;
+  --leading-lineHeight-022: 33px;
+  --leading-lineHeight-024: 36px;
+  --leading-lineHeight-034: 40px;
 }
 
 html[lang="ko"] {
   --font-family-brand: "SCoreDream, sans-serif";
+  --leading-lineHeight-012: 20px;
+  --leading-lineHeight-014: 24px;
+  --leading-lineHeight-016: 26px;
+  --leading-lineHeight-018: 28px;
+  --leading-lineHeight-022: 34px;
+  --leading-lineHeight-024: 36px;
+  --leading-lineHeight-034: 44px;
 }
 
 /* Typography */
 
 @utility display_l {
-  @apply font-family-brand font-extraBold text-044 leading-lineHeight-044 tracking-letterSpacing-044;
+  @apply font-family-brand font-bold text-034 leading-lineHeight-034 tracking-letterSpacing-034;
+
+  html:lang(en) & {
+    @apply font-bold;
+  }
+
+  html:lang(ko) & {
+    @apply font-extraBold;
+  }
 }
 
 @utility headline_l {
@@ -347,16 +370,52 @@ html[lang="ko"] {
   @apply font-family-brand font-bold text-018 leading-lineHeight-018 tracking-letterSpacing-018;
 }
 
+@utility title_l {
+  @apply font-family-system font-semiBold text-018 leading-lineHeight-018 tracking-letterSpacing-018;
+
+  html:lang(en) & {
+    @apply font-semiBold;
+  }
+
+  html:lang(ko) & {
+    @apply font-bold;
+  }
+}
+
 @utility title_m {
   @apply font-family-system font-medium text-016 leading-lineHeight-016 tracking-letterSpacing-016;
+
+  html:lang(en) & {
+    @apply font-medium;
+  }
+
+  html:lang(ko) & {
+    @apply font-semiBold;
+  }
 }
 
 @utility title_m-prominent {
   @apply font-family-system font-semiBold text-016 leading-lineHeight-016 tracking-letterSpacing-016;
+
+  html:lang(en) & {
+    @apply font-semiBold;
+  }
+
+  html:lang(ko) & {
+    @apply font-bold;
+  }
 }
 
 @utility title_s {
   @apply font-family-system font-regular text-014 leading-lineHeight-014 tracking-letterSpacing-014;
+
+  html:lang(en) & {
+    @apply font-regular;
+  }
+
+  html:lang(ko) & {
+    @apply font-medium;
+  }
 }
 
 @utility title_s-prominent {
@@ -365,22 +424,54 @@ html[lang="ko"] {
 
 @utility body_l {
   @apply font-family-system font-regular text-016 leading-lineHeight-016 tracking-letterSpacing-016;
+
+  html:lang(en) & {
+    @apply font-regular;
+  }
+
+  html:lang(ko) & {
+    @apply font-medium;
+  }
 }
 
 @utility body_l-prominent {
   @apply font-family-system font-medium text-016 leading-lineHeight-016 tracking-letterSpacing-016;
+
+  html:lang(en) & {
+    @apply font-medium;
+  }
+
+  html:lang(ko) & {
+    @apply font-semiBold;
+  }
 }
 
 @utility body_m {
   @apply font-family-system font-regular text-014 leading-lineHeight-014 tracking-letterSpacing-014;
+
+  html:lang(en) & {
+    @apply font-regular;
+  }
+
+  html:lang(ko) & {
+    @apply font-medium;
+  }
 }
 
 @utility body_m-prominent {
   @apply font-family-system font-medium text-014 leading-lineHeight-014 tracking-letterSpacing-014;
+
+  html:lang(en) & {
+    @apply font-medium;
+  }
+
+  html:lang(ko) & {
+    @apply font-semiBold;
+  }
 }
 
 @utility body_s {
-  @apply font-family-system font-regular text-012 leading-lineHeight-012 tracking-letterSpacing-012;
+  @apply font-family-system font-medium text-012 leading-lineHeight-012 tracking-letterSpacing-012;
 }
 
 @utility label_l {
@@ -388,11 +479,19 @@ html[lang="ko"] {
 }
 
 @utility label_m {
-  @apply font-family-system font-regular text-014 leading-lineHeight-014 tracking-letterSpacing-014;
+  @apply font-family-system font-medium text-014 leading-lineHeight-014 tracking-letterSpacing-014;
 }
 
 @utility label_s {
-  @apply font-family-system font-regular text-012 leading-lineHeight-012 tracking-letterSpacing-012;
+  @apply font-family-system font-medium text-012 leading-lineHeight-012 tracking-letterSpacing-012;
+
+  html:lang(en) & {
+    @apply font-medium;
+  }
+
+  html:lang(ko) & {
+    @apply font-semiBold;
+  }
 }
 
 @utility label_s-prominent {
