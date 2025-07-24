@@ -16,7 +16,7 @@ const TextField = ({
   type,
   ...props
 }: TextFieldProps & React.ComponentProps<"input">) => {
-  const [focused, setFocused] = useState(true);
+  const [focused, setFocused] = useState(false);
 
   return (
     <div className="w-[312px] h-fit bg-sy_container-neutral-normal">
@@ -38,6 +38,7 @@ const TextField = ({
         {focused && (
           <div className="w-12 h-12 absolute right-0 top-0 flex items-center justify-center">
             <button
+              tabIndex={-1}
               onMouseDown={(e) => e.preventDefault()}
               onClick={onIconClick}
               className="cursor-pointer"
