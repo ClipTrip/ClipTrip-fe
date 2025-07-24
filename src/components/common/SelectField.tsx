@@ -19,8 +19,6 @@ interface DataOption {
     label: string;
 }
 
-
-
 interface SelectFieldProps {
     datas: DataOption[];
     defaultValue: string;
