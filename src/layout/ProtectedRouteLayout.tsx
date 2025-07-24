@@ -9,7 +9,7 @@ const ProtectedRouteLayout = () => {
     return null;
   }
 
-  if (error) return <Navigate to="/login" replace />;
+  if (error) return <Navigate to="/onboarding" replace />;
 
   return (
     <div className="w-dvw h-dvh flex justify-center">
