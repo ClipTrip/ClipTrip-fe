@@ -37,6 +37,8 @@ import koSearchField from "@/locales/ko/searchField.json";
 import koTermsOfService2 from "@/locales/ko/termsOfService2.json";
 import koTextField from "@/locales/ko/textField.json";
 
+const lang = document.documentElement.lang;
+
 i18n.use(initReactI18next).init({
   resources: {
     en: {
@@ -78,7 +80,7 @@ i18n.use(initReactI18next).init({
       textField: koTextField
     }
   },
-  lng: "ko",
+  lng: lang,
   fallbackLng: "en",
   ns: [
     "appBar",
