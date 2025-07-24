@@ -321,7 +321,7 @@
   --color-sy_status-positive-normal: var(--color-blue-40);
   --color-sy_status-positive-normal: var(--color-blue-50);
 
-  --color-sy_dim: var(--color-black/74);
+  --color-sy_dim: #000000bd;
 
   --shadow-elevation: 0px 0px 20px rgba(51, 51, 51, 0.08);
 }
@@ -496,4 +496,45 @@ html[lang="ko"] {
 
 @utility label_s-prominent {
   @apply font-family-system font-semiBold text-012 leading-lineHeight-012 tracking-letterSpacing-012;
+}
+
+@keyframes bounce1 {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-11px);
+  }
+}
+@keyframes bounce2 {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-11px);
+  }
+}
+@keyframes bounce3 {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-11px);
+  }
+}
+
+.bounce-1 {
+  animation: bounce1 1.5s ease-in-out infinite;
+  animation-delay: 0s;
+}
+.bounce-2 {
+  animation: bounce2 1.5s ease-in-out infinite;
+  animation-delay: 0.15s;
+}
+.bounce-3 {
+  animation: bounce3 1.5s ease-in-out infinite;
+  animation-delay: 0.3s;
 }
