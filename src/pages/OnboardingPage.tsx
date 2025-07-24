@@ -77,10 +77,11 @@ const OnboardingPage = () => {
 
               {currentPage === totalPage && (
                 <>
-                  <ButtonActionFill onClick={() => navigate("/login")}>
-                    {t("buttonAction:button-action_start")}
-                  </ButtonActionFill>
-                  <button className="body_m-prominent w-[312px] h-12 cursor-pointer text-sy_label-alternative">
+                  <ButtonActionFill>{t("buttonAction:button-action_start")}</ButtonActionFill>
+                  <button
+                    onClick={() => navigate("/login")}
+                    className="body_m-prominent w-[312px] h-12 cursor-pointer text-sy_label-alternative"
+                  >
                     {t("buttonAction:button-action_signUp")}
                   </button>
                 </>
