@@ -56,12 +56,7 @@ const LoginPage = () => {
           }}
         />
 
-        <ButtonActionFill
-          variant="primary"
-          disabled={isPending}
-          onClick={handleLogin}
-          className="mt-[18px]"
-        >
+        <ButtonActionFill variant="primary" disabled={isPending} className="mt-[18px]">
           {t("buttonAction:button-action_signUp")}
         </ButtonActionFill>
       </form>
