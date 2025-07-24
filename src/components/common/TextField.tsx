@@ -40,6 +40,7 @@ const TextField = ({
         />
         {focused && (
           <ButtonIcon
+            type="button"
             className="absolute right-0 top-0 bg-transparent active:bg-transparent"
             Icon={Icon}
             onClick={onIconClick}
