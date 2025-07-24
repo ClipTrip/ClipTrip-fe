@@ -12,7 +12,7 @@ const Headline = ({ title, description, textAlign = "center", className }: Headl
     <div className={cn("flex flex-col gap-012 px-024", textAlign === "center" && "items-center")}>
       <h1
         className={cn(
-          "display_l text-sy_label-strong",
+          "display_l text-sy_label-strong break-keep",
           textAlign === "center" && "text-center",
           textAlign === "left" && "text-left",
           className
