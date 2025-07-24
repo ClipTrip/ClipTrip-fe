@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import {
     Command,
     CommandGroup,
@@ -22,11 +22,18 @@ interface DataOption {
 interface SelectFieldProps {
     datas: DataOption[];
     defaultValue: string;
+    setSelectedValue: (value: string) => void;
 }
 
-const SelectField = ({datas, defaultValue} : SelectFieldProps) => {
+const SelectField = ({datas, defaultValue, setSelectedValue} : SelectFieldProps) => {
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState("")
+
+    useEffect(() => {
+        if(value){
+            setSelectedValue(value);
+        }
+    }, [value]);
 
     return (
         <div className="pl-024 pr-024">
