@@ -5,7 +5,6 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerContent,
-    DrawerFooter,
     DrawerTrigger,
 } from "@/components/ui/drawer"
 import CloseIcon from "@/components/icons/system/CloseIcon.tsx";
