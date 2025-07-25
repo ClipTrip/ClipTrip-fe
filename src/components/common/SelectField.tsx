@@ -21,11 +21,11 @@ interface DataOption {
 
 interface SelectFieldProps {
     datas: DataOption[];
-    defaultValue: string;
+    placeHolder?: string;
     setSelectedValue: (value: string) => void;
 }
 
-const SelectField = ({datas, defaultValue, setSelectedValue} : SelectFieldProps) => {
+const SelectField = ({datas, placeHolder, setSelectedValue} : SelectFieldProps) => {
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState("")
 
@@ -45,7 +45,7 @@ const SelectField = ({datas, defaultValue, setSelectedValue} : SelectFieldProps)
                     >
                         {value
                             ? datas?.find((data) => data.value === value)?.label
-                            : defaultValue}
+                            : placeHolder}
                         {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon/>}
                     </button>
                 </PopoverTrigger>
