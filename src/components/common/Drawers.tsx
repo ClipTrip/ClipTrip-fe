@@ -20,18 +20,16 @@ const Drawers = ({trigger, children}: PropsWithChildren<DrawerProps>) => {
             <DrawerTrigger asChild>
                 {trigger}
             </DrawerTrigger>
-            <DrawerHeader>
-                <DrawerTitle></DrawerTitle>
-            </DrawerHeader>
             <DrawerContent className="fixed bottom-4 inset-x-0 mx-auto max-w-[360px] w-full [&>div:first-child]:hidden rounded-t-030 !rounded-t-030 overflow-visible">
                 <div className="pl-024 pr-024">
-                    <DrawerFooter className="w-full flex items-end p-0">
+                    <DrawerHeader className="w-full flex items-end p-0">
+                        <DrawerTitle></DrawerTitle>
                         <DrawerClose asChild>
-                            <button className="p-012 pr-0 mt-[8px]">
+                            <button className="p-012 pr-0 mt-[8px] cursor-pointer">
                                 <CloseIcon/>
                             </button>
                         </DrawerClose>
-                    </DrawerFooter>
+                    </DrawerHeader>
                     {children}
                 </div>
             </DrawerContent>
