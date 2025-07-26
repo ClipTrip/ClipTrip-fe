@@ -5,14 +5,21 @@ interface HeadlineProps {
   description?: string;
   textAlign?: "center" | "left";
   className?: string;
+  descriptionClassName?: string;
 }
 
-const Headline = ({ title, description, textAlign = "center", className }: HeadlineProps) => {
+const Headline = ({
+  title,
+  description,
+  textAlign = "center",
+  className,
+  descriptionClassName
+}: HeadlineProps) => {
   return (
     <div className={cn("flex flex-col gap-012 px-024", textAlign === "center" && "items-center")}>
       <h1
         className={cn(
-          "display_l text-sy_label-strong",
+          "display_l text-sy_label-strong break-keep",
           textAlign === "center" && "text-center",
           textAlign === "left" && "text-left",
           className
@@ -25,7 +32,8 @@ const Headline = ({ title, description, textAlign = "center", className }: Headl
           className={cn(
             "title_s-prominent text-sy_label-light",
             textAlign === "center" && "text-center",
-            textAlign === "left" && "text-left"
+            textAlign === "left" && "text-left",
+            descriptionClassName
           )}
         >
           {description}
