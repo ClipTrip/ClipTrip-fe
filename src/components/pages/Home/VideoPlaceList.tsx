@@ -4,10 +4,17 @@ import Driver from "@/components/common/Driver";
 import ListItem from "@/components/common/ListItem";
 import SectionTitle from "@/components/common/SectionTitle";
 import AddCircleIcon from "@/components/icons/system/AddCircleIcon";
-import DragIcon from "@/components/icons/system/DragIcon";
-import PinNumberIcon from "@/components/icons/system/PinNumberIcon";
-import RemoveCircleIcon from "@/components/icons/system/RemoveCircleIcon";
+import SortableListItem from "@/components/pages/Home/SortableListItem";
 import type { VideosResponse } from "@/types/video";
+import {
+  closestCenter,
+  DndContext,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent
+} from "@dnd-kit/core";
+import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -15,12 +22,43 @@ interface VideoPlaceListProps {
   placeList: VideosResponse["data"]["scheduleInfoResponse"]["placeList"];
 }
 
-const VideoPlaceList = ({ placeList }: VideoPlaceListProps) => {
+const VideoPlaceList = ({ placeList: defaultPlaceList }: VideoPlaceListProps) => {
   const { t } = useTranslation(["sectionTitle", "listItem", "buttonAction", "buttonChip", "info"]);
   const [mode, setMode] = useState<"view" | "edit">("view");
+  const [placeList, setPlaceList] = useState(defaultPlaceList);
+  const [deletePlaceList, setDeletePlaceList] = useState<
+    VideosResponse["data"]["scheduleInfoResponse"]["placeList"]
+  >([]);
 
   const handleMode = () => {
     setMode((mode) => (mode === "view" ? "edit" : "view"));
+  };
+
+  const sensors = useSensors(useSensor(PointerSensor));
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (active.id !== over?.id) {
+      const oldIndex = placeList.findIndex((p) => p.placeId === active.id);
+      const newIndex = placeList.findIndex((p) => p.placeId === over?.id);
+      setPlaceList(arrayMove(placeList, oldIndex, newIndex));
+    }
+  };
+
+  const handleRemove = (placeId: number) => {
+    const removed = placeList.find((place) => place.placeId === placeId);
+    if (!removed) return;
+
+    setDeletePlaceList((prev) => [...prev, removed]);
+    setPlaceList((prev) => prev.filter((place) => place.placeId !== placeId));
+  };
+
+  const handleAdd = (placeId: number) => {
+    const addItem = deletePlaceList.find((place) => place.placeId === placeId);
+    if (!addItem) return;
+
+    setDeletePlaceList((prev) => prev.filter((place) => place.placeId !== placeId));
+    setPlaceList((prev) => [...prev, addItem]);
   };
 
   return (
@@ -42,29 +80,46 @@ const VideoPlaceList = ({ placeList }: VideoPlaceListProps) => {
         </div>
 
         <div className="flex flex-col gap-012">
-          {placeList.map((place, idx) => (
-            <ListItem
-              key={place.placeId}
-              Pin={
-                mode === "edit" ? RemoveCircleIcon : PinNumberIcon.bind(null, { number: idx + 1 })
-              }
-              title={place.placeName}
-              description={place.roadAddress}
-              RightIcon={mode === "edit" ? DragIcon : undefined}
-            />
-          ))}
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext
+              items={placeList.map((p) => p.placeId)}
+              strategy={verticalListSortingStrategy}
+            >
+              <div className="flex flex-col gap-012">
+                {placeList.map((place, idx) => (
+                  <SortableListItem
+                    key={place.placeId}
+                    id={place.placeId}
+                    idx={idx}
+                    title={place.placeName}
+                    description={place.roadAddress}
+                    mode={mode}
+                    onRemove={() => handleRemove(place.placeId)}
+                  />
+                ))}
 
-          {mode === "edit" && (
-            <>
-              <Driver />
-
-              <ListItem
-                Pin={AddCircleIcon}
-                title={t("listItem:listItem_placeName")}
-                description={t("listItem:listItem_descriptionPlace")}
-              />
-            </>
-          )}
+                {mode === "edit" && (
+                  <>
+                    <Driver />
+                    {deletePlaceList.map((place) => (
+                      <ListItem
+                        key={place.placeId}
+                        Pin={AddCircleIcon}
+                        title={place.placeName}
+                        description={place.roadAddress}
+                        onPinClick={() => handleAdd(place.placeId)}
+                        status="delete"
+                      />
+                    ))}
+                  </>
+                )}
+              </div>
+            </SortableContext>
+          </DndContext>
         </div>
 
         <div className="px-024 py-028">
