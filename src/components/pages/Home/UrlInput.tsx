@@ -1,27 +1,22 @@
 import ButtonIcon from "@/components/common/ButtonIcon";
 import ArrowUpIcon from "@/components/icons/system/ArrowUpIcon";
 import VideosLoading from "@/components/pages/Home/VideosLoading";
-import { useVideos } from "@/hooks/useVideo";
 import { cn } from "@/lib/utils";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 
-const UrlInput = () => {
+interface UrlInputProps {
+  onSearch: (url: string) => void;
+  isPending: boolean;
+}
+
+const UrlInput = ({ onSearch, isPending }: UrlInputProps) => {
   const { t } = useTranslation("textField");
   const urlRef = useRef<HTMLInputElement>(null);
-  const { mutateAsync, isPending } = useVideos();
-
-  const handleSearch = async () => {
-    if (isPending) return null;
-
-    if (urlRef.current?.value) {
-      await mutateAsync({ youtubeUrl: urlRef.current.value });
-    }
-  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleSearch();
+    if (urlRef.current?.value) onSearch(urlRef.current?.value);
   };
 
   return (
