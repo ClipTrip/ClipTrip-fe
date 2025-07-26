@@ -14,7 +14,8 @@ const ButtonIcon = ({ Icon, className, onClick, ...props }: ButtonIconProps) => 
       onMouseDown={(e) => e.preventDefault()}
       onClick={onClick}
       className={cn(
-        "w-12 h-12 bg-sy_container-neutral-white rounded-010 flex items-center justify-center active:bg-sy_container-neutral-normal cursor-pointer disabled:cursor-default",
+        "w-12 h-12 bg-sy_container-neutral-white rounded-010 flex items-center justify-center active:bg-sy_container-neutral-normal disabled:cursor-default",
+        !!onClick && "cursor-pointer",
         className
       )}
       {...props}
