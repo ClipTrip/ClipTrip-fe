@@ -46,15 +46,12 @@ const ListItem = ({
       <div className="flex flex-col gap-004 grow pr-012">
         <h2
           data-state={status}
-          className="data-[state=delete]:text-sy_label-alternative title_m text-sy_label-normal"
+          className="data-[state=delete]:text-sy_label-light title_m text-sy_label-normal"
         >
           {title}
         </h2>
         {description && (
-          <p
-            data-state={status}
-            className="data-[state=delete]:text-shadow-sy_label-light body_m text-sy_label-light"
-          >
+          <p data-state={status} className="body_m text-sy_label-light">
             {description}
           </p>
         )}
