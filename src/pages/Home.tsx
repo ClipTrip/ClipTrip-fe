@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 
 const Home = () => {
   const { t } = useTranslation(["appBar", "headline"]);
+
   const [showVideoDetail, setShowVideoDetail] = useState(true);
   const { mutateAsync, isPending, data: resData } = useVideos();
 
@@ -34,7 +35,7 @@ const Home = () => {
           description={t("headline:headline_supportingText_home")}
           descriptionClassName="text-sy_label-normal"
         />
-
+        
         <UrlInput onSearch={handleSearch} isPending={isPending} />
       </div>
 

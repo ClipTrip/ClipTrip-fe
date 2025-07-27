@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 
+
 interface UrlInputProps {
   onSearch: (url: string) => void;
   isPending: boolean;
