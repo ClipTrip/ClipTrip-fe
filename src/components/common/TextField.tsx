@@ -1,22 +1,25 @@
+import ButtonIcon from "@/components/common/ButtonIcon";
 import CancelIcon from "@/components/icons/system/CancelIcon";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useState, type ElementType } from "react";
 
 interface TextFieldProps {
   supportingText?: string;
   onIconClick?: () => void;
+  Icon?: ElementType;
   isError?: boolean;
 }
 
 const TextField = ({
   supportingText,
+  Icon = CancelIcon,
   onIconClick,
   isError,
   className,
   type,
   ...props
 }: TextFieldProps & React.ComponentProps<"input">) => {
-  const [focused, setFocused] = useState(true);
+  const [focused, setFocused] = useState(false);
 
   return (
     <div className="w-[312px] h-fit bg-sy_container-neutral-normal">
@@ -36,15 +39,12 @@ const TextField = ({
           {...props}
         />
         {focused && (
-          <div className="w-12 h-12 absolute right-0 top-0 flex items-center justify-center">
-            <button
-              onMouseDown={(e) => e.preventDefault()}
-              onClick={onIconClick}
-              className="cursor-pointer"
-            >
-              <CancelIcon />
-            </button>
-          </div>
+          <ButtonIcon
+            type="button"
+            className="absolute right-0 top-0 bg-transparent active:bg-transparent"
+            Icon={Icon}
+            onClick={onIconClick}
+          />
         )}
       </div>
       {supportingText && (
