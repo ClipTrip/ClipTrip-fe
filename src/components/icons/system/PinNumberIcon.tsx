@@ -2,9 +2,10 @@ import { cn } from "@/lib/utils";
 
 interface SystemIconProps {
   className?: string;
+  number: number;
 }
 
-const PinNumberIcon = ({ className }: SystemIconProps) => {
+const PinNumberIcon = ({ number, className }: SystemIconProps) => {
   return (
     <svg
       className={cn("text-sy_icon-neutral-normal", className)}
@@ -19,10 +20,20 @@ const PinNumberIcon = ({ className }: SystemIconProps) => {
         fill="currentColor"
       />
       <circle cx="12.0005" cy="11.9155" r="8" fill="currentColor" />
-      <path
-        d="M13.5122 7.51562V16H11.7427V9.19141H11.6958L9.75049 10.4102V8.85156L11.8481 7.51562H13.5122Z"
+      <text
+        x="50%"
+        y="50%"
+        textAnchor="middle"
         fill="white"
-      />
+        fontSize="12px"
+        fontFamily="Pretendard"
+        fontWeight="700"
+        letterSpacing="-0.3"
+        dominantBaseline="middle"
+        dy="0.5"
+      >
+        {number}
+      </text>
     </svg>
   );
 };
