@@ -27,7 +27,7 @@ const Terms = () => {
 
     return (
         <>
-            <AppBar LeadingIcon={CloseIcon} title={t(type === "privacy" ? "appBar:appBar_set-03" : "appBar:appBar_set-04")} onLeadingIconClick={() => navigate("/register")}/>
+            <AppBar LeadingIcon={CloseIcon} title={t(type === "privacy" ? "appBar:appBar_set-03" : "appBar:appBar_set-04")} onLeadingIconClick={() => navigate(-1)}/>
             <div className="p-024 flex flex-col gap-028">
                 {type === "privacy" && <p className="body_m">
                     {t("termsOfService:termsOfService_title_00")}
