@@ -4,5 +4,7 @@ export const pagePath = {
   PLACES: "places",
   PROFILE: "profile",
   ONBOARDING: "onboarding",
-  LOGIN: "login"
+  LOGIN: "login",
+  REGISTER: "register",
+  TERMS: "terms",
 } as const;

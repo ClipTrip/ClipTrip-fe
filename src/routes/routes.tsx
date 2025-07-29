@@ -2,6 +2,8 @@ import ProtectedRouteLayout from "@/layout/ProtectedRouteLayout";
 import RootLayout from "@/layout/RootLayout";
 import Home from "@/pages/Home";
 import LoginPage from "@/pages/LoginPage";
+import RegisterPage from "@/pages/RegisterPage";
+import Terms from "@/pages/Terms.tsx";
 import OnboardingPage from "@/pages/OnboardingPage";
 import Places from "@/pages/Places";
 import Profile from "@/pages/Profile";
@@ -18,7 +20,15 @@ const router = createBrowserRouter([
         path: pagePath.ONBOARDING,
         element: <OnboardingPage />
       },
-      { path: pagePath.LOGIN, element: <LoginPage /> },
+      { path: pagePath.LOGIN,
+        element: <LoginPage />
+      },
+      { path: pagePath.REGISTER,
+        element: <RegisterPage />
+      },
+      { path: pagePath.TERMS,
+        element: <Terms />
+      },
       {
         path: pagePath.PLACES,
         element: <Places />
