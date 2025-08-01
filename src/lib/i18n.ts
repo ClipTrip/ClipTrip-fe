@@ -36,8 +36,17 @@ import koSelectField from '@/locales/ko/selectField.json';
 import koSearchField from '@/locales/ko/searchField.json';
 import koTermsOfService2 from '@/locales/ko/termsOfService2.json';
 import koTextField from '@/locales/ko/textField.json';
+import type { LanguageType } from '@/types/type';
 
-const lang = document.documentElement.lang;
+export const setLanguage = (lang: LanguageType) => {
+  i18n.changeLanguage(lang);
+  localStorage.setItem('language', lang);
+};
+
+export const getLanguage = () =>
+  localStorage.getItem('language') || document.documentElement.lang;
+
+const lang = getLanguage();
 
 i18n.use(initReactI18next).init({
   resources: {
