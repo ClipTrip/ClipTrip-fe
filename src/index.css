@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -120,56 +120,56 @@
 }
 
 @font-face {
-  font-family: "SCoreDream";
-  src: url("/fonts/S-CoreDream/SCDream1.otf") format("opentype");
+  font-family: 'SCoreDream';
+  src: url('/fonts/S-CoreDream/SCDream1.otf') format('opentype');
   font-weight: 100;
   font-style: normal;
 }
 @font-face {
-  font-family: "SCoreDream";
-  src: url("/fonts/S-CoreDream/SCDream2.otf") format("opentype");
+  font-family: 'SCoreDream';
+  src: url('/fonts/S-CoreDream/SCDream2.otf') format('opentype');
   font-weight: 200;
   font-style: normal;
 }
 @font-face {
-  font-family: "SCoreDream";
-  src: url("/fonts/S-CoreDream/SCDream3.otf") format("opentype");
+  font-family: 'SCoreDream';
+  src: url('/fonts/S-CoreDream/SCDream3.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
-  font-family: "SCoreDream";
-  src: url("/fonts/S-CoreDream/SCDream4.otf") format("opentype");
+  font-family: 'SCoreDream';
+  src: url('/fonts/S-CoreDream/SCDream4.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: "SCoreDream";
-  src: url("/fonts/S-CoreDream/SCDream5.otf") format("opentype");
+  font-family: 'SCoreDream';
+  src: url('/fonts/S-CoreDream/SCDream5.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
-  font-family: "SCoreDream";
-  src: url("/fonts/S-CoreDream/SCDream6.otf") format("opentype");
+  font-family: 'SCoreDream';
+  src: url('/fonts/S-CoreDream/SCDream6.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
 }
 @font-face {
-  font-family: "SCoreDream";
-  src: url("/fonts/S-CoreDream/SCDream7.otf") format("opentype");
+  font-family: 'SCoreDream';
+  src: url('/fonts/S-CoreDream/SCDream7.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
-  font-family: "SCoreDream";
-  src: url("/fonts/S-CoreDream/SCDream8.otf") format("opentype");
+  font-family: 'SCoreDream';
+  src: url('/fonts/S-CoreDream/SCDream8.otf') format('opentype');
   font-weight: 800;
   font-style: normal;
 }
 @font-face {
-  font-family: "SCoreDream";
-  src: url("/fonts/S-CoreDream/SCDream9.otf") format("opentype");
+  font-family: 'SCoreDream';
+  src: url('/fonts/S-CoreDream/SCDream9.otf') format('opentype');
   font-weight: 900;
   font-style: normal;
 }
@@ -197,8 +197,8 @@
   --radius-030: 30px;
   --radius-full: 1000px;
 
-  --font-family-brand: "Montserrat, sans-serif";
-  --font-family-system: "PretendardVariable, sans-serif";
+  --font-family-brand: 'Montserrat, sans-serif';
+  --font-family-system: 'PretendardVariable, sans-serif';
 
   --font-weight-extraBold: 800;
   --font-weight-bold: 700;
@@ -326,8 +326,8 @@
   --shadow-elevation: 0px 0px 20px rgba(51, 51, 51, 0.08);
 }
 
-html[lang="en"] {
-  --font-family-brand: "Montserrat, sans-serif";
+html[lang='en'] {
+  --font-family-brand: 'Montserrat, sans-serif';
   --leading-lineHeight-012: 18px;
   --leading-lineHeight-014: 22px;
   --leading-lineHeight-016: 24px;
@@ -337,8 +337,8 @@ html[lang="en"] {
   --leading-lineHeight-034: 40px;
 }
 
-html[lang="ko"] {
-  --font-family-brand: "SCoreDream, sans-serif";
+html[lang='ko'] {
+  --font-family-brand: 'SCoreDream, sans-serif';
   --leading-lineHeight-012: 20px;
   --leading-lineHeight-014: 24px;
   --leading-lineHeight-016: 26px;
@@ -351,7 +351,7 @@ html[lang="ko"] {
 /* Typography */
 
 @utility display_l {
-  @apply font-family-brand font-bold text-034 leading-lineHeight-034 tracking-letterSpacing-034;
+  @apply font-family-brand text-034 leading-lineHeight-034 tracking-letterSpacing-034 font-bold;
 
   html:lang(en) & {
     @apply font-bold;
@@ -363,11 +363,11 @@ html[lang="ko"] {
 }
 
 @utility headline_l {
-  @apply font-family-brand font-bold text-024 leading-lineHeight-024 tracking-letterSpacing-024;
+  @apply font-family-brand text-024 leading-lineHeight-024 tracking-letterSpacing-024 font-bold;
 }
 
 @utility headline_m {
-  @apply font-family-brand font-bold text-018 leading-lineHeight-018 tracking-letterSpacing-018;
+  @apply font-family-brand text-018 leading-lineHeight-018 tracking-letterSpacing-018 font-bold;
 }
 
 @utility title_l {
@@ -383,7 +383,7 @@ html[lang="ko"] {
 }
 
 @utility title_m {
-  @apply font-family-system font-medium text-016 leading-lineHeight-016 tracking-letterSpacing-016;
+  @apply font-family-system text-016 leading-lineHeight-016 tracking-letterSpacing-016 font-medium;
 
   html:lang(en) & {
     @apply font-medium;
@@ -435,7 +435,7 @@ html[lang="ko"] {
 }
 
 @utility body_l-prominent {
-  @apply font-family-system font-medium text-016 leading-lineHeight-016 tracking-letterSpacing-016;
+  @apply font-family-system text-016 leading-lineHeight-016 tracking-letterSpacing-016 font-medium;
 
   html:lang(en) & {
     @apply font-medium;
@@ -459,7 +459,7 @@ html[lang="ko"] {
 }
 
 @utility body_m-prominent {
-  @apply font-family-system font-medium text-014 leading-lineHeight-014 tracking-letterSpacing-014;
+  @apply font-family-system text-014 leading-lineHeight-014 tracking-letterSpacing-014 font-medium;
 
   html:lang(en) & {
     @apply font-medium;
@@ -471,7 +471,7 @@ html[lang="ko"] {
 }
 
 @utility body_s {
-  @apply font-family-system font-medium text-012 leading-lineHeight-012 tracking-letterSpacing-012;
+  @apply font-family-system text-012 leading-lineHeight-012 tracking-letterSpacing-012 font-medium;
 }
 
 @utility label_l {
@@ -479,11 +479,11 @@ html[lang="ko"] {
 }
 
 @utility label_m {
-  @apply font-family-system font-medium text-014 leading-lineHeight-014 tracking-letterSpacing-014;
+  @apply font-family-system text-014 leading-lineHeight-014 tracking-letterSpacing-014 font-medium;
 }
 
 @utility label_s {
-  @apply font-family-system font-medium text-012 leading-lineHeight-012 tracking-letterSpacing-012;
+  @apply font-family-system text-012 leading-lineHeight-012 tracking-letterSpacing-012 font-medium;
 
   html:lang(en) & {
     @apply font-medium;

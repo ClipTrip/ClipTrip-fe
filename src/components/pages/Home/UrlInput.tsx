@@ -1,9 +1,9 @@
-import ButtonIcon from "@/components/common/ButtonIcon";
-import ArrowUpIcon from "@/components/icons/system/ArrowUpIcon";
-import VideosLoading from "@/components/pages/Home/VideosLoading";
-import { cn } from "@/lib/utils";
-import { useRef } from "react";
-import { useTranslation } from "react-i18next";
+import ButtonIcon from '@/components/common/ButtonIcon';
+import ArrowUpIcon from '@/components/icons/system/ArrowUpIcon';
+import VideosLoading from '@/components/pages/Home/VideosLoading';
+import { cn } from '@/lib/utils';
+import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface UrlInputProps {
   onSearch: (url: string) => void;
@@ -11,7 +11,7 @@ interface UrlInputProps {
 }
 
 const UrlInput = ({ onSearch, isPending }: UrlInputProps) => {
-  const { t } = useTranslation("textField");
+  const { t } = useTranslation('textField');
   const urlRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,20 +22,23 @@ const UrlInput = ({ onSearch, isPending }: UrlInputProps) => {
   return (
     <>
       {isPending && <VideosLoading />}
-      <div className="w-[312px] h-fit bg-sy_container-neutral-normal rounded-016">
-        <form onSubmit={handleSubmit} className="relative">
+      <div className='bg-sy_container-neutral-normal rounded-016 h-fit w-[312px]'>
+        <form
+          onSubmit={handleSubmit}
+          className='relative'
+        >
           <input
-            placeholder={t("textField_url")}
-            data-slot="input"
+            placeholder={t('textField_url')}
+            data-slot='input'
             className={cn(
-              "placeholder:label_m placeholder:text-sy_label-light w-full h-14 p-012 rounded-016 outline-none pr-14 text-sy_label-normal label_m",
-              "focus:border focus:border-sy_line-super"
+              'placeholder:label_m placeholder:text-sy_label-light p-012 rounded-016 text-sy_label-normal label_m h-14 w-full pr-14 outline-none',
+              'focus:border-sy_line-super focus:border'
             )}
             ref={urlRef}
           />
 
           <ButtonIcon
-            className="absolute rounded-016 right-1 top-1 bg-neutral-10 active:bg-neutral-10 [&>svg]:text-sy_icon-neutral-white"
+            className='rounded-016 bg-neutral-10 active:bg-neutral-10 [&>svg]:text-sy_icon-neutral-white absolute right-1 top-1'
             Icon={ArrowUpIcon}
             disabled={isPending}
           />

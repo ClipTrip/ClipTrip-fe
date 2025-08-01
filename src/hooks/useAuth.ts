@@ -1,17 +1,21 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { authApi } from "@/services/authService";
-import type { AuthenticationResponse, LoginRequest, LoginResponse } from "@/types/auth";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
-import type { ApiFailResponse } from "@/types/api";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { authApi } from '@/services/authService';
+import type {
+  AuthenticationResponse,
+  LoginRequest,
+  LoginResponse,
+} from '@/types/auth';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
+import type { ApiFailResponse } from '@/types/api';
 
 export const useAuthentication = () => {
   return useQuery<AuthenticationResponse, Error, AuthenticationResponse>({
-    queryKey: ["me"],
+    queryKey: ['me'],
     staleTime: Infinity,
     queryFn: authApi.authentication,
     retry: false,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
   });
 };
 
@@ -24,14 +28,14 @@ export const useLogin = () => {
     onSuccess: (res) => {
       console.log(res.data.language);
       queryClient.invalidateQueries({
-        queryKey: ["me"]
+        queryKey: ['me'],
       });
-      navigate("/");
+      navigate('/');
     },
 
     onError: (error) => {
-      console.error("로그인 실패:", error.message);
+      console.error('로그인 실패:', error.message);
       toast.error(error.message);
-    }
+    },
   });
 };

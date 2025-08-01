@@ -1,6 +1,6 @@
-import ButtonIcon from "@/components/common/ButtonIcon";
-import { cn } from "@/lib/utils";
-import { isValidElement, type ElementType, type ReactNode } from "react";
+import ButtonIcon from '@/components/common/ButtonIcon';
+import { cn } from '@/lib/utils';
+import { isValidElement, type ElementType, type ReactNode } from 'react';
 
 interface ListItemProps {
   title: string;
@@ -9,7 +9,7 @@ interface ListItemProps {
   onPinClick?: () => void;
   RightIcon?: ElementType | ReactNode;
   onRightIconClick?: () => void;
-  status?: "delete";
+  status?: 'delete';
 }
 
 const ListItem = ({
@@ -19,7 +19,7 @@ const ListItem = ({
   description,
   status,
   onPinClick,
-  onRightIconClick
+  onRightIconClick,
 }: ListItemProps) => {
   const renderRightIcon = () => {
     if (!RightIcon) return null;
@@ -28,30 +28,41 @@ const ListItem = ({
       return RightIcon;
     }
 
-    if (typeof RightIcon === "function") {
-      return <ButtonIcon Icon={RightIcon} onClick={onRightIconClick} />;
+    if (typeof RightIcon === 'function') {
+      return (
+        <ButtonIcon
+          Icon={RightIcon}
+          onClick={onRightIconClick}
+        />
+      );
     }
 
     return null;
   };
   return (
-    <div className="flex py-008 pr-012 pl-024 bg-sy_container-neutral-white active:bg-sy_container-neutral-normal cursor-pointer">
+    <div className='py-008 pr-012 pl-024 bg-sy_container-neutral-white active:bg-sy_container-neutral-normal flex cursor-pointer'>
       {Pin && (
-        <div className="w-9 h-[51px] py-[3px] pr-012">
-          <button onClick={onPinClick} className={cn(!!onPinClick && "cursor-pointer")}>
+        <div className='pr-012 h-[51px] w-9 py-[3px]'>
+          <button
+            onClick={onPinClick}
+            className={cn(!!onPinClick && 'cursor-pointer')}
+          >
             <Pin />
           </button>
         </div>
       )}
-      <div className="flex flex-col gap-004 grow pr-012">
+      <div className='gap-004 pr-012 flex grow flex-col'>
         <h2
           data-state={status}
-          className="data-[state=delete]:text-sy_label-light title_m text-sy_label-normal"
+          className='data-[state=delete]:text-sy_label-light title_m text-sy_label-normal'
         >
           {title}
         </h2>
         {description && (
-          <p data-state={status} className="body_m text-sy_label-light">
+          <p
+            data-state={status}
+            className='body_m text-sy_label-light'
+          >
             {description}
           </p>
         )}

@@ -1,4 +1,4 @@
-import type { ApiSuccessResponse } from "@/types/api";
+import type { ApiSuccessResponse } from '@/types/api';
 
 export interface VideosRequest {
   youtubeUrl: string;
