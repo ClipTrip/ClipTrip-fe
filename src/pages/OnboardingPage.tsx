@@ -1,6 +1,7 @@
 import ButtonActionFill from '@/components/common/ButtonActionFill';
 import Headline from '@/components/common/Headline';
 import Pagination from '@/components/common/Pagination';
+import SelectLanguage from '@/components/pages/Onboarding/SelectLanguage';
 import {
   Carousel,
   CarouselContent,
@@ -34,6 +35,7 @@ const OnboardingPage = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
+  const [selectLanguage, setSelectLanguage] = useState(true);
   const { t, i18n } = useTranslation(['headline', 'buttonAction']);
   const navigate = useNavigate();
 
@@ -59,56 +61,63 @@ const OnboardingPage = () => {
   }, [i18n.language]);
 
   return (
-    <Carousel
-      setApi={setApi}
-      className='w-[360px] pt-9'
-      opts={{ watchDrag: true }}
-    >
-      <CarouselContent>
-        {ONBOARDING_IMG.map(({ src, alt, title }) => (
-          <CarouselItem key={src}>
-            <div className='flex flex-col items-center'>
-              <img
-                src={src}
-                alt={alt}
-                className='mb-11 h-[384px] w-[360px] object-cover object-bottom'
-              />
+    <>
+      {selectLanguage && (
+        <SelectLanguage onBackClick={() => setSelectLanguage(false)} />
+      )}
+      {!selectLanguage && (
+        <Carousel
+          setApi={setApi}
+          className='w-[360px] pt-9'
+          opts={{ watchDrag: true }}
+        >
+          <CarouselContent>
+            {ONBOARDING_IMG.map(({ src, alt, title }) => (
+              <CarouselItem key={src}>
+                <div className='flex flex-col items-center'>
+                  <img
+                    src={src}
+                    alt={alt}
+                    className='mb-11 h-[384px] w-[360px] object-cover object-bottom'
+                  />
 
-              <Headline
-                title={t(title)}
-                className={cn('w-[190px]', lang === 'en' && 'w-[200px]')}
-              />
+                  <Headline
+                    title={t(title)}
+                    className={cn('w-[190px]', lang === 'en' && 'w-[200px]')}
+                  />
 
-              <Pagination
-                totalPage={totalPage}
-                currentPage={currentPage}
-                className='mb-[52px] mt-[18px]'
-              />
+                  <Pagination
+                    totalPage={totalPage}
+                    currentPage={currentPage}
+                    className='mb-[52px] mt-[18px]'
+                  />
 
-              {currentPage !== totalPage && (
-                <ButtonActionFill
-                  variant={'neutral'}
-                  onClick={handleNext}
-                >
-                  {t('buttonAction:button-action_next')}
-                </ButtonActionFill>
-              )}
+                  {currentPage !== totalPage && (
+                    <ButtonActionFill
+                      variant={'neutral'}
+                      onClick={handleNext}
+                    >
+                      {t('buttonAction:button-action_next')}
+                    </ButtonActionFill>
+                  )}
 
-              {currentPage === totalPage && (
-                <>
-                  <ButtonActionFill onClick={() => navigate('/login')}>
-                    {t('buttonAction:button-action_start')}
-                  </ButtonActionFill>
-                  <button className='body_m-prominent text-sy_label-alternative h-12 w-[312px] cursor-pointer'>
-                    {t('buttonAction:button-action_signUp')}
-                  </button>
-                </>
-              )}
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-    </Carousel>
+                  {currentPage === totalPage && (
+                    <>
+                      <ButtonActionFill onClick={() => navigate('/login')}>
+                        {t('buttonAction:button-action_start')}
+                      </ButtonActionFill>
+                      <button className='body_m-prominent text-sy_label-alternative h-12 w-[312px] cursor-pointer'>
+                        {t('buttonAction:button-action_signUp')}
+                      </button>
+                    </>
+                  )}
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      )}
+    </>
   );
 };
 
