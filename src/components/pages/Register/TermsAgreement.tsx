@@ -1,8 +1,10 @@
 import Drawers from "@/components/common/Drawers.tsx";
 import ButtonActionFill from "@/components/common/ButtonActionFill.tsx";
 import CheckBox from "@/components/common/CheckBox.tsx";
+import Terms from "@/components/common/Terms.tsx";
+
+import {useState} from "react";
 import {useTranslation} from "react-i18next";
-import {useNavigate} from "react-router-dom";
 
 interface CheckState{
     all: boolean,
@@ -17,38 +19,47 @@ interface TermsAgreementProps {
 }
 
 const TermsAgreement = ({isCheck, onCheck, onCheckAll}: TermsAgreementProps) => {
-    const navigate = useNavigate();
-    const { t } = useTranslation(["headline","textField", "selectField", "buttonAction", "listItem"]);
+    const [isShowTerms, setIsShowTerms] = useState(false);
+    const [type, setType] = useState<string>("");
+    const { t } = useTranslation(["buttonAction", "listItem"]);
+
+    const handleTermsDetails = (type: string) => {
+        setType(type);
+        setIsShowTerms(true);
+    }
 
     return (
-        <Drawers trigger={
-            <ButtonActionFill className="mt-[18px]">{t("buttonAction:button-action_next")}</ButtonActionFill>
-        }>
-            <CheckBox
-                id="terms-all"
-                label={t("listItem:listItem_term-all")}
-                type="primary"
-                isChecked={isCheck.all}
-                setIsChecked={onCheckAll}
-            />
-            <CheckBox
-                id="terms-privacy"
-                label={t("listItem:listItem_term-01")}
-                isChecked={isCheck.privacy}
-                setIsChecked={(val) => onCheck("privacy", val)}
-                onClickRightIcon={() => navigate("/terms", { state: { type: "privacy" } })}
-            />
-            <CheckBox
-                id="terms-service"
-                label={t("listItem:listItem_term-02")}
-                isChecked={isCheck.service}
-                setIsChecked={(val) => onCheck("service", val)}
-                onClickRightIcon={() => navigate("/terms")}
-            />
-            <ButtonActionFill className="mt-[28px] mb-[28px]" disabled={!isCheck.all}>
-                {t("buttonAction:button-action_accept")}
-            </ButtonActionFill>
-        </Drawers>
+        <>
+            {!isShowTerms && <Drawers trigger={
+                <ButtonActionFill className="mt-[18px]">{t("button-action_next")}</ButtonActionFill>
+            }>
+                <CheckBox
+                    id="terms-all"
+                    label={t("listItem:listItem_term-all")}
+                    type="primary"
+                    isChecked={isCheck.all}
+                    setIsChecked={onCheckAll}
+                />
+                <CheckBox
+                    id="terms-privacy"
+                    label={t("listItem:listItem_term-01")}
+                    isChecked={isCheck.privacy}
+                    setIsChecked={(val) => onCheck("privacy", val)}
+                    onClickRightIcon={() => handleTermsDetails("privacy")}
+                />
+                <CheckBox
+                    id="terms-service"
+                    label={t("listItem:listItem_term-02")}
+                    isChecked={isCheck.service}
+                    setIsChecked={(val) => onCheck("service", val)}
+                    onClickRightIcon={() => handleTermsDetails("service")}
+                />
+                <ButtonActionFill className="mt-[28px] mb-[28px]" disabled={!isCheck.all}>
+                    {t("buttonAction:button-action_accept")}
+                </ButtonActionFill>
+            </Drawers>}
+            {isShowTerms && <Terms type={type} originScreen={"register"} onClose={setIsShowTerms}/>}
+        </>
     );
 };
 
