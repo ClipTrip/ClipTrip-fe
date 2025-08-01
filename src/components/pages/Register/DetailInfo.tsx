@@ -1,5 +1,4 @@
 import SelectField from "@/components/common/SelectField.tsx";
-import {useTranslatedOptions} from "@/hooks/useTranslatedOptions.ts";
 import {useTranslation} from "react-i18next";
 
 interface RegisterInfo {
@@ -16,10 +15,31 @@ interface DetailInfoProps {
 const DetailInfo = ({onChange}: DetailInfoProps) => {
     const { t } = useTranslation(["headline","textField", "selectField", "buttonAction", "listItem"]);
 
-    const genderOptions = useTranslatedOptions("gender");
-    const ageOptions = useTranslatedOptions("age");
-    const languageOptions = useTranslatedOptions("language");
-    const locationOptions = useTranslatedOptions("location");
+    const genderOptions = [
+        { value: "MALE", label: t("selectField:selectField_gender-01") },
+        { value: "FEMALE", label: t("selectField:selectField_gender-02") },
+    ];
+
+    const ageOptions = [
+        { value: "CHILD", label: t("selectField:selectField_age-01") },
+        { value: "TEENAGER", label: t("selectField:selectField_age-02") },
+        { value: "YOUNG_ADULT", label: t("selectField:selectField_age-03") },
+        { value: "ADULT", label: t("selectField:selectField_age-04") },
+        { value: "SENIOR", label: t("selectField:selectField_age-05") },
+    ];
+
+    const languageOptions = [
+        { value: "ENGLISH", label: t("selectField:selectField_language-01") },
+        { value: "KOREAN", label: t("selectField:selectField_language-02") },
+    ];
+
+    const locationOptions = [
+        { value: "UNITEDSTATES", label: t("selectField:selectField_country-01") },
+        { value: "KOREA", label: t("selectField:selectField_country-02") },
+        { value: "CHINA", label: t("selectField:selectField_country-03") },
+        { value: "JAPAN", label: t("selectField:selectField_country-04") },
+    ];
+
 
     return (
         <div className="w-full flex flex-col gap-012 mt-6">

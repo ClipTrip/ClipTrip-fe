@@ -12,8 +12,7 @@ import {useNavigate} from "react-router-dom";
 
 const RegisterPage = () => {
     const navigate = useNavigate();
-    const { t } = useTranslation(["headline","textField", "selectField", "buttonAction", "listItem"]);
-
+    const { t } = useTranslation(["headline"]);
     const {
         isNext,
         setIsNext,
