@@ -1,11 +1,11 @@
 export interface ApiSuccessResponse {
   httpStatusCode: number;
   message: string;
-  resultType: "SUCCESS";
+  resultType: 'SUCCESS';
 }
 
 export interface ApiFailResponse {
   httpStatusCode: number;
   message: string;
-  resultType: "FAIL";
+  resultType: 'FAIL';
 }

@@ -1,5 +1,5 @@
-import { useEffect, type ReactNode } from "react";
-import { useTranslation } from "react-i18next";
+import { useEffect, type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const I18nProvider = ({ children }: { children: ReactNode }) => {
   const { i18n } = useTranslation();

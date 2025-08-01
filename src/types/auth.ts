@@ -1,4 +1,4 @@
-import type { ApiSuccessResponse } from "@/types/api";
+import type { ApiSuccessResponse } from '@/types/api';
 
 export interface LoginRequest {
   email: string;
@@ -12,7 +12,7 @@ export interface LoginResponse extends ApiSuccessResponse {
       accessToken: string;
       refreshToken: string;
     };
-    language: "ENGLISH" | "KOREAN";
+    language: 'ENGLISH' | 'KOREAN';
   };
 }
 
