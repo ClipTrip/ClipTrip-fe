@@ -11,5 +11,9 @@
   "button-action_accept": "Accept and Continue",
   "button-action_signUp": "sign up",
   "button-action_addLikesList": "Add Likes List",
-  "button-action_addMember": "Add"
+  "button-action_addMember": "Add",
+  "button-action_language-01": "English",
+  "button-action_language-02": "한국어",
+  "button-action_language-03": "日本語",
+  "button-action_language-04": "中文"
 }

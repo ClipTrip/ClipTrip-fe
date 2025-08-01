@@ -1,4 +1,5 @@
 {
+  "headline_title_onb-00": "Please select a language",
   "headline_title_onb-01": "Places Seen in the Video",
   "headline_title_onb-02": "Just drop the link",
   "headline_title_onb-03": "From video to reality !",
@@ -7,6 +8,7 @@
   "headline_title_signUp-02": "About you?",
   "headline_title_home": "Let's Travel !",
   "headline_title_trips": "Choose your Trips",
+  "headline_supportingText_onb-00": "Language set by selected country.",
   "headline_supportingText_logIn": "So glad to see you again !",
   "headline_supportingText_signUp-01": "So glad to meet you !",
   "headline_supportingText_signUp-02": "Tell us about yourself !",
