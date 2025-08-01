@@ -70,7 +70,7 @@ const LoginPage = () => {
           disabled={isPending}
           className='mt-[18px]'
         >
-          {t('buttonAction:button-action_signUp')}
+          {t('buttonAction:button-action_login')}
         </ButtonActionFill>
       </form>
     </div>
