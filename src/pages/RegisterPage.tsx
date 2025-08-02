@@ -61,7 +61,6 @@ const RegisterPage = () => {
         });
     };
 
-
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -76,17 +75,11 @@ const RegisterPage = () => {
         description={isNext ? t("headline_supportingText_signUp-02") : t("headline_supportingText_signUp-01")}
       />
       {!isNext && (
-        <BasicInfo
-          emailRef={emailRef}
-          passwordRef={passwordRef}
-          setNext={() => setIsNext(true)}
-        />
+        <BasicInfo emailRef={emailRef} passwordRef={passwordRef} setNext={() => setIsNext(true)}/>
       )}
       {isNext && (
         <>
-          <DetailInfo
-            onChange={(field, value) => handleRegisterInfo(field, value)}
-          />
+          <DetailInfo onChange={(field, value) => handleRegisterInfo(field, value)}/>
           <TermsAgreement isCheck={isCheck} onCheck={handleCheckBoxChange} />
         </>
       )}
