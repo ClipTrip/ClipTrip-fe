@@ -1,12 +1,13 @@
 import ButtonIcon from '@/components/common/ButtonIcon';
 import { cn } from '@/lib/utils';
-import type { ElementType } from 'react';
+import { renderIconElement } from '@/utils/renderIconElement';
+import type { ElementType, ReactNode } from 'react';
 
 interface SectionTitleProps {
   title: string;
   description?: string;
   LeadingIcon?: ElementType;
-  RightIcon?: ElementType;
+  RightIcon?: ElementType | ReactNode;
   size?: 'm' | 'l';
 }
 
@@ -31,7 +32,11 @@ const SectionTitle = ({
         >
           {title}
         </h2>
-        {RightIcon && <ButtonIcon Icon={RightIcon} />}
+        {RightIcon
+          && renderIconElement(
+            RightIcon,
+            <ButtonIcon Icon={RightIcon as ElementType} />
+          )}
       </div>
       {description && (
         <span className='px-012 text-sy_label-light'>{description}</span>
