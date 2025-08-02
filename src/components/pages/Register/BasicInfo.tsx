@@ -11,6 +11,10 @@ interface BasicInfoProps {
 const BasicInfo = ({emailRef, passwordRef, setNext}: BasicInfoProps) => {
     const { t } = useTranslation(["textField", "buttonAction"]);
 
+    const handleNextButton = () => {
+        if (emailRef?.current?.value && passwordRef.current?.value && setNext) setNext();
+    }
+    
     return (
         <form className="flex flex-col items-center gap-8 mt-6">
             <TextField
@@ -31,9 +35,7 @@ const BasicInfo = ({emailRef, passwordRef, setNext}: BasicInfoProps) => {
                         passwordRef.current.value = "";
                 }}
             />
-            <ButtonActionFill variant="primary" className="mt-[18px]" onClick={() => {
-                if (emailRef?.current?.value && passwordRef.current?.value && setNext) setNext();
-            }}>
+            <ButtonActionFill variant="primary" className="mt-[18px]" onClick={handleNextButton}>
                 {t("buttonAction:button-action_next")}
             </ButtonActionFill>
         </form>
