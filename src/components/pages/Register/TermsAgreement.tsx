@@ -13,10 +13,11 @@ interface CheckState{
 
 interface TermsAgreementProps {
     isCheck: CheckState,
+    isGoNext: boolean,
     onCheck: (key: "all" | "privacy" | "service", value: boolean) => void,
 }
 
-const TermsAgreement = ({isCheck, onCheck}: TermsAgreementProps) => {
+const TermsAgreement = ({isCheck, isGoNext, onCheck}: TermsAgreementProps) => {
     const [isShowTerms, setIsShowTerms] = useState(false);
     const [type, setType] = useState<string>("");
     const { t } = useTranslation(["buttonAction", "listItem"]);
@@ -29,7 +30,7 @@ const TermsAgreement = ({isCheck, onCheck}: TermsAgreementProps) => {
     return (
         <>
             {!isShowTerms && <Drawers trigger={
-                <ButtonActionFill className="mt-[18px]">{t("button-action_next")}</ButtonActionFill>
+                <ButtonActionFill className="mt-[18px]" disabled={!isGoNext}>{t("button-action_next")}</ButtonActionFill>
             }>
                 <CheckBox
                     id="terms-all"

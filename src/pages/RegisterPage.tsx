@@ -34,8 +34,13 @@ const RegisterPage = () => {
     privacy: false,
     service: false,
   });
+    const isAllFilled =
+        registerInfo.gender !== "" &&
+        registerInfo.age !== "" &&
+        registerInfo.language !== "" &&
+        registerInfo.location !== "";
 
-  const handleRegisterInfo = (field: string, value: string) => {
+    const handleRegisterInfo = (field: string, value: string) => {
     setRegisterInfo((prev) => ({
       ...prev,
       [field]: value,
@@ -68,7 +73,7 @@ const RegisterPage = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <AppBar LeadingIcon={ArrowBackIcon} onLeadingIconClick={() => {navigate(-1);}}/>
+      <AppBar LeadingIcon={ArrowBackIcon} onLeadingIconClick={() => isNext ? setIsNext(false) : navigate(-1)}/>
       <Headline
         className="w-[195px] mt-7"
         title={isNext ? t("headline_title_signUp-02") : t("headline_title_signUp-01")}
@@ -80,7 +85,7 @@ const RegisterPage = () => {
       {isNext && (
         <>
           <DetailInfo onChange={(field, value) => handleRegisterInfo(field, value)}/>
-          <TermsAgreement isCheck={isCheck} onCheck={handleCheckBoxChange} />
+          <TermsAgreement isCheck={isCheck} onCheck={handleCheckBoxChange} isGoNext={isAllFilled} />
         </>
       )}
     </div>
