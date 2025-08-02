@@ -1,15 +1,17 @@
 import ButtonIcon from '@/components/common/ButtonIcon';
 import { cn } from '@/lib/utils';
-import { isValidElement, type ElementType, type ReactNode } from 'react';
+import { renderIconElement } from '@/utils/renderIconElement';
+import { type ElementType, type ReactNode } from 'react';
 
 interface ListItemProps {
   title: string;
   description?: string;
   Pin?: ElementType;
-  onPinClick?: () => void;
   RightIcon?: ElementType | ReactNode;
-  onRightIconClick?: () => void;
   status?: 'delete';
+  onClick?: () => void;
+  onPinClick?: () => void;
+  onRightIconClick?: () => void;
 }
 
 const ListItem = ({
@@ -18,27 +20,10 @@ const ListItem = ({
   title,
   description,
   status,
+  onClick,
   onPinClick,
   onRightIconClick,
 }: ListItemProps) => {
-  const renderRightIcon = () => {
-    if (!RightIcon) return null;
-
-    if (isValidElement(RightIcon)) {
-      return RightIcon;
-    }
-
-    if (typeof RightIcon === 'function') {
-      return (
-        <ButtonIcon
-          Icon={RightIcon}
-          onClick={onRightIconClick}
-        />
-      );
-    }
-
-    return null;
-  };
   return (
     <div className='py-008 pr-012 pl-024 bg-sy_container-neutral-white active:bg-sy_container-neutral-normal flex cursor-pointer'>
       {Pin && (
@@ -51,7 +36,10 @@ const ListItem = ({
           </button>
         </div>
       )}
-      <div className='gap-004 pr-012 flex grow flex-col'>
+      <button
+        onClick={onClick}
+        className='gap-004 pr-012 flex grow flex-col justify-center text-left'
+      >
         <h2
           data-state={status}
           className='data-[state=delete]:text-sy_label-light title_m text-sy_label-normal'
@@ -66,8 +54,14 @@ const ListItem = ({
             {description}
           </p>
         )}
-      </div>
-      {renderRightIcon()}
+      </button>
+      {renderIconElement(
+        RightIcon,
+        <ButtonIcon
+          Icon={RightIcon as ElementType}
+          onClick={onRightIconClick}
+        />
+      )}
     </div>
   );
 };
