@@ -2,7 +2,6 @@ import Drawers from "@/components/common/Drawers.tsx";
 import ButtonActionFill from "@/components/common/ButtonActionFill.tsx";
 import CheckBox from "@/components/common/CheckBox.tsx";
 import Terms from "@/components/common/Terms.tsx";
-
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
 
@@ -14,11 +13,10 @@ interface CheckState{
 
 interface TermsAgreementProps {
     isCheck: CheckState,
-    onCheck: (key: "privacy" | "service", value: boolean) => void,
-    onCheckAll: () => void,
+    onCheck: (key: "all" | "privacy" | "service", value: boolean) => void,
 }
 
-const TermsAgreement = ({isCheck, onCheck, onCheckAll}: TermsAgreementProps) => {
+const TermsAgreement = ({isCheck, onCheck}: TermsAgreementProps) => {
     const [isShowTerms, setIsShowTerms] = useState(false);
     const [type, setType] = useState<string>("");
     const { t } = useTranslation(["buttonAction", "listItem"]);
@@ -38,7 +36,7 @@ const TermsAgreement = ({isCheck, onCheck, onCheckAll}: TermsAgreementProps) => 
                     label={t("listItem:listItem_term-all")}
                     type="primary"
                     isChecked={isCheck.all}
-                    setIsChecked={onCheckAll}
+                    setIsChecked={(val) => onCheck("all", val)}
                 />
                 <CheckBox
                     id="terms-privacy"

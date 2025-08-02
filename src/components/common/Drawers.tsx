@@ -16,11 +16,12 @@ interface DrawerProps {
 const Drawers = ({trigger, children}: PropsWithChildren<DrawerProps>) => {
     return (
         <Drawer>
-            {trigger && <DrawerTrigger asChild>
+            {trigger &&
+              <DrawerTrigger asChild>
                 {trigger}
             </DrawerTrigger>}
             <DrawerContent className="fixed bottom-4 inset-x-0 mx-auto max-w-[360px] w-full [&>div:first-child]:hidden rounded-t-030 !rounded-t-030 overflow-visible">
-                <div className="pl-024 pr-024">
+                <div className="px-024">
                     <DrawerHeader className="w-full flex items-end p-0">
                         <DrawerTitle></DrawerTitle>
                         <DrawerClose asChild>
