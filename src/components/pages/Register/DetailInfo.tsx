@@ -13,7 +13,7 @@ interface DetailInfoProps {
 }
 
 const DetailInfo = ({onChange}: DetailInfoProps) => {
-    const { t } = useTranslation(["headline","textField", "selectField", "buttonAction", "listItem"]);
+    const { t } = useTranslation(["selectField"]);
 
     const genderOptions = [
         { value: "MALE", label: t("selectField:selectField_gender-01") },
@@ -45,19 +45,19 @@ const DetailInfo = ({onChange}: DetailInfoProps) => {
         <div className="w-full flex flex-col gap-012 mt-6">
             <SelectField
                 datas={genderOptions}
-                placeHolder={t("selectField:selectField_gender")}
+                placeHolder={t("selectField_gender")}
                 onChange={(val) => onChange("gender", val)}/>
             <SelectField
                 datas={ageOptions}
-                placeHolder={t("selectField:selectField_age")}
+                placeHolder={t("selectField_age")}
                 onChange={(val) => onChange("age", val)}/>
             <SelectField
                 datas={languageOptions}
-                placeHolder={t("selectField:selectField_language")}
+                placeHolder={t("selectField_language")}
                 onChange={(val) => onChange("language", val)}/>
             <SelectField
                 datas={locationOptions}
-                placeHolder={t("selectField:selectField_country")}
+                placeHolder={t("selectField_country")}
                 onChange={(val) => onChange("location", val)}/>
         </div>
     );
