@@ -6,6 +6,11 @@ const I18nProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     document.documentElement.lang = i18n.language;
+
+    return () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      delete (window as any).naver;
+    };
   }, [i18n.language]);
   return <>{children}</>;
 };
