@@ -12,7 +12,7 @@ interface NaviItemProps {
 const NaviItem = ({ href, Icon, label }: NaviItemProps) => {
   return (
     <NavLink
-      to={href}
+      to={`/${href}`}
       end
     >
       {({ isActive }) => (
