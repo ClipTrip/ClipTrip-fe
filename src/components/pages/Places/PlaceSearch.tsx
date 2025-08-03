@@ -1,6 +1,6 @@
 import ButtonIcon from '@/components/common/ButtonIcon';
+import FullPageLoading from '@/components/common/FullPageLoading';
 import SearchIcon from '@/components/icons/system/SearchIcon';
-import VideosLoading from '@/components/pages/Home/VideosLoading';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -20,7 +20,7 @@ const PlaceSearch = ({ onSearch, isPending }: PlaceSearchProps) => {
 
   return (
     <>
-      {isPending && <VideosLoading />}
+      {isPending && <FullPageLoading />}
       <form
         onSubmit={handleSubmit}
         className='bg-sy_container-neutral-white rounded-010 relative h-fit w-[312px]'
