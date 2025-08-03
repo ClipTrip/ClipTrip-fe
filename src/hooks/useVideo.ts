@@ -1,8 +1,8 @@
-import { videoApi } from "@/services/videoService";
-import type { ApiFailResponse } from "@/types/api";
-import type { VideosRequest, VideosResponse } from "@/types/video";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { videoApi } from '@/services/videoService';
+import type { ApiFailResponse } from '@/types/api';
+import type { VideosRequest, VideosResponse } from '@/types/video';
+import { useMutation } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 export const useVideos = () => {
   return useMutation<VideosResponse, ApiFailResponse, VideosRequest>({
@@ -13,6 +13,6 @@ export const useVideos = () => {
     onError: (error) => {
       console.error(error.message);
       toast.error(error.message);
-    }
+    },
   });
 };

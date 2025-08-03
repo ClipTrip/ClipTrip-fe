@@ -1,9 +1,9 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 interface HeadlineProps {
   title: string;
   description?: string;
-  textAlign?: "center" | "left";
+  textAlign?: 'center' | 'left';
   className?: string;
   descriptionClassName?: string;
 }
@@ -11,17 +11,22 @@ interface HeadlineProps {
 const Headline = ({
   title,
   description,
-  textAlign = "center",
+  textAlign = 'center',
   className,
-  descriptionClassName
+  descriptionClassName,
 }: HeadlineProps) => {
   return (
-    <div className={cn("flex flex-col gap-012 px-024", textAlign === "center" && "items-center")}>
+    <div
+      className={cn(
+        'gap-012 px-024 flex flex-col',
+        textAlign === 'center' && 'items-center'
+      )}
+    >
       <h1
         className={cn(
-          "display_l text-sy_label-strong break-keep",
-          textAlign === "center" && "text-center",
-          textAlign === "left" && "text-left",
+          'display_l text-sy_label-strong break-keep',
+          textAlign === 'center' && 'text-center',
+          textAlign === 'left' && 'text-left',
           className
         )}
       >
@@ -30,9 +35,9 @@ const Headline = ({
       {description && (
         <h2
           className={cn(
-            "title_s-prominent text-sy_label-light",
-            textAlign === "center" && "text-center",
-            textAlign === "left" && "text-left",
+            'title_s-prominent text-sy_label-light',
+            textAlign === 'center' && 'text-center',
+            textAlign === 'left' && 'text-left',
             descriptionClassName
           )}
         >

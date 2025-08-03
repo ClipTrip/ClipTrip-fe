@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import type { ButtonHTMLAttributes, ElementType } from "react";
+import { cn } from '@/lib/utils';
+import type { ButtonHTMLAttributes, ElementType } from 'react';
 
 interface ButtonIconProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   Icon: ElementType;
@@ -7,15 +7,20 @@ interface ButtonIconProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
 }
 
-const ButtonIcon = ({ Icon, className, onClick, ...props }: ButtonIconProps) => {
+const ButtonIcon = ({
+  Icon,
+  className,
+  onClick,
+  ...props
+}: ButtonIconProps) => {
   return (
     <button
       tabIndex={-1}
       onMouseDown={(e) => e.preventDefault()}
       onClick={onClick}
       className={cn(
-        "w-12 h-12 bg-sy_container-neutral-white rounded-010 flex items-center justify-center active:bg-sy_container-neutral-normal disabled:cursor-default",
-        !!onClick && "cursor-pointer",
+        'bg-sy_container-neutral-white rounded-010 active:bg-sy_container-neutral-normal flex h-12 w-12 items-center justify-center disabled:cursor-default',
+        !!onClick && 'cursor-pointer',
         className
       )}
       {...props}

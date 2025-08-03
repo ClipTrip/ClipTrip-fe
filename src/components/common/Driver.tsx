@@ -1,5 +1,5 @@
 const Driver = () => {
-  return <div className="w-full border border-sy_line-normal" />;
+  return <div className='border-sy_line-normal w-full border' />;
 };
 
 export default Driver;
