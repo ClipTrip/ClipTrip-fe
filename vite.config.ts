@@ -21,6 +21,7 @@ export default defineConfig({
         cert: fs.readFileSync(path.resolve(__dirname, 'localhost+2.pem')),
       },
     }),
+    host: true,
     proxy: {
       '/api': {
         target: 'https://clip-trip.shop',
