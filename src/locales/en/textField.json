@@ -7,5 +7,6 @@
   "textField_newPassword": "New Password",
   "textField_url": "Paste Video URL",
   "textField_likesList": "Likes List name",
-  "textField_addMember": "Email"
+  "textField_addMember": "Email",
+  "textField_checkID": "check"
 }
