@@ -4,6 +4,8 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import fs from 'fs';
 
+const isLocal = !process.env.VERCEL;
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
@@ -13,10 +15,12 @@ export default defineConfig({
     },
   },
   server: {
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, 'localhost+2-key.pem')),
-      cert: fs.readFileSync(path.resolve(__dirname, 'localhost+2.pem')),
-    },
+    ...(isLocal && {
+      https: {
+        key: fs.readFileSync(path.resolve(__dirname, 'localhost+2-key.pem')),
+        cert: fs.readFileSync(path.resolve(__dirname, 'localhost+2.pem')),
+      },
+    }),
     proxy: {
       '/api': {
         target: 'https://clip-trip.shop',
