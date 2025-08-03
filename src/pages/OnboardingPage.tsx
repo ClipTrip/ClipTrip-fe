@@ -58,6 +58,7 @@ const OnboardingPage = () => {
 
   useEffect(() => {
     document.documentElement.lang = i18n.language;
+    console.log(i18n.language);
   }, [i18n.language]);
 
   return (
@@ -101,23 +102,21 @@ const OnboardingPage = () => {
                     </ButtonActionFill>
                   )}
 
-                  {currentPage === totalPage && (
-                      <>
-                        <ButtonActionFill onClick={() => navigate("/login")}>
-                          {t("buttonAction:button-action_start")}
-                        </ButtonActionFill>
-                        <button onClick={() => navigate("/register")} className="body_m-prominent w-[312px] h-12 cursor-pointer text-sy_label-alternative">
-                          {t("buttonAction:button-action_signUp")}
-                        </button>
-                      </>
-                  )}
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-      )}
-    </>
+              {currentPage === totalPage && (
+                <>
+                  <ButtonActionFill onClick={() => navigate("/login")}>
+                    {t("buttonAction:button-action_start")}
+                  </ButtonActionFill>
+                  <button onClick={() => navigate("/register")} className="body_m-prominent w-[312px] h-12 cursor-pointer text-sy_label-alternative">
+                    {t("buttonAction:button-action_signUp")}
+                  </button>
+                </>
+              )}
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+    </Carousel>
   );
 };
 
