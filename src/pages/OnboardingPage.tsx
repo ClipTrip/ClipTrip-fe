@@ -46,11 +46,11 @@ const OnboardingPage = () => {
   };
 
   useEffect(() => {
-    if (!api) {
-      return;
-    }
+    if (!api) return;
+
     setTotalPage(api.scrollSnapList().length);
     setCurrentPage(api.selectedScrollSnap() + 1);
+
     api.on('select', () => {
       setCurrentPage(api.selectedScrollSnap() + 1);
     });
@@ -62,61 +62,62 @@ const OnboardingPage = () => {
   }, [i18n.language]);
 
   return (
-    <>
-      {selectLanguage && (
-        <SelectLanguage onBackClick={() => setSelectLanguage(false)} />
-      )}
-      {!selectLanguage && (
-        <Carousel
-          setApi={setApi}
-          className='w-[360px] pt-9'
-          opts={{ watchDrag: true }}
-        >
-          <CarouselContent>
-            {ONBOARDING_IMG.map(({ src, alt, title }) => (
-              <CarouselItem key={src}>
-                <div className='flex flex-col items-center'>
-                  <img
-                    src={src}
-                    alt={alt}
-                    className='mb-11 h-[384px] w-[360px] object-cover object-bottom'
-                  />
+      <>
+        {selectLanguage ? (
+            <SelectLanguage onBackClick={() => setSelectLanguage(false)} />
+        ) : (
+            <Carousel
+                setApi={setApi}
+                className="w-[360px] pt-9"
+                opts={{ watchDrag: true }}
+            >
+              <CarouselContent>
+                {ONBOARDING_IMG.map(({ src, alt, title }) => (
+                    <CarouselItem key={src}>
+                      <div className="flex flex-col items-center">
+                        <img
+                            src={src}
+                            alt={alt}
+                            className="mb-11 h-[384px] w-[360px] object-cover object-bottom"
+                        />
 
-                  <Headline
-                    title={t(title)}
-                    className={cn('w-[190px]', lang === 'en' && 'w-[200px]')}
-                  />
+                        <Headline
+                            title={t(title)}
+                            className={cn('w-[190px]', lang === 'en' && 'w-[200px]')}
+                        />
 
-                  <Pagination
-                    totalPage={totalPage}
-                    currentPage={currentPage}
-                    className='mb-[52px] mt-[18px]'
-                  />
+                        <Pagination
+                            totalPage={totalPage}
+                            currentPage={currentPage}
+                            className="mb-[52px] mt-[18px]"
+                        />
 
-                  {currentPage !== totalPage && (
-                    <ButtonActionFill
-                      variant={'neutral'}
-                      onClick={handleNext}
-                    >
-                      {t('buttonAction:button-action_next')}
-                    </ButtonActionFill>
-                  )}
+                        {currentPage !== totalPage && (
+                            <ButtonActionFill variant="neutral" onClick={handleNext}>
+                              {t('buttonAction:button-action_next')}
+                            </ButtonActionFill>
+                        )}
 
-              {currentPage === totalPage && (
-                <>
-                  <ButtonActionFill onClick={() => navigate("/login")}>
-                    {t("buttonAction:button-action_start")}
-                  </ButtonActionFill>
-                  <button onClick={() => navigate("/register")} className="body_m-prominent w-[312px] h-12 cursor-pointer text-sy_label-alternative">
-                    {t("buttonAction:button-action_signUp")}
-                  </button>
-                </>
-              )}
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-    </Carousel>
+                        {currentPage === totalPage && (
+                            <>
+                              <ButtonActionFill onClick={() => navigate('/login')}>
+                                {t('buttonAction:button-action_start')}
+                              </ButtonActionFill>
+                              <button
+                                  onClick={() => navigate('/register')}
+                                  className="body_m-prominent w-[312px] h-12 cursor-pointer text-sy_label-alternative"
+                              >
+                                {t('buttonAction:button-action_signUp')}
+                              </button>
+                            </>
+                        )}
+                      </div>
+                    </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+        )}
+      </>
   );
 };
 
