@@ -100,15 +100,13 @@ const PlaceDetailPage = () => {
                       className='p-0'
                     >
                       <DropdownMenuItem className='p-0'>
-                        <Menu
-                          menuItems={[
-                            {
-                              title: t('menu:menu_delete'),
-                              variant: 'negative',
-                            },
-                          ]}
-                          onMenuItemClick={handleDeleteBookmark}
-                        />
+                        <Menu>
+                          <Menu.Item
+                            title={t('menu:menu_delete')}
+                            variant='negative'
+                            onClick={handleDeleteBookmark}
+                          />
+                        </Menu>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

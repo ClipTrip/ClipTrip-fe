@@ -31,15 +31,17 @@ const BookmarkDetailList = ({ placeList }: BookmarkDetailListProps) => {
             className='p-0'
           >
             <DropdownMenuItem className='p-0'>
-              <Menu
-                menuItems={[
-                  { title: t('menu:menu_addToAnotherList') },
-                  {
-                    title: t('menu:menu_delete'),
-                    variant: 'negative',
-                  },
-                ]}
-              />
+              <Menu>
+                <Menu.Item
+                  title={t('menu:menu_addToAnotherList')}
+                  onClick={() => {}}
+                />
+                <Menu.Item
+                  title={t('menu:menu_delete')}
+                  variant='negative'
+                  onClick={() => {}}
+                />
+              </Menu>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
