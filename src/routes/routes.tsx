@@ -22,8 +22,6 @@ const router = createBrowserRouter([
       },
       { path: pagePath.LOGIN, element: <LoginPage /> },
       { path: pagePath.REGISTER, element: <RegisterPage /> },
-      { path: pagePath.PLACES, element: <Places /> },
-      { path: `${pagePath.PLACES}/:placeId`, element: <PlaceDetailPage /> },
       {
         path: pagePath.PROFILE,
         element: <Profile />,
@@ -42,6 +40,8 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      { path: pagePath.PLACES, element: <Places /> },
+      { path: `${pagePath.PLACES}/:placeId`, element: <PlaceDetailPage /> },
     ],
   },
 ]);
