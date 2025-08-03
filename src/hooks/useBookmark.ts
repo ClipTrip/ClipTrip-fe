@@ -3,6 +3,8 @@ import type { ApiFailResponse, ApiSuccessResponse } from '@/types/api';
 import type {
   BookmarkDetailResponse,
   BookmarkResponse,
+  CreateBookmarkRequest,
+  CreateBookmarkResponse,
 } from '@/types/bookmarks';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -32,6 +34,27 @@ export const useDeleteBookmark = () => {
         queryKey: ['bookmarks'],
       });
       toast.success('북마크가 삭제되었습니다.');
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+};
+
+export const useCreateBookmark = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<
+    CreateBookmarkResponse,
+    ApiFailResponse,
+    CreateBookmarkRequest
+  >({
+    mutationFn: (data) => bookmarkService.createBookmark(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['bookmarks'],
+      });
+      toast.success('북마크가 생성되었습니다.');
     },
     onError: (error) => {
       toast.error(error.message);

@@ -17,3 +17,12 @@ export interface BookmarkDetailResponse extends ApiSuccessResponse {
     placeList: PlaceList[];
   };
 }
+
+export interface CreateBookmarkRequest {
+  bookmarkName: string;
+  description: string;
+}
+
+export interface CreateBookmarkResponse extends ApiSuccessResponse {
+  data: number;
+}

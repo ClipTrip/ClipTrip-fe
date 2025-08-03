@@ -2,6 +2,8 @@ import { instance } from '@/lib/axios';
 import {
   type BookmarkDetailResponse,
   type BookmarkResponse,
+  type CreateBookmarkRequest,
+  type CreateBookmarkResponse,
 } from '@/types/bookmarks';
 
 export const bookmarkService = {
@@ -19,6 +21,14 @@ export const bookmarkService = {
 
   deleteBookmark: async (bookmarkId: number) => {
     const res = await instance.delete(`/api/v1/bookmarks/${bookmarkId}`);
+    return res.data;
+  },
+
+  createBookmark: async (data: CreateBookmarkRequest) => {
+    const res = await instance.post<CreateBookmarkResponse>(
+      '/api/v1/bookmarks',
+      data
+    );
     return res.data;
   },
 };
