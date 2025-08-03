@@ -19,7 +19,10 @@ const ProtectedRouteLayout = () => {
 
   return (
     <div className='flex h-dvh w-dvw justify-center'>
-      <ScrollArea className='h-dvh w-[360px]'>
+      <ScrollArea
+        className='h-dvh w-[360px]'
+        id='navigation-root'
+      >
         <Outlet />
       </ScrollArea>
     </div>
