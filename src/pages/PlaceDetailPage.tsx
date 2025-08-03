@@ -8,6 +8,7 @@ import SectionTitle from '@/components/common/SectionTitle';
 import ArrowBackIcon from '@/components/icons/system/ArrowBackIcon';
 import MoreIcon from '@/components/icons/system/MoreIcon';
 import BookmarkDetailList from '@/components/pages/Places/[placesId]/BookmarkDetailList';
+import RenameModal from '@/components/pages/Places/RenameModal';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +18,7 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 import { useDeleteBookmark, useGetBookmarkDetail } from '@/hooks/useBookmark';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Sheet, type SheetRef } from 'react-modal-sheet';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -46,6 +47,8 @@ const PlaceDetailPage = () => {
   const { t } = useTranslation(['appBar', 'textField', 'menu']);
   const navigate = useNavigate();
   const ref = useRef<SheetRef>(null);
+  const [open, setOpen] = useState(false);
+  const [defaultName, setDefaultName] = useState('');
 
   if (isPending || deleteIsPending) {
     return <FullPageLoading />;
@@ -66,6 +69,13 @@ const PlaceDetailPage = () => {
   };
   return (
     <>
+      {open && (
+        <RenameModal
+          defaultName={defaultName}
+          open={open}
+          onOpenChange={setOpen}
+        />
+      )}
       <AppBar
         LeadingIcon={ArrowBackIcon}
         onLeadingIconClick={() => navigate(-1)}
@@ -101,6 +111,13 @@ const PlaceDetailPage = () => {
                     >
                       <DropdownMenuItem className='p-0'>
                         <Menu>
+                          <Menu.Item
+                            title={t('menu:menu_rename')}
+                            onClick={() => {
+                              setDefaultName(bookmarkDetail.data.name);
+                              setOpen(true);
+                            }}
+                          />
                           <Menu.Item
                             title={t('menu:menu_delete')}
                             variant='negative'

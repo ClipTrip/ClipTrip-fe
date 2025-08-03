@@ -2,6 +2,7 @@ import FullPageLoading from '@/components/common/FullPageLoading';
 import ListItem from '@/components/common/ListItem';
 import Menu from '@/components/common/Menu';
 import MoreIcon from '@/components/icons/system/MoreIcon';
+import RenameModal from '@/components/pages/Places/RenameModal';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,6 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useDeleteBookmark } from '@/hooks/useBookmark';
 import type { BookmarkResponse } from '@/types/bookmarks';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,6 +23,8 @@ const BookmarkList = ({ places }: BookmarkListProps) => {
   const { t } = useTranslation(['menu']);
   const { mutateAsync, isPending } = useDeleteBookmark();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [defaultName, setDefaultName] = useState('');
 
   const handleDeleteBookmark = async (bookmarkId: number) => {
     if (isPending) return null;
@@ -30,6 +34,13 @@ const BookmarkList = ({ places }: BookmarkListProps) => {
 
   return (
     <>
+      {open && (
+        <RenameModal
+          defaultName={defaultName}
+          open={open}
+          onOpenChange={setOpen}
+        />
+      )}
       {isPending && <FullPageLoading />}
       {places.map(({ bookmarkId, name }) => (
         <ListItem
@@ -44,17 +55,22 @@ const BookmarkList = ({ places }: BookmarkListProps) => {
                 className='p-0'
               >
                 <DropdownMenuItem className='p-0'>
-                  <Menu
-                    menuItems={[
-                      {
-                        title: t('menu_delete'),
-                        variant: 'negative',
-                      },
-                    ]}
-                    onMenuItemClick={() => {
-                      handleDeleteBookmark(bookmarkId);
-                    }}
-                  />
+                  <Menu>
+                    <Menu.Item
+                      title={t('menu_rename')}
+                      onClick={() => {
+                        setDefaultName(name);
+                        setOpen(true);
+                      }}
+                    />
+                    <Menu.Item
+                      title={t('menu_delete')}
+                      variant='negative'
+                      onClick={() => {
+                        handleDeleteBookmark(bookmarkId);
+                      }}
+                    />
+                  </Menu>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
