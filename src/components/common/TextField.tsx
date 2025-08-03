@@ -59,6 +59,7 @@ const TextField = ({
         )}
         {checkText && (
           <button
+            onMouseDown={(e) => e.preventDefault()}
             onClick={onCheckClick}
             className={cn(
               'label_m text-sy_label-light absolute right-5 top-1/2 -translate-y-1/2 cursor-pointer',
