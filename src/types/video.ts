@@ -8,7 +8,7 @@ export interface PlaceList {
   placeId: number;
   placeName: string;
   roadAddress: string;
-  phone: string;
+  phone?: string;
   type: string;
   longitude: number;
   latitude: number;
@@ -20,6 +20,7 @@ export interface VideosResponse extends ApiSuccessResponse {
     videoResponse: {
       videoId: number;
       url: string;
+      thumbnailUrl: string;
       summary: string;
     };
     scheduleInfoResponse: {
