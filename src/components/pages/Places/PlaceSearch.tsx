@@ -1,21 +1,27 @@
 import ButtonIcon from '@/components/common/ButtonIcon';
 import FullPageLoading from '@/components/common/FullPageLoading';
 import SearchIcon from '@/components/icons/system/SearchIcon';
-import { useRef } from 'react';
+import type { InputHTMLAttributes } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface PlaceSearchProps {
-  onSearch?: (url: string) => void;
+  onSearch?: (query: string) => void;
   isPending?: boolean;
+  value: string;
+  onChange: InputHTMLAttributes<HTMLInputElement>['onChange'];
 }
 
-const PlaceSearch = ({ onSearch, isPending }: PlaceSearchProps) => {
+const PlaceSearch = ({
+  isPending,
+  value,
+  onChange,
+  onSearch,
+}: PlaceSearchProps) => {
   const { t } = useTranslation('searchField');
-  const searchRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (searchRef.current?.value) onSearch?.(searchRef.current?.value);
+    onSearch?.(value);
   };
 
   return (
@@ -29,11 +35,12 @@ const PlaceSearch = ({ onSearch, isPending }: PlaceSearchProps) => {
           placeholder={t('searchField')}
           data-slot='search'
           className='body_l placeholder:label_m placeholder:text-sy_label-light px-020 py-016 rounded-020 text-sy_label-normal h-14 w-full pr-12 outline-none'
-          ref={searchRef}
+          value={value}
+          onChange={onChange}
         />
 
         <ButtonIcon
-          className='[&>svg]:text-sy_icon-neutral-light absolute right-5 top-4 h-6 w-6'
+          className='[&>svg]:text-sy_icon-neutral-light absolute right-5 top-4 h-6 w-6 cursor-pointer'
           Icon={SearchIcon}
           disabled={isPending}
         />
