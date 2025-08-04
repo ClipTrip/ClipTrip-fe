@@ -1,6 +1,8 @@
 import { bookmarkService } from '@/services/bookmarkService';
 import type { ApiFailResponse, ApiSuccessResponse } from '@/types/api';
 import type {
+  AddBookmarkProps,
+  AddBookmarkResponse,
   BookmarkDetailResponse,
   BookmarkResponse,
   CreateBookmarkRequest,
@@ -19,7 +21,7 @@ export const useGetBookmark = () => {
 export const useGetBookmarkDetail = (id?: string) => {
   return useQuery<BookmarkDetailResponse, ApiFailResponse>({
     queryFn: () => bookmarkService.getBookmarkDetail(id!),
-    queryKey: ['bookmarkDetail', id],
+    queryKey: ['bookmarks', id],
     enabled: !!id,
   });
 };
@@ -55,6 +57,29 @@ export const useCreateBookmark = () => {
         queryKey: ['bookmarks'],
       });
       toast.success('북마크가 생성되었습니다.');
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+};
+
+export const useAddBookmark = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<
+    AddBookmarkResponse,
+    ApiFailResponse,
+    AddBookmarkProps,
+    AddBookmarkProps
+  >({
+    mutationFn: ({ bookmarkId, data }) =>
+      bookmarkService.addBookmark({ bookmarkId: bookmarkId, data }),
+    onSuccess: (_, __, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ['bookmarks', variables.bookmarkId],
+      });
+      toast.success('새로운 장소가 추가 되었습니다.');
     },
     onError: (error) => {
       toast.error(error.message);
