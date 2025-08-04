@@ -2,6 +2,7 @@ import ChipCategory from '@/components/common/ChipCategory';
 import AttractionsIcon from '@/components/icons/category/AttractionsIcon';
 import CafesIcon from '@/components/icons/category/CafesIcon';
 import HotelsIcon from '@/components/icons/category/HotelsIcon';
+import LockerIcon from '@/components/icons/category/LockerIcon';
 import ParkingIcon from '@/components/icons/category/ParkingIcon';
 import PublicServicesIcon from '@/components/icons/category/PublicServicesIcon';
 import RestaurantsIcon from '@/components/icons/category/RestaurantsIcon';
@@ -39,6 +40,7 @@ const CHIPS = [
     Icon: ParkingIcon,
     color: 'parking',
   },
+  { label: 'category-07', Icon: LockerIcon, color: 'carrier' },
 ] as const;
 
 const ChipsCategory = () => {
