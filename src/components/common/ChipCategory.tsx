@@ -1,19 +1,15 @@
+import type { chipColor } from '@/components/common/ChipsCategory';
 import { cn } from '@/lib/utils';
-import type { ComponentType, SVGProps } from 'react';
+import type { CategoryCodeType } from '@/types/place';
+import { type ComponentType, type SVGProps } from 'react';
 
 interface ChipCategoryProps {
   Icon: ComponentType<SVGProps<SVGSVGElement>>;
   label: string;
-  color:
-    | 'restaurants'
-    | 'cafes'
-    | 'hotels'
-    | 'attractions'
-    | 'publicServices'
-    | 'parking'
-    | 'carrier';
+  code: CategoryCodeType | CategoryCodeType[];
+  color: chipColor;
   isActive?: boolean;
-  onClick?: () => void;
+  onClick?: (code: CategoryCodeType | CategoryCodeType[]) => void;
 }
 
 const COLOR = {
@@ -51,12 +47,13 @@ const ChipCategory = ({
   Icon,
   label,
   color,
+  code,
   isActive = false,
   onClick,
 }: ChipCategoryProps) => {
   return (
     <button
-      onClick={onClick}
+      onClick={() => onClick?.(code)}
       className={cn(
         'rounded-010 bg-sy_container-neutral-white px-012 py-008 gap-004 flex items-center',
         isActive && COLOR[color].bg,

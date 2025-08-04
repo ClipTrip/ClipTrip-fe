@@ -1,4 +1,4 @@
-import type { CATEGORY } from '@/constants/category';
+import type { CATEGORY, CATEGORY_CODE } from '@/constants/category';
 import type { ApiSuccessResponse } from '@/types/api';
 
 export interface PlaceList {
@@ -13,6 +13,8 @@ export interface PlaceList {
 }
 
 export type CategoryType = (typeof CATEGORY)[keyof typeof CATEGORY];
+export type CategoryCodeType =
+  (typeof CATEGORY_CODE)[keyof typeof CATEGORY_CODE];
 
 export interface KeywordPlacesRequest {
   query: string;
@@ -22,5 +24,25 @@ export interface KeywordPlacesRequest {
 }
 
 export interface KeywordPlacesResponse extends ApiSuccessResponse {
-  data: PlaceList[];
+  data: Omit<PlaceList, 'placeId' | 'placeOrder'>[];
+}
+
+export interface CategoryPlacesRequest {
+  categoryCode: CategoryCodeType;
+  x: string;
+  y: string;
+  radius: string;
+}
+
+export interface CategoryPlacesResponse extends ApiSuccessResponse {
+  data: Omit<PlaceList, 'placeId' | 'placeOrder'>[];
+}
+
+export interface LuggagePlacesRequest {
+  latitude: string;
+  longitude: string;
+}
+
+export interface LuggagePlacesResponse extends ApiSuccessResponse {
+  data: Omit<PlaceList, 'type' | 'placeOrder' | 'phone'>[];
 }

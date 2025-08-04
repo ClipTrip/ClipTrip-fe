@@ -1,11 +1,13 @@
-import ListItem from '@/components/common/ListItem';
-import SaveIcon from '@/components/icons/system/SaveIcon';
+import CategorySearchList from '@/components/pages/Places/CategorySearchList';
+import KeywordSearchList from '@/components/pages/Places/KeywordSearchList';
+import LuggageSearchList from '@/components/pages/Places/LuggageSearchList';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { useSearchKeywordPlaces } from '@/hooks/usePlace';
 import { cn } from '@/lib/utils';
-import type { KeywordPlacesRequest } from '@/types/place';
+import type {
+  CategoryPlacesRequest,
+  KeywordPlacesRequest,
+} from '@/types/place';
 import { useRef } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Sheet, type SheetRef } from 'react-modal-sheet';
 
 const pixel = 104;
@@ -22,14 +24,11 @@ for (let i = start; i >= end; i -= 0.05) {
 }
 
 interface SearchSheetProps {
-  searchParams: KeywordPlacesRequest;
+  searchParams: KeywordPlacesRequest | CategoryPlacesRequest;
 }
 
 const SearchSheet = ({ searchParams }: SearchSheetProps) => {
-  const { t } = useTranslation('category');
   const ref = useRef<SheetRef>(null);
-  const { data: placesData } = useSearchKeywordPlaces(searchParams);
-  const places = placesData?.data;
 
   return (
     <>
@@ -46,14 +45,17 @@ const SearchSheet = ({ searchParams }: SearchSheetProps) => {
           <Sheet.Header className='flex h-12 items-center' />
           <Sheet.Content className={cn('gap-016 pb-[104px]')}>
             <ScrollArea className={cn('h-[calc(60dvh-70px)] w-full')}>
-              {places?.map((place) => (
-                <ListItem
-                  key={place.placeId}
-                  RightIcon={SaveIcon}
-                  title={place.placeName}
-                  description={t(place.type)}
-                />
-              ))}
+              {'query' in searchParams && (
+                <KeywordSearchList searchParams={searchParams} />
+              )}
+              {'categoryCode' in searchParams
+                && searchParams.categoryCode === 'LS1' && (
+                  <LuggageSearchList searchParams={searchParams} />
+                )}
+              {'categoryCode' in searchParams
+                && searchParams.categoryCode !== 'LS1' && (
+                  <CategorySearchList searchParams={searchParams} />
+                )}
             </ScrollArea>
           </Sheet.Content>
         </Sheet.Container>

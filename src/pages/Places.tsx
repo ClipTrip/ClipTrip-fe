@@ -11,6 +11,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import CloseIcon from '@/components/icons/system/CloseIcon';
 import { useState } from 'react';
 import SearchSheet from '@/components/pages/Places/SearchSheet';
+import type { CategoryCodeType } from '@/types/place';
 
 const Places = () => {
   const { t } = useTranslation([
@@ -25,19 +26,31 @@ const Places = () => {
   const navigate = useNavigate();
   const query = searchParams.get('query');
   const [search, setSearch] = useState(query ?? '');
+  const category = searchParams.get('category');
   const x = searchParams.get('x');
   const y = searchParams.get('y');
   const radius = searchParams.get('radius');
 
-  const searchMode = !!(query && x && y && radius);
+  const searchMode = !!(x && y && radius);
 
   const map = useMapStore((state) => state.map);
 
-  const handleSearch = (query: string) => {
+  const handleKeywordSearch = (query: string) => {
     if (map) {
       const mapCenter = map.getCenter();
       navigate(
-        `/places?query=${query}&x=${mapCenter.x}&y=${mapCenter.y}&radius=20000`
+        `/places?query=${query}&x=${mapCenter.x}&y=${mapCenter.y}&radius=2000`
+      );
+    }
+  };
+
+  const handleCategorySearch = (
+    category: CategoryCodeType | CategoryCodeType[]
+  ) => {
+    if (map) {
+      const mapCenter = map.getCenter();
+      navigate(
+        `/places?category=${category}&x=${mapCenter.x}&y=${mapCenter.y}&radius=2000`
       );
     }
   };
@@ -50,24 +63,36 @@ const Places = () => {
           LeadingIcon={CloseIcon}
           onLeadingIconClick={() => {
             setSearch('');
-            navigate(-1);
+            navigate('/places');
           }}
         />
       )}
 
       <div className='pl-024 gap-012 flex w-[360px] flex-col'>
         <PlaceSearch
-          onSearch={handleSearch}
+          onSearch={handleKeywordSearch}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <ChipsCategory />
+        <ChipsCategory onClick={handleCategorySearch} />
       </div>
 
       <Map className='h-[calc(100dvh-260px)] [&>div:nth-child(3)]:hidden [&>div:nth-child(4)]:hidden [&>div:nth-child(6)]:hidden [&>div:nth-child(7)]:hidden' />
 
       {!searchMode && <BookmarkListSheet />}
-      {searchMode && <SearchSheet searchParams={{ query, x, y, radius }} />}
+      {searchMode && query && (
+        <SearchSheet searchParams={{ query, x, y, radius }} />
+      )}
+      {searchMode && category && (
+        <SearchSheet
+          searchParams={{
+            categoryCode: category as CategoryCodeType,
+            x,
+            y,
+            radius,
+          }}
+        />
+      )}
 
       {!searchMode && <Navigation className='absolute bottom-0 z-50' />}
     </>
