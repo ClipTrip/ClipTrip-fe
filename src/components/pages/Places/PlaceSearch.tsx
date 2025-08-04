@@ -1,27 +1,28 @@
 import ButtonIcon from '@/components/common/ButtonIcon';
 import FullPageLoading from '@/components/common/FullPageLoading';
 import SearchIcon from '@/components/icons/system/SearchIcon';
-import type { InputHTMLAttributes } from 'react';
+import { cn } from '@/lib/utils';
+import type { InputHTMLAttributes, RefObject } from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface PlaceSearchProps {
-  onSearch?: (query: string) => void;
+interface PlaceSearchProps extends InputHTMLAttributes<HTMLInputElement> {
+  onSearch?: () => void;
   isPending?: boolean;
-  value: string;
-  onChange: InputHTMLAttributes<HTMLInputElement>['onChange'];
+  ref: RefObject<HTMLInputElement | null>;
 }
 
 const PlaceSearch = ({
+  className,
   isPending,
-  value,
-  onChange,
   onSearch,
+  ref,
+  ...props
 }: PlaceSearchProps) => {
   const { t } = useTranslation('searchField');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSearch?.(value);
+    onSearch?.();
   };
 
   return (
@@ -34,9 +35,12 @@ const PlaceSearch = ({
         <input
           placeholder={t('searchField')}
           data-slot='search'
-          className='body_l placeholder:label_m placeholder:text-sy_label-light px-020 py-016 rounded-020 text-sy_label-normal h-14 w-full pr-12 outline-none'
-          value={value}
-          onChange={onChange}
+          className={cn(
+            'body_l placeholder:label_m placeholder:text-sy_label-light px-020 py-016 rounded-020 text-sy_label-normal h-14 w-full pr-12 outline-none',
+            className
+          )}
+          ref={ref}
+          {...props}
         />
 
         <ButtonIcon

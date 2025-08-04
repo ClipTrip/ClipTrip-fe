@@ -1,5 +1,6 @@
 import ListItem from '@/components/common/ListItem';
 import SaveIcon from '@/components/icons/system/SaveIcon';
+import { usePlaceMarker } from '@/hooks/useMap';
 import { useSearchCategoryPlaces } from '@/hooks/usePlace';
 import type { CategoryPlacesRequest } from '@/types/place';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +12,13 @@ interface CategorySearchListProps {
 const CategorySearchList = ({ searchParams }: CategorySearchListProps) => {
   const { t } = useTranslation('category');
   const { data: places } = useSearchCategoryPlaces(searchParams);
+
+  const markerArr = places.map((place) => ({
+    latitude: place.latitude,
+    longitude: place.longitude,
+  }));
+
+  usePlaceMarker({ places: markerArr });
 
   return places?.map((place, idx) => (
     <ListItem

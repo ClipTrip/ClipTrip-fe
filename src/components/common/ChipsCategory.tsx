@@ -12,9 +12,10 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import type { CategoryCodeType } from '@/types/place';
-import { useState, type ComponentType, type SVGProps } from 'react';
+import { useEffect, useState, type ComponentType, type SVGProps } from 'react';
 import { useTranslation } from 'react-i18next';
 import chip from '@/locales/en/chip.json';
+import { useSearchParams } from 'react-router-dom';
 
 export type chipColor =
   | 'restaurants'
@@ -71,18 +72,47 @@ const CHIPS: {
 ] as const;
 
 interface ChipsCategoryProps {
-  onClick?: (code: CategoryCodeType | CategoryCodeType[]) => void;
+  onClick?: (code: CategoryCodeType | CategoryCodeType[] | null) => void;
 }
 
 const ChipsCategory = ({ onClick }: ChipsCategoryProps) => {
+  const [searchParams] = useSearchParams();
   const { t } = useTranslation('chip');
   const [activeCode, setActiveCode] = useState<
     CategoryCodeType | CategoryCodeType[] | null
   >(null);
 
+  useEffect(() => {
+    const param = searchParams.get('category')?.split(',');
+
+    if (!param) {
+      setActiveCode(null);
+      return;
+    }
+
+    const matchedChip = CHIPS.find((chip) => {
+      if (Array.isArray(chip.code)) {
+        return chip.code.includes(param[0] as CategoryCodeType);
+      }
+      return chip.code === param[0];
+    });
+
+    if (matchedChip) {
+      setActiveCode(matchedChip.code);
+    } else {
+      setActiveCode(null);
+    }
+  }, [searchParams]);
+
   const handleClick = (code: CategoryCodeType | CategoryCodeType[]) => {
-    setActiveCode(code);
-    onClick?.(code);
+    const isSame =
+      Array.isArray(code) && Array.isArray(activeCode)
+        ? code.every((c) => activeCode?.includes(c))
+          && activeCode.length === code.length
+        : code === activeCode;
+
+    setActiveCode(isSame ? null : code);
+    onClick?.(isSame ? null : code);
   };
 
   return (

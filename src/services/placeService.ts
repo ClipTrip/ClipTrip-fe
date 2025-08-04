@@ -1,6 +1,7 @@
 import { instance } from '@/lib/axios';
 import type {
   CategoryPlacesRequest,
+  CategoryPlacesResponse,
   KeywordPlacesRequest,
   LuggagePlacesRequest,
 } from '@/types/place';
@@ -15,9 +16,12 @@ export const placeApi = {
   },
 
   getCategoryPlaces: async (params: CategoryPlacesRequest) => {
-    const res = await instance.get('/api/v1/places/category', {
-      params,
-    });
+    const res = await instance.get<CategoryPlacesResponse>(
+      '/api/v1/places/category',
+      {
+        params,
+      }
+    );
 
     return res.data;
   },

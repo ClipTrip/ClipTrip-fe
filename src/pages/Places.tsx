@@ -9,7 +9,7 @@ import BookmarkListSheet from '@/components/pages/Places/BookmarkListSheet';
 import { useMapStore } from '@/store/mapStore';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import CloseIcon from '@/components/icons/system/CloseIcon';
-import { useState } from 'react';
+import { useRef } from 'react';
 import SearchSheet from '@/components/pages/Places/SearchSheet';
 import type { CategoryCodeType } from '@/types/place';
 
@@ -24,8 +24,9 @@ const Places = () => {
   ]);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const searchRef = useRef<HTMLInputElement>(null);
+
   const query = searchParams.get('query');
-  const [search, setSearch] = useState(query ?? '');
   const category = searchParams.get('category');
   const x = searchParams.get('x');
   const y = searchParams.get('y');
@@ -34,24 +35,30 @@ const Places = () => {
   const searchMode = !!(x && y && radius);
 
   const map = useMapStore((state) => state.map);
+  const clearMarkers = useMapStore((state) => state.clearMarkers);
 
-  const handleKeywordSearch = (query: string) => {
+  const handleKeywordSearch = () => {
     if (map) {
       const mapCenter = map.getCenter();
       navigate(
-        `/places?query=${query}&x=${mapCenter.x}&y=${mapCenter.y}&radius=2000`
+        `/places?query=${searchRef.current?.value}&x=${mapCenter.x}&y=${mapCenter.y}&radius=2000`
       );
     }
   };
 
   const handleCategorySearch = (
-    category: CategoryCodeType | CategoryCodeType[]
+    category: CategoryCodeType | CategoryCodeType[] | null
   ) => {
-    if (map) {
+    if (searchRef.current) searchRef.current.value = '';
+
+    if (map && category) {
       const mapCenter = map.getCenter();
       navigate(
         `/places?category=${category}&x=${mapCenter.x}&y=${mapCenter.y}&radius=2000`
       );
+    } else {
+      navigate('/places');
+      clearMarkers();
     }
   };
 
@@ -62,7 +69,8 @@ const Places = () => {
         <AppBar
           LeadingIcon={CloseIcon}
           onLeadingIconClick={() => {
-            setSearch('');
+            if (searchRef.current) searchRef.current.value = '';
+            clearMarkers();
             navigate('/places');
           }}
         />
@@ -71,8 +79,8 @@ const Places = () => {
       <div className='pl-024 gap-012 flex w-[360px] flex-col'>
         <PlaceSearch
           onSearch={handleKeywordSearch}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          defaultValue={query || ''}
+          ref={searchRef}
         />
         <ChipsCategory onClick={handleCategorySearch} />
       </div>
