@@ -65,8 +65,6 @@ export const useCreateBookmark = () => {
 };
 
 export const useAddBookmark = () => {
-  const queryClient = useQueryClient();
-
   return useMutation<
     AddBookmarkResponse,
     ApiFailResponse,
@@ -75,10 +73,7 @@ export const useAddBookmark = () => {
   >({
     mutationFn: ({ bookmarkId, data }) =>
       bookmarkService.addBookmark({ bookmarkId: bookmarkId, data }),
-    onSuccess: (_, __, variables) => {
-      queryClient.invalidateQueries({
-        queryKey: ['bookmarks', variables.bookmarkId],
-      });
+    onSuccess: () => {
       toast.success('새로운 장소가 추가 되었습니다.');
     },
     onError: (error) => {

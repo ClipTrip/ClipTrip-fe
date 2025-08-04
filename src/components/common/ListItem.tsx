@@ -7,6 +7,7 @@ interface ListItemProps {
   title: string;
   description?: string;
   Pin?: ElementType;
+  LeftIcon?: ReactNode;
   RightIcon?: ElementType | ReactNode;
   status?: 'delete';
   onClick?: () => void;
@@ -19,6 +20,7 @@ const ListItem = ({
   RightIcon,
   title,
   description,
+  LeftIcon,
   status,
   onClick,
   onPinClick,
@@ -36,6 +38,7 @@ const ListItem = ({
           </button>
         </div>
       )}
+      {LeftIcon}
       <button
         onClick={onClick}
         className='gap-004 pr-012 flex grow flex-col justify-center text-left'

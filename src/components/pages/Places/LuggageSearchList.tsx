@@ -1,5 +1,6 @@
 import ListItem from '@/components/common/ListItem';
 import SaveIcon from '@/components/icons/system/SaveIcon';
+import AddBookmarkModal from '@/components/pages/Places/AddBookmarkModal';
 import { usePlaceMarker } from '@/hooks/useMap';
 import { useSearchLuggagePlaces } from '@/hooks/usePlace';
 import type { CategoryPlacesRequest } from '@/types/place';
@@ -27,7 +28,13 @@ const LuggageSearchList = ({ searchParams }: LuggageSearchListProps) => {
   return places?.map((place) => (
     <ListItem
       key={place.placeId}
-      RightIcon={SaveIcon}
+      RightIcon={
+        <AddBookmarkModal
+          data={{ phoneNumber: '', type: 'LUGGAGE_STORAGE', ...place }}
+        >
+          <SaveIcon />
+        </AddBookmarkModal>
+      }
       title={place.placeName}
       description={t('LUGGAGE_STORAGE')}
     />

@@ -1,5 +1,5 @@
 import type { ApiSuccessResponse } from '@/types/api';
-import type { PlaceList } from '@/types/place';
+import type { CategoryType, PlaceList } from '@/types/place';
 
 export interface BookmarkResponse extends ApiSuccessResponse {
   data: {
@@ -34,8 +34,8 @@ export interface AddBookmarkRequest {
   longitude: number;
   roadAddress: string;
   placeName: string;
-  phoneNumber: string;
-  type: 'LARGE_MART';
+  phoneNumber?: string;
+  type: CategoryType;
 }
 
 export interface AddBookmarkProps {

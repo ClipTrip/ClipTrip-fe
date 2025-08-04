@@ -1,5 +1,6 @@
 import ListItem from '@/components/common/ListItem';
 import SaveIcon from '@/components/icons/system/SaveIcon';
+import AddBookmarkModal from '@/components/pages/Places/AddBookmarkModal';
 import { usePlaceMarker } from '@/hooks/useMap';
 import { useSearchKeywordPlaces } from '@/hooks/usePlace';
 import type { KeywordPlacesRequest } from '@/types/place';
@@ -21,14 +22,22 @@ const KeywordSearchList = ({ searchParams }: KeywordSearchListProps) => {
 
   usePlaceMarker({ places: markerArr });
 
-  return places?.map((place, idx) => (
-    <ListItem
-      key={idx}
-      RightIcon={SaveIcon}
-      title={place.placeName}
-      description={t(place.type)}
-    />
-  ));
+  return (
+    <>
+      {places?.map((place, idx) => (
+        <ListItem
+          key={idx}
+          RightIcon={
+            <AddBookmarkModal data={{ phoneNumber: place.phone, ...place }}>
+              <SaveIcon />
+            </AddBookmarkModal>
+          }
+          title={place.placeName}
+          description={t(place.type)}
+        />
+      ))}
+    </>
+  );
 };
 
 export default KeywordSearchList;
