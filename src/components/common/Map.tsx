@@ -12,6 +12,7 @@ const Map = ({ className, style }: MapProps) => {
   const { i18n } = useTranslation();
   const language = i18n.language;
   const mapRef = useRef<HTMLDivElement | null>(null);
+  const center = useMapStore((state) => state.center);
   const setMap = useMapStore((state) => state.setMap);
 
   useEffect(() => {
@@ -20,9 +21,9 @@ const Map = ({ className, style }: MapProps) => {
 
       const map = new naver.maps.Map(mapRef.current, {
         center: new window.naver.maps.LatLng(
-          37.554059875114014,
-          126.97069430236104
-        ), // 서울역
+          center?.latitude || 37.554059875114014,
+          center?.longitude || 126.97069430236104
+        ),
         zoom: 14,
       });
 

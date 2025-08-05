@@ -8,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { usePlaceCenter, usePlaceMarker } from '@/hooks/useMap';
 import type { BookmarkDetailResponse } from '@/types/bookmarks';
 import { useTranslation } from 'react-i18next';
 
@@ -17,6 +18,18 @@ interface BookmarkDetailListProps {
 
 const BookmarkDetailList = ({ placeList }: BookmarkDetailListProps) => {
   const { t } = useTranslation(['menu']);
+
+  const markerArr = placeList?.map((place) => ({
+    latitude: place.latitude,
+    longitude: place.longitude,
+  }));
+
+  usePlaceCenter({
+    latitude: markerArr[0].latitude,
+    longitude: markerArr[0].longitude,
+  });
+
+  usePlaceMarker({ places: markerArr });
 
   return placeList.map((place, idx) => (
     <ListItem

@@ -12,7 +12,6 @@ export const usePlaceMarker = ({ places }: usePlaceMarkerProps) => {
 
   useEffect(() => {
     clearMarkers();
-
     if (!map || !places?.length) return;
 
     places.forEach((place) => {
@@ -23,4 +22,25 @@ export const usePlaceMarker = ({ places }: usePlaceMarkerProps) => {
       addMarker(marker);
     });
   }, [places]);
+};
+
+interface usePlaceCenterProps {
+  latitude: number;
+  longitude: number;
+}
+
+export const usePlaceCenter = ({
+  latitude,
+  longitude,
+}: usePlaceCenterProps) => {
+  const map = useMapStore((state) => state.map);
+  const setCenter = useMapStore((state) => state.setCenter);
+
+  useEffect(() => {
+    if (!map) return;
+
+    const center = new naver.maps.LatLng(latitude, longitude);
+    map.setCenter(center);
+    setCenter(latitude, longitude);
+  }, [latitude, longitude, map, setCenter]);
 };
