@@ -29,10 +29,14 @@ const BookmarkDetailList = ({ placeList }: BookmarkDetailListProps) => {
     longitude: place.longitude,
   }));
 
-  usePlaceCenter({
-    latitude: markerArr[0].latitude,
-    longitude: markerArr[0].longitude,
-  });
+  usePlaceCenter(
+    markerArr[0]
+      ? {
+          latitude: markerArr[0].latitude,
+          longitude: markerArr[0].longitude,
+        }
+      : undefined
+  );
 
   usePlaceMarker({ places: markerArr });
 

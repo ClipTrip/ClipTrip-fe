@@ -29,18 +29,17 @@ interface usePlaceCenterProps {
   longitude: number;
 }
 
-export const usePlaceCenter = ({
-  latitude,
-  longitude,
-}: usePlaceCenterProps) => {
+export const usePlaceCenter = (coords?: usePlaceCenterProps) => {
   const map = useMapStore((state) => state.map);
   const setCenter = useMapStore((state) => state.setCenter);
 
   useEffect(() => {
-    if (!map) return;
+    if (!map || !coords) return;
+
+    const { latitude, longitude } = coords;
 
     const center = new naver.maps.LatLng(latitude, longitude);
     map.setCenter(center);
     setCenter(latitude, longitude);
-  }, [latitude, longitude, map, setCenter]);
+  }, [coords, map, setCenter]);
 };
