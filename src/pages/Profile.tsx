@@ -7,9 +7,11 @@ import ChangePassword from "@/components/pages/Profile/ChangePassword.tsx";
 import Dialog from "@/components/pages/Profile/Dialog.tsx";
 import {useTranslation} from "react-i18next";
 import {useState} from "react";
+import {useLogout} from "@/hooks/useAuth.ts";
 
 const Profile = () => {
   const {t} = useTranslation(["appBar", "listItem", "modal", "buttonAction"]);
+  const {mutateAsync, isPending} = useLogout();
   const [open, setOpen] = useState<{language: boolean, password: boolean, privacy: boolean, service: boolean}>({
     language: false,
     password: false,
@@ -21,6 +23,11 @@ const Profile = () => {
     setOpen(prev => ({...prev, [key]: state}));
   }
 
+  const handleLogout = async () => {
+    if(isPending) return null;
+
+    await mutateAsync();
+  }
 
   return(
       <div className="w-full h-full relative">
@@ -34,6 +41,7 @@ const Profile = () => {
               trigger={<p className="title_m text-sy_label-light py-020 px-024 cursor-pointer">{t("listItem:listItem_set-05")}</p>}
               title={t("modal:modal_title_logOut")}
               actionButtonText={t("buttonAction:button-action_logOut")}
+              onClickActionButton={handleLogout}
               variant="normal"
           />
           <Dialog

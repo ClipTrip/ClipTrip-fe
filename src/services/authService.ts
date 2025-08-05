@@ -9,7 +9,7 @@ export const authApi = {
     return res.data;
   },
   login: async (data: LoginRequest) => {
-    const res = await instance.post('/api/v1/users/sign-in', data);
+    const res = await instance.post('/api/v1/auth/sign-in', data);
 
     if (res.data.resultType === 'FAIL') {
       throw res.data as ApiFailResponse;
@@ -17,4 +17,9 @@ export const authApi = {
 
     return res.data;
   },
+  logout: async () => {
+    const res = await instance.post('/api/v1/auth/logout');
+
+    return res.data
+  }
 };

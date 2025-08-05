@@ -4,6 +4,7 @@ import type {
   AuthenticationResponse,
   LoginRequest,
   LoginResponse,
+  LogOutResponse,
 } from '@/types/auth';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
@@ -35,6 +36,24 @@ export const useLogin = () => {
 
     onError: (error) => {
       console.error('로그인 실패:', error.message);
+      toast.error(error.message);
+    },
+  });
+};
+
+export const useLogout = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  return useMutation<LogOutResponse, ApiFailResponse>({
+    mutationFn: authApi.logout,
+    onSuccess: () => {
+      queryClient.removeQueries({ queryKey: ['me'] });
+      toast.success('로그아웃 되었습니다.');
+      navigate('/login');
+    },
+    onError: (error) => {
+      console.log('로그아웃 실패:', error.message);
       toast.error(error.message);
     },
   });
