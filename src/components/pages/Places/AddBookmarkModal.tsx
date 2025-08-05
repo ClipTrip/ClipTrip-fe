@@ -36,17 +36,24 @@ const AddBookmarkModalContent = ({ data }: AddBookmarkModalContentProps) => {
 };
 
 interface AddBookmarkModalProps {
+  open?: boolean;
   data: AddBookmarkProps['data'];
-  children: ReactNode;
+  children?: ReactNode;
+  setOpen?: (open: boolean) => void;
 }
 
-const AddBookmarkModal = ({ data, children }: AddBookmarkModalProps) => {
-  const [open, setOpen] = useState(false);
+const AddBookmarkModal = ({
+  open,
+  data,
+  children,
+  setOpen,
+}: AddBookmarkModalProps) => {
+  const [ModalOpen, setModalOpen] = useState(open || false);
 
   return (
     <Dialog
-      open={open}
-      onOpenChange={setOpen}
+      open={open === undefined ? ModalOpen : open}
+      onOpenChange={setOpen || setModalOpen}
     >
       <DialogTrigger>{children}</DialogTrigger>
       <DialogContent className='rounded-020 py-012 gap-004 flex w-[314px] flex-col px-0'>
@@ -57,7 +64,7 @@ const AddBookmarkModal = ({ data, children }: AddBookmarkModalProps) => {
           </DialogHeader>
         </VisuallyHidden>
         <ScrollArea className='h-[260px]'>
-          {open && <AddBookmarkModalContent data={data} />}
+          {(ModalOpen || open) && <AddBookmarkModalContent data={data} />}
         </ScrollArea>
       </DialogContent>
     </Dialog>
