@@ -9,7 +9,7 @@ export const authApi = {
   },
   login: async (data: LoginRequest) => {
     const res = await instance.post<LoginResponse>(
-      '/api/v1/users/sign-in',
+      '/api/v1/auth/sign-in',
       data
     );
 
