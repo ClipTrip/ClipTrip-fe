@@ -2,7 +2,7 @@ import FullPageLoading from '@/components/common/FullPageLoading';
 import ListItem from '@/components/common/ListItem';
 import Menu from '@/components/common/Menu';
 import MoreIcon from '@/components/icons/system/MoreIcon';
-import RenameModal from '@/components/pages/Places/RenameModal';
+import AddRenameModal from '@/components/pages/Places/AddRenameModal';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,7 +35,7 @@ const BookmarkList = ({ places }: BookmarkListProps) => {
   return (
     <>
       {open && (
-        <RenameModal
+        <AddRenameModal
           defaultName={defaultName}
           open={open}
           onOpenChange={setOpen}

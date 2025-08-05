@@ -12,10 +12,10 @@ import { Sheet, type SheetRef } from 'react-modal-sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useTranslation } from 'react-i18next';
 import { useRef, useState } from 'react';
-import RenameModal from '@/components/pages/Places/RenameModal';
 import FullPageLoading from '@/components/common/FullPageLoading';
 import { useDeleteBookmark, useGetBookmarkDetail } from '@/hooks/useBookmark';
 import { useNavigate, useParams } from 'react-router-dom';
+import AddRenameModal from '@/components/pages/Places/AddRenameModal';
 
 const pixel = 104;
 const height = window.innerHeight;
@@ -65,7 +65,7 @@ const BookmarkDetailListSheet = () => {
   return (
     <>
       {open && (
-        <RenameModal
+        <AddRenameModal
           defaultName={defaultName}
           open={open}
           onOpenChange={setOpen}

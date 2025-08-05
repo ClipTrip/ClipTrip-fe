@@ -7,20 +7,37 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { useCreateBookmark } from '@/hooks/useBookmark';
 
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface RenameModalProps {
+interface AddRenameModalProps {
   defaultName: string;
   open: boolean;
   onOpenChange?: (open: boolean) => void;
+  mode?: 'add' | 'rename';
 }
 
-const RenameModal = ({ defaultName, open, onOpenChange }: RenameModalProps) => {
+const AddRenameModal = ({
+  defaultName,
+  open,
+  mode = 'rename',
+  onOpenChange,
+}: AddRenameModalProps) => {
   const { t } = useTranslation(['buttonAction', 'textField']);
   const [name, setName] = useState(defaultName);
+  const { mutateAsync, isPending } = useCreateBookmark();
+
+  const handleCreateBookmark = async () => {
+    if (isPending) return null;
+
+    await mutateAsync({
+      bookmarkName: name,
+      description: '',
+    });
+  };
 
   const handleClose = () => {
     onOpenChange?.(false);
@@ -28,6 +45,7 @@ const RenameModal = ({ defaultName, open, onOpenChange }: RenameModalProps) => {
 
   const handleSubmit = () => {
     onOpenChange?.(false);
+    if (mode === 'add') handleCreateBookmark();
   };
 
   useEffect(() => {
@@ -78,4 +96,4 @@ const RenameModal = ({ defaultName, open, onOpenChange }: RenameModalProps) => {
   );
 };
 
-export default RenameModal;
+export default AddRenameModal;

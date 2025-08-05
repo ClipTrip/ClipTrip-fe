@@ -10,6 +10,7 @@ interface ListItemProps {
   LeftIcon?: ReactNode;
   RightIcon?: ElementType | ReactNode;
   status?: 'delete';
+  className?: string;
   onClick?: () => void;
   onPinClick?: () => void;
   onRightIconClick?: () => void;
@@ -22,12 +23,18 @@ const ListItem = ({
   description,
   LeftIcon,
   status,
+  className,
   onClick,
   onPinClick,
   onRightIconClick,
 }: ListItemProps) => {
   return (
-    <div className='py-008 pr-012 pl-024 bg-sy_container-neutral-white active:bg-sy_container-neutral-normal flex cursor-pointer'>
+    <div
+      className={cn(
+        'py-008 pr-012 pl-024 bg-sy_container-neutral-white active:bg-sy_container-neutral-normal flex cursor-pointer',
+        className
+      )}
+    >
       {Pin && (
         <div className='pr-012 h-[51px] w-9 py-[3px]'>
           <button
@@ -41,7 +48,10 @@ const ListItem = ({
       {LeftIcon}
       <button
         onClick={onClick}
-        className='gap-004 pr-012 flex grow flex-col justify-center text-left'
+        className={cn(
+          'gap-004 pr-012 flex grow flex-col justify-center text-left',
+          onClick && 'cursor-pointer'
+        )}
       >
         <h2
           data-state={status}
