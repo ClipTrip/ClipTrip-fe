@@ -34,6 +34,7 @@ export const useDeleteBookmark = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['bookmarks'],
+        exact: true,
       });
       toast.success('북마크가 삭제되었습니다.');
     },
