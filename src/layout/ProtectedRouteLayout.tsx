@@ -1,6 +1,6 @@
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useAuthentication } from '@/hooks/useAuth';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 const ProtectedRouteLayout = () => {
   const { error, isPending } = useAuthentication();
@@ -10,20 +10,23 @@ const ProtectedRouteLayout = () => {
   }
 
   if (error)
-    return (
-      <Navigate
-        to='/onboarding'
-        replace
-      />
-    );
+    // return (
+    //   <Navigate
+    //     to='/onboarding'
+    //     replace
+    //   />
+    // );
 
-  return (
-    <div className='flex h-dvh w-dvw justify-center'>
-      <ScrollArea className='h-dvh w-[360px]'>
-        <Outlet />
-      </ScrollArea>
-    </div>
-  );
+    return (
+      <div className='flex h-dvh w-dvw justify-center'>
+        <ScrollArea
+          className='h-dvh w-[360px]'
+          id='navigation-root'
+        >
+          <Outlet />
+        </ScrollArea>
+      </div>
+    );
 };
 
 export default ProtectedRouteLayout;

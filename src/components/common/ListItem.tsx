@@ -1,15 +1,19 @@
 import ButtonIcon from '@/components/common/ButtonIcon';
 import { cn } from '@/lib/utils';
-import { isValidElement, type ElementType, type ReactNode } from 'react';
+import { renderIconElement } from '@/utils/renderIconElement';
+import { type ElementType, type ReactNode } from 'react';
 
 interface ListItemProps {
   title: string;
   description?: string;
   Pin?: ElementType;
-  onPinClick?: () => void;
+  LeftIcon?: ReactNode;
   RightIcon?: ElementType | ReactNode;
-  onRightIconClick?: () => void;
   status?: 'delete';
+  className?: string;
+  onClick?: () => void;
+  onPinClick?: () => void;
+  onRightIconClick?: () => void;
 }
 
 const ListItem = ({
@@ -17,30 +21,20 @@ const ListItem = ({
   RightIcon,
   title,
   description,
+  LeftIcon,
   status,
+  className,
+  onClick,
   onPinClick,
   onRightIconClick,
 }: ListItemProps) => {
-  const renderRightIcon = () => {
-    if (!RightIcon) return null;
-
-    if (isValidElement(RightIcon)) {
-      return RightIcon;
-    }
-
-    if (typeof RightIcon === 'function') {
-      return (
-        <ButtonIcon
-          Icon={RightIcon}
-          onClick={onRightIconClick}
-        />
-      );
-    }
-
-    return null;
-  };
   return (
-    <div className='py-008 pr-012 pl-024 bg-sy_container-neutral-white active:bg-sy_container-neutral-normal flex cursor-pointer'>
+    <div
+      className={cn(
+        'py-008 pr-012 pl-024 bg-sy_container-neutral-white active:bg-sy_container-neutral-normal flex cursor-pointer',
+        className
+      )}
+    >
       {Pin && (
         <div className='pr-012 h-[51px] w-9 py-[3px]'>
           <button
@@ -51,7 +45,14 @@ const ListItem = ({
           </button>
         </div>
       )}
-      <div className='gap-004 pr-012 flex grow flex-col'>
+      {LeftIcon}
+      <button
+        onClick={onClick}
+        className={cn(
+          'gap-004 pr-012 flex grow flex-col justify-center text-left',
+          onClick && 'cursor-pointer'
+        )}
+      >
         <h2
           data-state={status}
           className='data-[state=delete]:text-sy_label-light title_m text-sy_label-normal'
@@ -66,8 +67,14 @@ const ListItem = ({
             {description}
           </p>
         )}
-      </div>
-      {renderRightIcon()}
+      </button>
+      {renderIconElement(
+        RightIcon,
+        <ButtonIcon
+          Icon={RightIcon as ElementType}
+          onClick={onRightIconClick}
+        />
+      )}
     </div>
   );
 };

@@ -1,0 +1,22 @@
+{
+  "LARGE_MART": "Large Mart",
+  "CONVENIENCE_STORE": "Convenience Store",
+  "CHILD_CARE": "Child Care",
+  "SCHOOL": "School",
+  "ACADEMY": "Academy",
+  "PARKING_LOT": "Parking Lot",
+  "GAS_STATION": "Gas Station",
+  "SUBWAY_STATION": "Subway Station",
+  "BANK": "Bank",
+  "CULTURAL_FACILITY": "Cultural Facility",
+  "REAL_ESTATE_AGENCY": "Real Estate Agency",
+  "PUBLIC_INSTITUTION": "Public Institution",
+  "TOURIST_ATTRACTION": "Tourist Attraction",
+  "ACCOMMODATION": "Accommodation",
+  "RESTAURANT": "Restaurant",
+  "CAFE": "Cafe",
+  "HOSPITAL": "Hospital",
+  "PHARMACY": "Pharmacy",
+  "LUGGAGE_STORAGE": "Luggage Storage",
+  "ETC": "Others"
+}

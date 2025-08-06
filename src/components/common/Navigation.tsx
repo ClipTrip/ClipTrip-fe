@@ -4,6 +4,8 @@ import PlacesIcon from '@/components/icons/navi/PlacesIcon';
 import PlansIcon from '@/components/icons/navi/PlansIcon';
 import ProfileIcon from '@/components/icons/navi/ProfileIcon';
 import { cn } from '@/lib/utils';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 interface NavigationProps {
@@ -12,7 +14,17 @@ interface NavigationProps {
 
 const Navigation = ({ className }: NavigationProps) => {
   const { t } = useTranslation('naviItem');
-  return (
+
+  const [container, setContainer] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const el = document.getElementById('navigation-root');
+    if (el) setContainer(el);
+  }, []);
+
+  if (!container) return null;
+
+  return createPortal(
     <div
       className={cn(
         'pt-004 px-024 pb-028 bg-sy_container-neutral-white w-[360px]',
@@ -41,7 +53,8 @@ const Navigation = ({ className }: NavigationProps) => {
           label={t('naviItem-04')}
         />
       </nav>
-    </div>
+    </div>,
+    container
   );
 };
 

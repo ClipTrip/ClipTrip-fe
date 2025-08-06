@@ -1,18 +1,8 @@
 import type { ApiSuccessResponse } from '@/types/api';
+import type { PlaceList } from '@/types/place';
 
 export interface VideosRequest {
   youtubeUrl: string;
-}
-
-export interface PlaceList {
-  placeId: number;
-  placeName: string;
-  roadAddress: string;
-  phone: string;
-  type: string;
-  longitude: number;
-  latitude: number;
-  placeOrder: number;
 }
 
 export interface VideosResponse extends ApiSuccessResponse {
@@ -20,6 +10,7 @@ export interface VideosResponse extends ApiSuccessResponse {
     videoResponse: {
       videoId: number;
       url: string;
+      thumbnailUrl: string;
       summary: string;
     };
     scheduleInfoResponse: {

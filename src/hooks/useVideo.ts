@@ -7,11 +7,7 @@ import { toast } from 'sonner';
 export const useVideos = () => {
   return useMutation<VideosResponse, ApiFailResponse, VideosRequest>({
     mutationFn: (data) => videoApi.youtube(data),
-    onSuccess: (res) => {
-      console.log(res.data);
-    },
     onError: (error) => {
-      console.error(error.message);
       toast.error(error.message);
     },
   });
