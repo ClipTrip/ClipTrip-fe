@@ -7,13 +7,14 @@ interface NaviItemProps {
   href: (typeof pagePath)[keyof typeof pagePath];
   Icon: ElementType;
   label: string;
+  end?: boolean;
 }
 
-const NaviItem = ({ href, Icon, label }: NaviItemProps) => {
+const NaviItem = ({ href, Icon, label, end }: NaviItemProps) => {
   return (
     <NavLink
-      to={href}
-      end
+      to={`/${href}`}
+      end={end}
     >
       {({ isActive }) => (
         <div className={cn('flex w-16 cursor-pointer flex-col items-center')}>

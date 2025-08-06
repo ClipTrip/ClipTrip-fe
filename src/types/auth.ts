@@ -7,11 +7,6 @@ export interface LoginRequest {
 
 export interface LoginResponse extends ApiSuccessResponse {
   data: {
-    jwtToken: {
-      grantType: string;
-      accessToken: string;
-      refreshToken: string;
-    };
     language: 'ENGLISH' | 'KOREAN';
   };
 }

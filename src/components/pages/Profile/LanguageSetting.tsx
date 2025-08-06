@@ -15,12 +15,14 @@ const LanguageSetting = ({ onClickBackIcon }: LanguageSettingProps) => {
   const languageOptions = [
     { value: 'en', label: t('buttonAction:button-action_language-01') },
     { value: 'ko', label: t('buttonAction:button-action_language-02') },
-    { value: "ja", label: t("buttonAction:button-action_language-03") },
-    { value: "zh", label: t("buttonAction:button-action_language-04") },
+    { value: 'ja', label: t('buttonAction:button-action_language-03') },
+    { value: 'zh', label: t('buttonAction:button-action_language-04') },
   ];
 
   const findLanguageOptions = () => {
-    return languageOptions.find((option) => option.value === localStorage.getItem('language'))?.label;
+    return languageOptions.find(
+      (option) => option.value === localStorage.getItem('language')
+    )?.label;
   };
 
   return (

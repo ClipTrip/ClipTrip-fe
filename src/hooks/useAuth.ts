@@ -35,7 +35,6 @@ export const useLogin = () => {
     },
 
     onError: (error) => {
-      console.error('로그인 실패:', error.message);
       toast.error(error.message);
     },
   });

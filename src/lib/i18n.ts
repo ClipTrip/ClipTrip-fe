@@ -18,6 +18,7 @@ import enSelectField from '@/locales/en/selectField.json';
 import enSearchField from '@/locales/en/searchField.json';
 import enTermsOfService2 from '@/locales/en/termsOfService2.json';
 import enTextField from '@/locales/en/textField.json';
+import enCategory from '@/locales/en/category.json';
 
 import koAppBar from '@/locales/ko/appBar.json';
 import koAccessibility from '@/locales/ko/accessibility.json';
@@ -36,6 +37,7 @@ import koSelectField from '@/locales/ko/selectField.json';
 import koSearchField from '@/locales/ko/searchField.json';
 import koTermsOfService2 from '@/locales/ko/termsOfService2.json';
 import koTextField from '@/locales/ko/textField.json';
+import koCategory from '@/locales/ko/category.json';
 import type { LanguageType } from '@/types/type';
 
 export const setLanguage = (lang: LanguageType) => {
@@ -68,6 +70,7 @@ i18n.use(initReactI18next).init({
       searchField: enSearchField,
       termsOfService2: enTermsOfService2,
       textField: enTextField,
+      category: enCategory,
     },
     ko: {
       appBar: koAppBar,
@@ -87,6 +90,7 @@ i18n.use(initReactI18next).init({
       searchField: koSearchField,
       termsOfService2: koTermsOfService2,
       textField: koTextField,
+      category: koCategory,
     },
   },
   lng: lang,

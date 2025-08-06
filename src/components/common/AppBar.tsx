@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
-import type { ElementType } from 'react';
+import { renderIconElement } from '@/utils/renderIconElement';
+import { type ElementType, type ReactNode } from 'react';
 
 interface IconButtonProps {
   Icon?: ElementType;
@@ -24,9 +25,9 @@ const IconButton = ({ Icon, onClick }: IconButtonProps) => {
 interface AppBarProps {
   title?: string;
   LeadingIcon?: ElementType;
-  FirstIcon?: ElementType;
-  SecondIcon?: ElementType;
-  ThirdIcon?: ElementType;
+  FirstIcon?: ElementType | ReactNode;
+  SecondIcon?: ElementType | ReactNode;
+  ThirdIcon?: ElementType | ReactNode;
   onLeadingIconClick?: () => void;
   onFirstIconClick?: () => void;
   onSecondIconClick?: () => void;
@@ -63,18 +64,29 @@ const AppBar = ({
         </h3>
       </div>
       <div className='flex h-fit w-fit'>
-        <IconButton
-          Icon={FirstIcon}
-          onClick={onFirstIconClick}
-        />
-        <IconButton
-          Icon={SecondIcon}
-          onClick={onSecondIconClick}
-        />
-        <IconButton
-          Icon={ThirdIcon}
-          onClick={onThirdIconClick}
-        />
+        {renderIconElement(
+          FirstIcon,
+          <IconButton
+            Icon={FirstIcon as ElementType}
+            onClick={onFirstIconClick}
+          />
+        )}
+
+        {renderIconElement(
+          SecondIcon,
+          <IconButton
+            Icon={SecondIcon as ElementType}
+            onClick={onSecondIconClick}
+          />
+        )}
+
+        {renderIconElement(
+          ThirdIcon,
+          <IconButton
+            Icon={ThirdIcon as ElementType}
+            onClick={onThirdIconClick}
+          />
+        )}
       </div>
     </header>
   );

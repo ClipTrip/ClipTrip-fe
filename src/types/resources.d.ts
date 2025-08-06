@@ -16,6 +16,7 @@ import selectField from '@/locales/ko/selectField.json';
 import searchField from '@/locales/ko/searchField.json';
 import termsOfService2 from '@/locales/ko/termsOfService2.json';
 import textField from '@/locales/ko/textField.json';
+import category from '@/locales/ko/category.json';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
@@ -37,6 +38,7 @@ declare module 'i18next' {
       searchField: typeof searchField;
       termsOfService2: typeof termsOfService2;
       textField: typeof textField;
+      category: typeof category;
     };
   }
 }

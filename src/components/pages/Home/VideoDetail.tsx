@@ -23,6 +23,8 @@ const VideoDetail = ({ data, onBack }: VideoDetailProps) => {
 
       <div className='gap-028 flex flex-col'>
         <VideoSummary
+          src={data.videoResponse.thumbnailUrl}
+          alt='Video Thumbnail'
           url={data.videoResponse.url}
           summary={data.videoResponse.summary}
         />
