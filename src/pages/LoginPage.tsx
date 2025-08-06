@@ -69,9 +69,8 @@ const LoginPage = () => {
           variant='primary'
           disabled={isPending}
           className='mt-[18px]'
-          onClick={() => navigate('/register')}
         >
-          {t('buttonAction:button-action_signUp')}
+          {t('buttonAction:button-action_login')}
         </ButtonActionFill>
       </form>
     </div>
