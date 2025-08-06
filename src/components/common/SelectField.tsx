@@ -1,18 +1,18 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Command,
   CommandGroup,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from '@/components/ui/command';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import ArrowDropDownIcon from "@/components/icons/system/ArrowDropDownIcon.tsx";
-import ArrowDropUpIcon from "@/components/icons/system/ArrowDropUpIcon.tsx";
+} from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import ArrowDropDownIcon from '@/components/icons/system/ArrowDropDownIcon.tsx';
+import ArrowDropUpIcon from '@/components/icons/system/ArrowDropUpIcon.tsx';
 
 interface DataOption {
   value: string;
@@ -27,17 +27,20 @@ interface SelectFieldProps {
 
 const SelectField = ({ datas, placeHolder, onChange }: SelectFieldProps) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   return (
-    <div className="pl-024 pr-024 w-full">
-      <Popover open={open} onOpenChange={setOpen}>
+    <div className='pl-024 pr-024 w-full'>
+      <Popover
+        open={open}
+        onOpenChange={setOpen}
+      >
         <PopoverTrigger asChild>
           <button
-            type="button"
+            type='button'
             className={cn(
-              "relative p-020 py-016 flex w-full justify-between bg-sy_container-neutral-normal rounded-020 body_m-prominent",
-              open ? "border border-sy_line-super z-50" : "border-none z-20"
+              'p-020 py-016 bg-sy_container-neutral-normal rounded-020 body_m-prominent relative flex w-full justify-between',
+              open ? 'border-sy_line-super z-50 border' : 'z-20 border-none'
             )}
           >
             {value
@@ -47,20 +50,20 @@ const SelectField = ({ datas, placeHolder, onChange }: SelectFieldProps) => {
           </button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-[312px] mt-[-20px] border-none p-0 bg-sy_container-neutral-normal rounded-020 z-40 shadow-lg"
-          align="start"
+          className='bg-sy_container-neutral-normal rounded-020 z-40 mt-[-20px] w-[312px] border-none p-0 shadow-lg'
+          align='start'
         >
-          <Command className="bg-sy_container-neutral-normal">
-            <CommandList className="pt-020">
-              <CommandGroup className="text-sy_label-alternative">
+          <Command className='bg-sy_container-neutral-normal'>
+            <CommandList className='pt-020'>
+              <CommandGroup className='text-sy_label-alternative'>
                 {datas?.map((data) => (
                   <CommandItem
                     key={data.value}
                     value={data.value}
-                    className="p-012 cursor-pointer hover:bg-sy_container-hover"
+                    className='p-012 hover:bg-sy_container-hover cursor-pointer'
                     onSelect={(currentValue) => {
                       if (onChange) onChange(currentValue);
-                      setValue(currentValue === value ? "" : currentValue);
+                      setValue(currentValue === value ? '' : currentValue);
                       setOpen(false);
                     }}
                   >

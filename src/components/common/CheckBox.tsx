@@ -1,11 +1,11 @@
-import { cn } from "@/lib/utils";
-import CheckCircleIcon from "@/components/icons/system/CheckCircleIcon.tsx";
-import ChevronRightIcon from "@/components/icons/system/ChevronRightIcon.tsx";
+import { cn } from '@/lib/utils';
+import CheckCircleIcon from '@/components/icons/system/CheckCircleIcon.tsx';
+import ChevronRightIcon from '@/components/icons/system/ChevronRightIcon.tsx';
 
 interface CheckBoxProps {
   id: string;
   label: string;
-  type?: "default" | "primary";
+  type?: 'default' | 'primary';
   isChecked?: boolean;
   setIsChecked?: (value: boolean) => void;
   onClickRightIcon?: () => void;
@@ -14,18 +14,18 @@ interface CheckBoxProps {
 const CheckBox = ({
   id,
   label,
-  type = "default",
+  type = 'default',
   isChecked,
   setIsChecked,
   onClickRightIcon,
 }: CheckBoxProps) => {
   return (
-    <div className="pb-016 pt-016 flex justify-between items-center">
+    <div className='pb-016 pt-016 flex items-center justify-between'>
       <div>
         <input
-          type="checkbox"
+          type='checkbox'
           id={id}
-          className="hidden"
+          className='hidden'
           checked={isChecked}
           onChange={(e) => {
             if (setIsChecked) {
@@ -33,19 +33,22 @@ const CheckBox = ({
             }
           }}
         />
-        <label htmlFor={id} className="flex items-center gap-016">
+        <label
+          htmlFor={id}
+          className='gap-016 flex items-center'
+        >
           <CheckCircleIcon isActive={isChecked} />
           <p
             className={cn(
-              type === "default" && "title_s text-sy_label-normal font-regular",
-              type === "primary" && "title_m-prominent font-bold"
+              type === 'default' && 'title_s text-sy_label-normal font-regular',
+              type === 'primary' && 'title_m-prominent font-bold'
             )}
           >
             {label}
           </p>
         </label>
       </div>
-      {type === "default" && (
+      {type === 'default' && (
         <button onClick={onClickRightIcon}>
           <ChevronRightIcon />
         </button>
