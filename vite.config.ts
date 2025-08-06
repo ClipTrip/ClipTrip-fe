@@ -24,7 +24,7 @@ export default defineConfig({
     host: true,
     proxy: {
       '/api': {
-        target: 'https://clip-trip.shop',
+        target: 'https://api.clip-trip.shop',
         changeOrigin: true,
         secure: true,
       },
