@@ -10,9 +10,13 @@ export const authApi = {
   },
 
   login: async (data: LoginRequest) => {
-    const res = await axios.post<LoginResponse>('/api/v1/auth/sign-in', data, {
-      withCredentials: true,
-    });
+    const res = await axios.post<LoginResponse>(
+      `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/sign-in`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
 
     return res.data;
   },
@@ -25,7 +29,7 @@ export const authApi = {
 
   tokenRefresh: async () => {
     const res = await axios.post(
-      '/api/v1/auth/refresh',
+      `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/refresh`,
       {},
       { withCredentials: true }
     );
