@@ -11,7 +11,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import type { ApiFailResponse } from '@/types/api';
 import type { AxiosError } from 'axios';
 import { setLanguage } from '@/lib/i18n';
-import type { LanguageType } from '@/types/type';
+import { LANGUAGE } from '@/constants/language';
 
 export const useAuthentication = () => {
   return useQuery<AuthenticationResponse, Error, AuthenticationResponse>({
@@ -36,7 +36,7 @@ export const useLogin = () => {
       try {
         const verifyResult = await authApi.verify();
         if (verifyResult.data.isTokenVerified) {
-          setLanguage(res.data.language as LanguageType);
+          setLanguage(LANGUAGE[res.data.language]);
           queryClient.setQueryData(['verify'], verifyResult);
           navigate(redirectPath);
         }
