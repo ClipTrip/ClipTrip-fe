@@ -21,3 +21,5 @@ export interface AuthenticationResponse extends ApiSuccessResponse {
     grantType: string;
   };
 }
+
+export interface LogOutResponse extends ApiSuccessResponse {}
