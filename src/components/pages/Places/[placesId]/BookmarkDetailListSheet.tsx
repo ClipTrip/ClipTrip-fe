@@ -69,6 +69,7 @@ const BookmarkDetailListSheet = () => {
           defaultName={defaultName}
           open={open}
           onOpenChange={setOpen}
+          bookmarkId={bookmarkId}
         />
       )}
       <Sheet
