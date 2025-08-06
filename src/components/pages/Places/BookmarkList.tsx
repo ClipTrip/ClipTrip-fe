@@ -24,7 +24,10 @@ const BookmarkList = ({ places }: BookmarkListProps) => {
   const { mutateAsync, isPending } = useDeleteBookmark();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [defaultName, setDefaultName] = useState('');
+  const [selectedPlace, setSelectedPlace] = useState<{
+    id: number;
+    name: string;
+  }>();
 
   const handleDeleteBookmark = async (bookmarkId: number) => {
     if (isPending) return null;
@@ -34,11 +37,12 @@ const BookmarkList = ({ places }: BookmarkListProps) => {
 
   return (
     <>
-      {open && (
+      {open && selectedPlace && (
         <AddRenameModal
-          defaultName={defaultName}
+          defaultName={selectedPlace.name}
           open={open}
           onOpenChange={setOpen}
+          bookmarkId={selectedPlace.id}
         />
       )}
       {isPending && <FullPageLoading />}
@@ -59,7 +63,7 @@ const BookmarkList = ({ places }: BookmarkListProps) => {
                     <Menu.Item
                       title={t('menu_rename')}
                       onClick={() => {
-                        setDefaultName(name);
+                        setSelectedPlace({ name, id: bookmarkId });
                         setOpen(true);
                       }}
                     />
