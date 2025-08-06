@@ -7,14 +7,17 @@ import type {
   LogOutResponse,
 } from '@/types/auth';
 import { toast } from 'sonner';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import type { ApiFailResponse } from '@/types/api';
+import type { AxiosError } from 'axios';
+import { setLanguage } from '@/lib/i18n';
+import type { LanguageType } from '@/types/type';
 
 export const useAuthentication = () => {
   return useQuery<AuthenticationResponse, Error, AuthenticationResponse>({
-    queryKey: ['me'],
+    queryKey: ['verify'],
+    queryFn: authApi.verify,
     staleTime: Infinity,
-    queryFn: authApi.authentication,
     retry: false,
     refetchOnWindowFocus: false,
   });
@@ -23,19 +26,27 @@ export const useAuthentication = () => {
 export const useLogin = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [searchParam] = useSearchParams();
 
-  return useMutation<LoginResponse, ApiFailResponse, LoginRequest>({
+  const redirectPath = searchParam.get('redirect') || '/';
+
+  return useMutation<LoginResponse, AxiosError<ApiFailResponse>, LoginRequest>({
     mutationFn: (data) => authApi.login(data),
-    onSuccess: (res) => {
-      console.log(res.data.language);
-      queryClient.invalidateQueries({
-        queryKey: ['me'],
-      });
-      navigate('/');
+    onSuccess: async (res) => {
+      try {
+        const verifyResult = await authApi.verify();
+        if (verifyResult.data.isTokenVerified) {
+          setLanguage(res.data.language as LanguageType);
+          queryClient.setQueryData(['verify'], verifyResult);
+          navigate(redirectPath);
+        }
+      } catch {
+        toast.error('인증 실패');
+      }
     },
 
     onError: (error) => {
-      toast.error(error.message);
+      toast.error(error.response?.data.message);
     },
   });
 };
