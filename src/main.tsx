@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './lib/i18n';
 import I18nProvider from '@/providers/I18nProvider.tsx';
 import { Toaster } from '@/components/ui/sonner.tsx';
+import { Analytics } from '@vercel/analytics/react';
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById('root')!).render(
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
         <Toaster />
       </I18nProvider>
       <ReactQueryDevtools initialIsOpen={false} />
+      <Analytics />
     </QueryClientProvider>
   </StrictMode>
 );

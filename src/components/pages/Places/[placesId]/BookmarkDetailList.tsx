@@ -53,6 +53,7 @@ const BookmarkDetailList = ({
   };
 
   useEffect(() => {
+    setPlaces(placeList);
     onSetting(placeList);
   }, [placeList, onSetting]);
 
