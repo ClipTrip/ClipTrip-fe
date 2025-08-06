@@ -5,6 +5,7 @@ import {
   type BookmarkResponse,
   type CreateBookmarkRequest,
   type CreateBookmarkResponse,
+  type PatchBookmarkProps,
 } from '@/types/bookmarks';
 
 export const bookmarkService = {
@@ -35,6 +36,14 @@ export const bookmarkService = {
 
   addBookmark: async ({ bookmarkId, data }: AddBookmarkProps) => {
     const res = await instance.post<CreateBookmarkResponse>(
+      `/api/v1/bookmarks/${bookmarkId}`,
+      data
+    );
+    return res.data;
+  },
+
+  patchBookmark: async ({ bookmarkId, data }: PatchBookmarkProps) => {
+    const res = await instance.patch<CreateBookmarkResponse>(
       `/api/v1/bookmarks/${bookmarkId}`,
       data
     );

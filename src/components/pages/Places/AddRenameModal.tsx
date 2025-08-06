@@ -7,7 +7,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { useCreateBookmark } from '@/hooks/useBookmark';
+import { useCreateBookmark, usePatchBookmark } from '@/hooks/useBookmark';
 
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { useEffect, useState } from 'react';
@@ -18,17 +18,21 @@ interface AddRenameModalProps {
   open: boolean;
   onOpenChange?: (open: boolean) => void;
   mode?: 'add' | 'rename';
+  bookmarkId?: number;
 }
 
 const AddRenameModal = ({
   defaultName,
   open,
   mode = 'rename',
+  bookmarkId,
   onOpenChange,
 }: AddRenameModalProps) => {
   const { t } = useTranslation(['buttonAction', 'textField']);
   const [name, setName] = useState(defaultName);
   const { mutateAsync, isPending } = useCreateBookmark();
+  const { mutateAsync: patchMutate, isPending: isPatchPending } =
+    usePatchBookmark();
 
   const handleCreateBookmark = async () => {
     if (isPending) return null;
@@ -39,6 +43,12 @@ const AddRenameModal = ({
     });
   };
 
+  const handlePatchBookmark = async () => {
+    if (isPatchPending || !bookmarkId) return null;
+
+    await patchMutate({ bookmarkId, data: { bookmarkName: name } });
+  };
+
   const handleClose = () => {
     onOpenChange?.(false);
   };
@@ -46,6 +56,7 @@ const AddRenameModal = ({
   const handleSubmit = () => {
     onOpenChange?.(false);
     if (mode === 'add') handleCreateBookmark();
+    if (mode === 'rename') handlePatchBookmark();
   };
 
   useEffect(() => {

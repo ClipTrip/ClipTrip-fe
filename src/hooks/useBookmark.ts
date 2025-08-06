@@ -7,6 +7,8 @@ import type {
   BookmarkResponse,
   CreateBookmarkRequest,
   CreateBookmarkResponse,
+  PatchBookmarkProps,
+  PatchBookmarkResponse,
 } from '@/types/bookmarks';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -76,6 +78,28 @@ export const useAddBookmark = () => {
       bookmarkService.addBookmark({ bookmarkId: bookmarkId, data }),
     onSuccess: () => {
       toast.success('새로운 장소가 추가 되었습니다.');
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+};
+
+export const usePatchBookmark = () => {
+  const queryClient = useQueryClient();
+  return useMutation<
+    PatchBookmarkResponse,
+    ApiFailResponse,
+    PatchBookmarkProps,
+    PatchBookmarkProps
+  >({
+    mutationFn: ({ bookmarkId, data }) =>
+      bookmarkService.patchBookmark({ bookmarkId: bookmarkId, data }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['bookmarks'],
+      });
+      toast.success('북마크가 수정 되었습니다.');
     },
     onError: (error) => {
       toast.error(error.message);
