@@ -16,6 +16,7 @@ import FullPageLoading from '@/components/common/FullPageLoading';
 import { useDeleteBookmark, useGetBookmarkDetail } from '@/hooks/useBookmark';
 import { useNavigate, useParams } from 'react-router-dom';
 import AddRenameModal from '@/components/pages/Places/AddRenameModal';
+import type { BookmarkDetailResponse } from '@/types/bookmarks';
 
 const pixel = 104;
 const height = window.innerHeight;
@@ -30,7 +31,15 @@ for (let i = start; i >= end; i -= 0.05) {
   snapPoints.push(parseFloat(i.toFixed(2)));
 }
 
-const BookmarkDetailListSheet = () => {
+interface BookmarkDetailListSheetProps {
+  onDelete: (placeId: number) => void;
+  onSetting: (placeList: BookmarkDetailResponse['data']['placeList']) => void;
+}
+
+const BookmarkDetailListSheet = ({
+  onDelete,
+  onSetting,
+}: BookmarkDetailListSheetProps) => {
   const { t } = useTranslation(['appBar', 'textField', 'menu']);
   const ref = useRef<SheetRef>(null);
   const [open, setOpen] = useState(false);
@@ -120,7 +129,11 @@ const BookmarkDetailListSheet = () => {
             </div>
 
             <ScrollArea className='h-[calc(80dvh-250px)] w-full'>
-              <BookmarkDetailList placeList={placeList} />
+              <BookmarkDetailList
+                placeList={placeList}
+                onDelete={onDelete}
+                onSetting={onSetting}
+              />
             </ScrollArea>
           </Sheet.Content>
         </Sheet.Container>

@@ -44,7 +44,7 @@ export interface AddBookmarkProps {
 }
 
 export interface PatchBookmarkRequest extends Partial<CreateBookmarkRequest> {
-  placeInfoRequests?: AddBookmarkRequest;
+  placeInfoRequests?: AddBookmarkRequest[];
 }
 
 export interface PatchBookmarkProps {

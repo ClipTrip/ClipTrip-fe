@@ -11,18 +11,25 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { usePlaceCenter, usePlaceMarker } from '@/hooks/useMap';
 import type { BookmarkDetailResponse } from '@/types/bookmarks';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface BookmarkDetailListProps {
   placeList: BookmarkDetailResponse['data']['placeList'];
+  onDelete: (placeId: number) => void;
+  onSetting: (placeList: BookmarkDetailResponse['data']['placeList']) => void;
 }
 
-const BookmarkDetailList = ({ placeList }: BookmarkDetailListProps) => {
+const BookmarkDetailList = ({
+  placeList,
+  onDelete,
+  onSetting,
+}: BookmarkDetailListProps) => {
   const { t } = useTranslation(['menu']);
   const [selectedPlace, setSeletedPlace] =
     useState<BookmarkDetailResponse['data']['placeList'][number]>();
   const [open, setOpen] = useState(false);
+  const [places, setPlaces] = useState(placeList);
 
   const markerArr = placeList?.map((place) => ({
     latitude: place.latitude,
@@ -40,6 +47,15 @@ const BookmarkDetailList = ({ placeList }: BookmarkDetailListProps) => {
 
   usePlaceMarker({ places: markerArr });
 
+  const hnadleDelete = (placeId: number) => {
+    setPlaces((pre) => pre.filter((place) => place.placeId !== placeId));
+    onDelete(placeId);
+  };
+
+  useEffect(() => {
+    onSetting(placeList);
+  }, [placeList, onSetting]);
+
   return (
     <>
       {selectedPlace && (
@@ -49,7 +65,7 @@ const BookmarkDetailList = ({ placeList }: BookmarkDetailListProps) => {
           setOpen={setOpen}
         />
       )}
-      {placeList.map((place, idx) => (
+      {places.map((place, idx) => (
         <Fragment key={place.placeId}>
           <AddBookmarkModal data={place}></AddBookmarkModal>
           <ListItem
@@ -74,7 +90,9 @@ const BookmarkDetailList = ({ placeList }: BookmarkDetailListProps) => {
                       <Menu.Item
                         title={t('menu:menu_delete')}
                         variant='negative'
-                        onClick={() => {}}
+                        onClick={() => {
+                          hnadleDelete(place.placeId);
+                        }}
                       />
                     </Menu>
                   </DropdownMenuItem>
