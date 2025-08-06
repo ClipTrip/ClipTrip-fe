@@ -7,7 +7,15 @@ export const instance = axios.create({
 });
 
 instance.interceptors.response.use(
-  (response) => response,
+  async (res) => {
+    const isVerifiedApi = res.config.url === '/api/v1/auth/verify';
+    if (isVerifiedApi && !res.data.data.isTokenVerified) {
+      const originalRequest = res.config;
+      await authApi.tokenRefresh();
+      return instance(originalRequest);
+    }
+    return res;
+  },
   async (error) => {
     if (axios.isAxiosError(error)) {
       const originalRequest = error.config as AxiosRequestConfig & {
