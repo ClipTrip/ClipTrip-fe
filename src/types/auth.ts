@@ -13,7 +13,7 @@ export interface LoginResponse extends ApiSuccessResponse {
 
 export interface AuthenticationResponse extends ApiSuccessResponse {
   data: {
-    grantType: string;
+    isTokenVerified: boolean;
   };
 }
 

@@ -6,12 +6,15 @@ import ArrowBackIcon from '@/components/icons/system/ArrowBackIcon';
 import { useLogin } from '@/hooks/useAuth';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation(['headline', 'textField', 'buttonAction']);
   const { mutateAsync, isPending } = useLogin();
+  const [searchParam] = useSearchParams();
+
+  const redirectPath = searchParam.get('redirect');
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -35,7 +38,10 @@ const LoginPage = () => {
     <div className='flex flex-col items-center'>
       <AppBar
         LeadingIcon={ArrowBackIcon}
-        onLeadingIconClick={() => navigate(-1)}
+        onLeadingIconClick={() => {
+          if (redirectPath) navigate(redirectPath);
+          else navigate(-1);
+        }}
       />
 
       <Headline
