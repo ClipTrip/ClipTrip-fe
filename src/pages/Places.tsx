@@ -28,11 +28,11 @@ const Places = () => {
 
   const query = searchParams.get('query');
   const category = searchParams.get('category');
-  const x = searchParams.get('x');
-  const y = searchParams.get('y');
+  const longitude = searchParams.get('longitude');
+  const latitude = searchParams.get('latitude');
   const radius = searchParams.get('radius');
 
-  const searchMode = !!(x && y && radius);
+  const searchMode = !!(longitude && latitude && radius);
 
   const map = useMapStore((state) => state.map);
   const clearMarkers = useMapStore((state) => state.clearMarkers);
@@ -41,7 +41,7 @@ const Places = () => {
     if (map) {
       const mapCenter = map.getCenter();
       navigate(
-        `/places?query=${searchRef.current?.value}&x=${mapCenter.x}&y=${mapCenter.y}&radius=2000`
+        `/places?query=${searchRef.current?.value}&longitude=${mapCenter.x}&latitude=${mapCenter.y}&radius=2000`
       );
     }
   };
@@ -54,7 +54,7 @@ const Places = () => {
     if (map && category) {
       const mapCenter = map.getCenter();
       navigate(
-        `/places?category=${category}&x=${mapCenter.x}&y=${mapCenter.y}&radius=2000`
+        `/places?category=${category}&longitude=${mapCenter.x}&latitude=${mapCenter.y}&radius=2000`
       );
     } else {
       navigate('/places');
@@ -89,14 +89,14 @@ const Places = () => {
 
       {!searchMode && <BookmarkListSheet />}
       {searchMode && query && (
-        <SearchSheet searchParams={{ query, x, y, radius }} />
+        <SearchSheet searchParams={{ query, longitude, latitude, radius }} />
       )}
       {searchMode && category && (
         <SearchSheet
           searchParams={{
             categoryCode: category as CategoryCodeType,
-            x,
-            y,
+            longitude,
+            latitude,
             radius,
           }}
         />

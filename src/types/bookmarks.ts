@@ -34,8 +34,9 @@ export interface AddBookmarkRequest {
   longitude: number;
   roadAddress: string;
   placeName: string;
-  phoneNumber?: string;
+  phone?: string;
   type: CategoryType;
+  kakaoPlaceId?: string;
 }
 
 export interface AddBookmarkProps {

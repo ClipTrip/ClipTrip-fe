@@ -4,17 +4,27 @@ import type {
   CategoryCodeType,
   CategoryPlacesRequest,
   KeywordPlacesRequest,
-  KeywordPlacesResponse,
   LuggagePlacesRequest,
   LuggagePlacesResponse,
+  SearchPlacesResponse,
 } from '@/types/place';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
 export const useSearchKeywordPlaces = (params: KeywordPlacesRequest) => {
-  return useQuery<KeywordPlacesResponse, ApiFailResponse>({
+  return useQuery<SearchPlacesResponse, ApiFailResponse>({
     queryFn: () => placeApi.getKeywordPlaces(params),
-    queryKey: ['places', params.query, params.x, params.y, params.radius],
-    enabled: !!params.query && !!params.x && !!params.y && !!params.radius,
+    queryKey: [
+      'places',
+      params.query,
+      params.longitude,
+      params.latitude,
+      params.radius,
+    ],
+    enabled:
+      !!params.query
+      && !!params.longitude
+      && !!params.latitude
+      && !!params.radius,
   });
 };
 
@@ -24,8 +34,8 @@ type InputParams = Omit<CategoryPlacesRequest, 'categoryCode'> & {
 
 export const useSearchCategoryPlaces = ({
   categoryCode,
-  x,
-  y,
+  longitude,
+  latitude,
   radius,
 }: InputParams) => {
   const codes = categoryCode
@@ -35,15 +45,15 @@ export const useSearchCategoryPlaces = ({
 
   const queries = useQueries({
     queries: codes.map((code) => ({
-      queryKey: ['places', code, x, y, radius],
+      queryKey: ['places', code, longitude, latitude, radius],
       queryFn: () =>
         placeApi.getCategoryPlaces({
           categoryCode: code as CategoryCodeType,
-          x,
-          y,
+          longitude,
+          latitude,
           radius,
         }),
-      enabled: !!x && !!y && !!radius && code !== 'LS1',
+      enabled: !!longitude && !!latitude && !!radius && code !== 'LS1',
     })),
   });
 
