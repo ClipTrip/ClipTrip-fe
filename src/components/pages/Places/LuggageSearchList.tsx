@@ -31,6 +31,7 @@ const LuggageSearchList = ({ searchParams }: LuggageSearchListProps) => {
           data={{
             ...place,
             type: place.type || 'LUGGAGE_STORAGE',
+            kakaoPlaceId: place.placeId.toString(),
           }}
         >
           <SaveIcon />

@@ -11,6 +11,7 @@ export interface PlaceList {
   longitude: number;
   latitude: number;
   placeOrder: number;
+  bookmarkedIdList: number[];
 }
 
 export interface SearchResponsePlace {
@@ -24,6 +25,7 @@ export interface SearchResponsePlace {
   translatedRoadAddress: string | null;
   language: LanguageName;
   kakaoPlaceId: string;
+  bookmarkedIdList: number[];
 }
 
 export type CategoryType = (typeof CATEGORY)[keyof typeof CATEGORY];
@@ -54,7 +56,10 @@ export interface LuggagePlacesRequest {
 }
 
 export interface LuggagePlacesResponse extends ApiSuccessResponse {
-  data: ({
-    placeId: number;
-  } & Omit<SearchResponsePlace, 'phone' | 'kakaoPlaceId'>)[];
+  data: LuggagePlaces[];
 }
+
+export type LuggagePlaces = {
+  placeId: number;
+  bookmarkedIdList?: number[];
+} & Omit<SearchResponsePlace, 'phone' | 'kakaoPlaceId'>;

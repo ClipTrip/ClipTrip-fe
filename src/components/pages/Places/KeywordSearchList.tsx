@@ -28,7 +28,7 @@ const KeywordSearchList = ({ searchParams }: KeywordSearchListProps) => {
           key={idx}
           RightIcon={
             <AddBookmarkModal data={{ ...place }}>
-              <SaveIcon />
+              <SaveIcon isActive={place.bookmarkedIdList.length > 0} />
             </AddBookmarkModal>
           }
           title={place.placeName}

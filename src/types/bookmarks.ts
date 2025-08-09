@@ -54,3 +54,10 @@ export interface PatchBookmarkProps {
 }
 
 export type PatchBookmarkResponse = CreateBookmarkResponse;
+
+export interface DeleteBookmarkRequest {
+  bookmarkId: number;
+  placeId: number;
+}
+
+export type DeleteBookmarkResponse = CreateBookmarkResponse;
