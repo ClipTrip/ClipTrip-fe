@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 import type { ReactNode } from 'react';
 
 const actionButtonVariants = cva(
-  'bg-sy_container-neutral-normal text-sy_label-alternative border-none w-[128px] h-12',
+  'bg-sy_container-neutral-normal text-sy_label-alternative border-none w-[48%] h-12',
   {
     variants: {
       variant: {
@@ -57,7 +57,7 @@ const Dialog = ({
             {description}
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
+        <AlertDialogFooter className="flex flex-row justify-center items-center gap-2">
           <AlertDialogCancel className={cn(actionButtonVariants())}>
             {t('button-action_cancel')}
           </AlertDialogCancel>
