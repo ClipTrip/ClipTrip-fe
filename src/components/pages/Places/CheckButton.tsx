@@ -1,21 +1,34 @@
 import CheckCircleIcon from '@/components/icons/system/CheckCircleIcon';
-import { useAddBookmark } from '@/hooks/useBookmark';
+import { useAddBookmark, useDeleteBookmarkPlace } from '@/hooks/useBookmark';
 import type { AddBookmarkProps } from '@/types/bookmarks';
 import { useState } from 'react';
 
 interface CheckButtonProps {
   bookmarkId: AddBookmarkProps['bookmarkId'];
   data: AddBookmarkProps['data'];
+  defaultCheck?: boolean;
+  placeId?: number;
+  kakaoPlaceId?: string;
 }
 
-const CheckButton = ({ bookmarkId, data }: CheckButtonProps) => {
-  const [checked, setChecked] = useState(false);
+const CheckButton = ({
+  bookmarkId,
+  data,
+  defaultCheck = false,
+  placeId,
+  kakaoPlaceId,
+}: CheckButtonProps) => {
+  const [checked, setChecked] = useState(defaultCheck);
   const { mutateAsync, isPending } = useAddBookmark();
+  const { mutateAsync: deleteMutate, isPending: deleteIsPending } =
+    useDeleteBookmarkPlace();
 
   const handleClick = async () => {
-    if (isPending || checked) return null;
+    if (isPending || deleteIsPending) return null;
+    if (!checked) await mutateAsync({ bookmarkId, data });
+    if (checked && (placeId || kakaoPlaceId))
+      await deleteMutate({ bookmarkId, placeId, kakaoPlaceId });
     setChecked((pre) => !pre);
-    await mutateAsync({ bookmarkId, data });
   };
 
   return (

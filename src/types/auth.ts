@@ -1,4 +1,5 @@
 import type { ApiSuccessResponse } from '@/types/api';
+import type { LanguageName } from '@/types/type';
 
 export interface LoginRequest {
   email: string;
@@ -7,7 +8,7 @@ export interface LoginRequest {
 
 export interface LoginResponse extends ApiSuccessResponse {
   data: {
-    language: 'ENGLISH' | 'KOREAN';
+    language: LanguageName;
   };
 }
 

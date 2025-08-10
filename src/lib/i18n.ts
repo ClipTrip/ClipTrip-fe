@@ -38,9 +38,9 @@ import koSearchField from '@/locales/ko/searchField.json';
 import koTermsOfService2 from '@/locales/ko/termsOfService2.json';
 import koTextField from '@/locales/ko/textField.json';
 import koCategory from '@/locales/ko/category.json';
-import type { LanguageType } from '@/types/type';
+import type { LanguageCode } from '@/types/type';
 
-export const setLanguage = (lang: LanguageType) => {
+export const setLanguage = (lang: LanguageCode) => {
   i18n.changeLanguage(lang);
   localStorage.setItem('language', lang);
 };
