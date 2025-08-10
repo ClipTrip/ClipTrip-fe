@@ -45,9 +45,9 @@ const BookmarkDetailList = ({
       : undefined
   );
 
-  usePlaceMarker({ places: markerArr });
+  usePlaceMarker({ places: markerArr, pin: places?.map(({ type }) => type) });
 
-  const hnadleDelete = (placeId: number) => {
+  const handleDelete = (placeId: number) => {
     setPlaces((pre) => pre.filter((place) => place.placeId !== placeId));
     onDelete(placeId);
   };
@@ -92,7 +92,7 @@ const BookmarkDetailList = ({
                         title={t('menu:menu_delete')}
                         variant='negative'
                         onClick={() => {
-                          hnadleDelete(place.placeId);
+                          handleDelete(place.placeId);
                         }}
                       />
                     </Menu>
