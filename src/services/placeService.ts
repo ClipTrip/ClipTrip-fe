@@ -1,22 +1,26 @@
 import { instance } from '@/lib/axios';
 import type {
   CategoryPlacesRequest,
-  CategoryPlacesResponse,
   KeywordPlacesRequest,
   LuggagePlacesRequest,
+  LuggagePlacesResponse,
+  SearchPlacesResponse,
 } from '@/types/place';
 
 export const placeApi = {
   getKeywordPlaces: async (params: KeywordPlacesRequest) => {
-    const res = await instance.get('/api/v1/places/keyword', {
-      params,
-    });
+    const res = await instance.get<SearchPlacesResponse>(
+      '/api/v1/places/keyword',
+      {
+        params,
+      }
+    );
 
     return res.data;
   },
 
   getCategoryPlaces: async (params: CategoryPlacesRequest) => {
-    const res = await instance.get<CategoryPlacesResponse>(
+    const res = await instance.get<SearchPlacesResponse>(
       '/api/v1/places/category',
       {
         params,
@@ -27,9 +31,12 @@ export const placeApi = {
   },
 
   getLuggagePlaces: async (params: LuggagePlacesRequest) => {
-    const res = await instance.get('/api/v1/places/luggage-storages', {
-      params,
-    });
+    const res = await instance.get<LuggagePlacesResponse>(
+      '/api/v1/places/luggage-storages',
+      {
+        params,
+      }
+    );
 
     return res.data;
   },

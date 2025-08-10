@@ -34,8 +34,9 @@ export interface AddBookmarkRequest {
   longitude: number;
   roadAddress: string;
   placeName: string;
-  phoneNumber?: string;
+  phone?: string;
   type: CategoryType;
+  kakaoPlaceId?: string;
 }
 
 export interface AddBookmarkProps {
@@ -53,3 +54,11 @@ export interface PatchBookmarkProps {
 }
 
 export type PatchBookmarkResponse = CreateBookmarkResponse;
+
+export interface DeleteBookmarkRequest {
+  bookmarkId: number;
+  placeId?: number;
+  kakaoPlaceId?: string;
+}
+
+export type DeleteBookmarkResponse = CreateBookmarkResponse;

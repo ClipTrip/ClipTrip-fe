@@ -13,24 +13,26 @@ interface LuggageSearchListProps {
 const LuggageSearchList = ({ searchParams }: LuggageSearchListProps) => {
   const { t } = useTranslation('category');
   const { data: placesData } = useSearchLuggagePlaces({
-    latitude: searchParams.y,
-    longitude: searchParams.x,
+    ...searchParams,
   });
   const places = placesData?.data;
 
   const markerArr = places?.map((place) => ({
-    latitude: place.latitude,
-    longitude: place.longitude,
+    ...place,
   }));
 
-  usePlaceMarker({ places: markerArr });
+  usePlaceMarker({ places: markerArr, pin: 'LUGGAGE_STORAGE' });
 
   return places?.map((place) => (
     <ListItem
       key={place.placeId}
       RightIcon={
         <AddBookmarkModal
-          data={{ phoneNumber: '', type: 'LUGGAGE_STORAGE', ...place }}
+          data={{
+            ...place,
+            type: place.type || 'LUGGAGE_STORAGE',
+            kakaoPlaceId: place.placeId.toString(),
+          }}
         >
           <SaveIcon />
         </AddBookmarkModal>

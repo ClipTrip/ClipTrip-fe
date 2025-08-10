@@ -11,25 +11,31 @@ import {
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useGetBookmark } from '@/hooks/useBookmark';
-import type { AddBookmarkProps } from '@/types/bookmarks';
+import type {
+  LuggagePlaces,
+  PlaceList,
+  SearchResponsePlace,
+} from '@/types/place';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface AddBookmarkModalContentProps {
-  data: AddBookmarkProps['data'];
+  data: SearchResponsePlace | LuggagePlaces | PlaceList;
 }
 
 const AddBookmarkModalContent = ({ data }: AddBookmarkModalContentProps) => {
   const { data: places } = useGetBookmark();
-
   return places?.data.map((place) => (
     <ListItem
       LeftIcon={
         <CheckButton
           data={data}
           bookmarkId={place.bookmarkId}
+          defaultCheck={data?.bookmarkedIdList?.includes(place.bookmarkId)}
+          placeId={'placeId' in data ? data.placeId : undefined}
+          kakaoPlaceId={'kakaoPlaceId' in data ? data.kakaoPlaceId : undefined}
         />
       }
       title={place.name}
@@ -40,7 +46,7 @@ const AddBookmarkModalContent = ({ data }: AddBookmarkModalContentProps) => {
 
 interface AddBookmarkModalProps {
   open?: boolean;
-  data: AddBookmarkProps['data'];
+  data: SearchResponsePlace | LuggagePlaces | PlaceList;
   children?: ReactNode;
   setOpen?: (open: boolean) => void;
 }

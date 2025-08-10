@@ -3,7 +3,7 @@ import SelectField from '@/components/common/SelectField.tsx';
 import ArrowBackIcon from '@/components/icons/system/ArrowBackIcon.tsx';
 import { useTranslation } from 'react-i18next';
 import { setLanguage } from '@/lib/i18n.ts';
-import type { LanguageType } from '@/types/type.ts';
+import type { LanguageCode } from '@/types/type.ts';
 
 interface LanguageSettingProps {
   onClickBackIcon?: () => void;
@@ -36,7 +36,7 @@ const LanguageSetting = ({ onClickBackIcon }: LanguageSettingProps) => {
         <SelectField
           datas={languageOptions}
           placeHolder={findLanguageOptions()}
-          onChange={(code) => setLanguage(code as LanguageType)}
+          onChange={(code) => setLanguage(code as LanguageCode)}
         />
       </div>
     </div>

@@ -16,11 +16,10 @@ const KeywordSearchList = ({ searchParams }: KeywordSearchListProps) => {
   const places = placesData?.data;
 
   const markerArr = places?.map((place) => ({
-    latitude: place.latitude,
-    longitude: place.longitude,
+    ...place,
   }));
 
-  usePlaceMarker({ places: markerArr });
+  usePlaceMarker({ places: markerArr, pin: places?.map(({ type }) => type) });
 
   return (
     <>
@@ -28,8 +27,8 @@ const KeywordSearchList = ({ searchParams }: KeywordSearchListProps) => {
         <ListItem
           key={idx}
           RightIcon={
-            <AddBookmarkModal data={{ phoneNumber: place.phone, ...place }}>
-              <SaveIcon />
+            <AddBookmarkModal data={{ ...place }}>
+              <SaveIcon isActive={place.bookmarkedIdList.length > 0} />
             </AddBookmarkModal>
           }
           title={place.placeName}

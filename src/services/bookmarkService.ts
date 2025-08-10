@@ -5,6 +5,8 @@ import {
   type BookmarkResponse,
   type CreateBookmarkRequest,
   type CreateBookmarkResponse,
+  type DeleteBookmarkRequest,
+  type DeleteBookmarkResponse,
   type PatchBookmarkProps,
 } from '@/types/bookmarks';
 
@@ -47,6 +49,21 @@ export const bookmarkService = {
       `/api/v1/bookmarks/${bookmarkId}`,
       data
     );
+    return res.data;
+  },
+
+  deleteBookmarkPlace: async ({
+    bookmarkId,
+    placeId,
+    kakaoPlaceId,
+  }: DeleteBookmarkRequest) => {
+    let url;
+
+    if (placeId) url = `/api/v1/bookmarks/${bookmarkId}/place/${placeId}`;
+    else url = `/api/v1/bookmarks/${bookmarkId}/kakao/${kakaoPlaceId}`;
+
+    const res = await instance.delete<DeleteBookmarkResponse>(url);
+
     return res.data;
   },
 };
