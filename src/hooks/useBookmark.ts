@@ -126,6 +126,9 @@ export const useDeleteBookmarkPlace = () => {
         queryKey: ['bookmarks', val.bookmarkId],
         exact: true,
       });
+      queryClient.invalidateQueries({
+        queryKey: ['places'],
+      });
       toast.success('북마크에서 해당 장소가 삭제되었습니다.');
     },
     onError: (error) => {

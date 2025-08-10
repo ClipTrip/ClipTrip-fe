@@ -55,10 +55,14 @@ export const bookmarkService = {
   deleteBookmarkPlace: async ({
     bookmarkId,
     placeId,
+    kakaoPlaceId,
   }: DeleteBookmarkRequest) => {
-    const res = await instance.delete<DeleteBookmarkResponse>(
-      `/api/v1/bookmarks/${bookmarkId}/${placeId}`
-    );
+    let url;
+
+    if (placeId) url = `/api/v1/bookmarks/${bookmarkId}/place/${placeId}`;
+    else url = `/api/v1/bookmarks/${bookmarkId}/kakao/${kakaoPlaceId}`;
+
+    const res = await instance.delete<DeleteBookmarkResponse>(url);
 
     return res.data;
   },

@@ -57,7 +57,8 @@ export type PatchBookmarkResponse = CreateBookmarkResponse;
 
 export interface DeleteBookmarkRequest {
   bookmarkId: number;
-  placeId: number;
+  placeId?: number;
+  kakaoPlaceId?: string;
 }
 
 export type DeleteBookmarkResponse = CreateBookmarkResponse;

@@ -8,6 +8,7 @@ interface CheckButtonProps {
   data: AddBookmarkProps['data'];
   defaultCheck?: boolean;
   placeId?: number;
+  kakaoPlaceId?: string;
 }
 
 const CheckButton = ({
@@ -15,6 +16,7 @@ const CheckButton = ({
   data,
   defaultCheck = false,
   placeId,
+  kakaoPlaceId,
 }: CheckButtonProps) => {
   const [checked, setChecked] = useState(defaultCheck);
   const { mutateAsync, isPending } = useAddBookmark();
@@ -24,7 +26,8 @@ const CheckButton = ({
   const handleClick = async () => {
     if (isPending || deleteIsPending) return null;
     if (!checked) await mutateAsync({ bookmarkId, data });
-    if (checked && placeId) await deleteMutate({ bookmarkId, placeId });
+    if (checked && (placeId || kakaoPlaceId))
+      await deleteMutate({ bookmarkId, placeId, kakaoPlaceId });
     setChecked((pre) => !pre);
   };
 

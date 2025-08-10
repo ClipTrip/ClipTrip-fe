@@ -35,6 +35,7 @@ const AddBookmarkModalContent = ({ data }: AddBookmarkModalContentProps) => {
           bookmarkId={place.bookmarkId}
           defaultCheck={data?.bookmarkedIdList?.includes(place.bookmarkId)}
           placeId={'placeId' in data ? data.placeId : undefined}
+          kakaoPlaceId={'kakaoPlaceId' in data ? data.kakaoPlaceId : undefined}
         />
       }
       title={place.name}
