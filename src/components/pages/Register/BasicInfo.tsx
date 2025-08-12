@@ -3,36 +3,28 @@ import ButtonActionFill from '@/components/common/ButtonActionFill.tsx';
 import { useTranslation } from 'react-i18next';
 
 interface BasicInfoProps {
-  emailRef: React.RefObject<HTMLInputElement | null>;
-  passwordRef: React.RefObject<HTMLInputElement | null>;
-  setNext?: () => void;
+  emailValue: string;
+  passwordValue: string;
+  onChangeValue: (type: string, value: string) => void;
+  handleNextButton?: () => void;
 }
 
-const BasicInfo = ({ emailRef, passwordRef, setNext }: BasicInfoProps) => {
+const BasicInfo = ({ emailValue, passwordValue, onChangeValue , handleNextButton }: BasicInfoProps) => {
   const { t } = useTranslation(['textField', 'buttonAction']);
-
-  const handleNextButton = () => {
-    if (emailRef?.current?.value && passwordRef.current?.value && setNext)
-      setNext();
-  };
 
   return (
     <form className='mt-6 flex flex-col items-center gap-8'>
       <TextField
         type='email'
         placeholder={t('textField:textField_signUp-id')}
-        ref={emailRef}
-        onIconClick={() => {
-          if (emailRef.current) emailRef.current.value = '';
-        }}
+        value={emailValue}
+        onChange={(event) => onChangeValue("email", event.target.value)}
       />
       <TextField
         type='password'
         placeholder={t('textField:textField_signUp-password')}
-        ref={passwordRef}
-        onIconClick={() => {
-          if (passwordRef.current) passwordRef.current.value = '';
-        }}
+        value={passwordValue}
+        onChange={(event) => onChangeValue("password", event.target.value)}
       />
       <ButtonActionFill
         variant='primary'
