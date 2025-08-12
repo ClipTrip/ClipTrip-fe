@@ -23,14 +23,14 @@ const RegisterPage = () => {
     gender: string;
     age: number;
     language: string;
-    location: string;
+    countryCode: string;
   }>({
     email: '',
     password: '',
     gender: '',
     age: 0,
     language: '',
-    location: '',
+    countryCode: '',
   });
   const [isCheck, setIsCheck] = useState<{
     all: boolean;
@@ -41,11 +41,7 @@ const RegisterPage = () => {
     privacy: false,
     service: false,
   });
-  const isAllFilled =
-    registerInfo.gender !== ''
-    && registerInfo.age !== 0
-    && registerInfo.language !== ''
-    && registerInfo.location !== '';
+  const isAllFilled = registerInfo.gender !== '' && registerInfo.age !== 0 && registerInfo.language !== '' && registerInfo.location !== '';
 
   const handleRegisterInfo = (field: string, value: string) => {
     setRegisterInfo((prev) => ({
@@ -75,18 +71,10 @@ const RegisterPage = () => {
       }
     });
   };
-  
+
   const handleSubmitRegisterInfo = async () => {
     if (isPending) return null;
-
-    await mutateAsync({
-      email: registerInfo.email,
-      password: registerInfo.password,
-      age: registerInfo.age,
-      gender: registerInfo.gender,
-      language: registerInfo.language,
-      countryCode: registerInfo.location
-    } as RegisterRequest);
+    await mutateAsync({...registerInfo} as RegisterRequest)
   }
 
   return (
@@ -97,14 +85,8 @@ const RegisterPage = () => {
       />
       <Headline
         className='mt-7 w-[195px]'
-        title={
-          isNext ? t('headline_title_signUp-02') : t('headline_title_signUp-01')
-        }
-        description={
-          isNext
-            ? t('headline_supportingText_signUp-02')
-            : t('headline_supportingText_signUp-01')
-        }
+        title={isNext ? t('headline_title_signUp-02') : t('headline_title_signUp-01')}
+        description={isNext ? t('headline_supportingText_signUp-02') : t('headline_supportingText_signUp-01')}
       />
       {!isNext && (
         <BasicInfo

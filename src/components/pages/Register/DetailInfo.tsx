@@ -64,7 +64,7 @@ const DetailInfo = ({ onChange }: DetailInfoProps) => {
       <SearchFieldv2
         placeHolder={t('searchField:country')}
         datas={locationOptions}
-        onChange={(val) => onChange('location', val)}
+        onChange={(val) => onChange('countryCode', val)}
       />
     </div>
   );
