@@ -41,7 +41,7 @@ const RegisterPage = () => {
     privacy: false,
     service: false,
   });
-  const isAllFilled = registerInfo.gender !== '' && registerInfo.age !== 0 && registerInfo.language !== '' && registerInfo.location !== '';
+  const isAllFilled = registerInfo.gender !== '' && registerInfo.age !== 0 && registerInfo.language !== '' && registerInfo.countryCode !== '';
 
   const handleRegisterInfo = (field: string, value: string) => {
     setRegisterInfo((prev) => ({

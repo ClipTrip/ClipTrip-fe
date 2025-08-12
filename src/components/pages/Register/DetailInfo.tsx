@@ -7,7 +7,7 @@ interface RegisterInfo {
   gender: string;
   age: string;
   language: string;
-  location: string;
+  countryCode: string;
 }
 
 interface DetailInfoProps {
