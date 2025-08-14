@@ -3,11 +3,14 @@ import Headline from '@/components/common/Headline';
 import Navigation from '@/components/common/Navigation';
 import TripCardList from '@/components/pages/Trips/TripCardList';
 import TripList from '@/components/pages/Trips/TripList';
+import { useGetSchedules } from '@/hooks/useSchedule';
 
 import { useTranslation } from 'react-i18next';
 
 const TripsPage = () => {
   const { t } = useTranslation(['appBar', 'headline']);
+  const { data, error, isPending } = useGetSchedules();
+
   return (
     <>
       <AppBar title={t('appBar_navi-02')} />
@@ -18,9 +21,17 @@ const TripsPage = () => {
         className='mb-7 mt-10 w-[250px] whitespace-pre-line'
       />
 
-      <TripCardList />
+      <TripCardList
+        data={data?.data}
+        error={error}
+        isPending={isPending}
+      />
 
-      <TripList />
+      <TripList
+        data={data?.data}
+        error={error}
+        isPending={isPending}
+      />
 
       <Navigation className='absolute bottom-0 z-50' />
     </>

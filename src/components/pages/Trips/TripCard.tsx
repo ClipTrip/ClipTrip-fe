@@ -7,7 +7,13 @@ const CARD = [
   'bg-[url("/card04.png")]',
 ];
 
-const TripCard = () => {
+interface TripCardProps {
+  size?: number;
+  title?: string;
+  description?: string;
+}
+
+const TripCard = ({ size, title, description }: TripCardProps) => {
   const random = Math.floor(Math.random() * 4);
   const randomCard = CARD[random];
   const textColor =
@@ -20,7 +26,9 @@ const TripCard = () => {
         randomCard
       )}
     >
-      <span className={cn('body_s', textColor)}>9개의 장소</span>
+      <span className={cn('body_s', textColor)}>
+        {size && `${size}개의 장소`}
+      </span>
 
       <div>
         <h2
@@ -29,9 +37,9 @@ const TripCard = () => {
             random === 0 && 'text-sy_label-white'
           )}
         >
-          서울 하이라이트
+          {title}
         </h2>
-        <p className={cn('body_s', textColor)}>서울의 핵심만 쏙쏙!</p>
+        <p className={cn('body_s', textColor)}>{description}</p>
       </div>
     </div>
   );

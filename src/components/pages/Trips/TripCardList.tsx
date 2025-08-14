@@ -4,20 +4,52 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
+import { Skeleton } from '@/components/ui/skeleton';
+import type { ApiFailResponse } from '@/types/api';
+import type { GetSchedulesResponse } from '@/types/schedule';
 
-const TripCardList = () => {
+interface TripCardListProps {
+  data?: GetSchedulesResponse['data'];
+  isPending: boolean;
+  error: ApiFailResponse | null;
+}
+
+const TripCardList = ({ data, error, isPending }: TripCardListProps) => {
   return (
     <div className='mb-4 w-[360px] pl-4'>
       <Carousel className='w-full'>
         <CarouselContent className='pl-3'>
-          {[1, 2, 3, 4, 5].map((v) => (
+          {data?.map((v) => (
             <CarouselItem
-              key={v}
+              key={v.scheduleId}
               className='pl-008 basis-auto'
             >
-              <TripCard />
+              <TripCard
+                size={data.length}
+                title={v.scheduleName}
+                description={v.description}
+              />
             </CarouselItem>
           ))}
+          {!isPending && data?.length === 0 && (
+            <TripCard title='일정을 추가해보세요' />
+          )}
+          {isPending
+            && [1, 2, 3, 4].map((v) => (
+              <CarouselItem
+                key={v}
+                className='pl-008 basis-auto'
+              >
+                <Skeleton className='rounded-020 h-[254px] w-[194px]' />
+              </CarouselItem>
+            ))}
+          {error && (
+            <CarouselItem className='pl-008 basis-auto'>
+              <div className='rounded-020 h-[254px] w-[194px]'>
+                {error.message}
+              </div>
+            </CarouselItem>
+          )}
         </CarouselContent>
       </Carousel>
     </div>
