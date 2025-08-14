@@ -1,12 +1,17 @@
+import FullPageLoading from '@/components/common/FullPageLoading';
 import ListItem from '@/components/common/ListItem';
 import SaveIcon from '@/components/icons/system/SaveIcon';
 import AddBookmarkModal from '@/components/pages/Places/AddBookmarkModal';
 import { usePlaceMarker } from '@/hooks/useMap';
-import { useSearchCategoryPlaces } from '@/hooks/usePlace';
+import {
+  useGetPlaceDetailKakaoId,
+  useSearchCategoryPlaces,
+} from '@/hooks/usePlace';
 import type {
   CategoryCodeType,
   CategoryPlacesRequest,
   CategoryType,
+  PlaceDetailKakaoIdRequest,
 } from '@/types/place';
 import { useTranslation } from 'react-i18next';
 
@@ -27,6 +32,8 @@ const PIN: { category: CategoryType; code: CategoryCodeType | 'CT1,AT4' }[] = [
 const CategorySearchList = ({ searchParams }: CategorySearchListProps) => {
   const { t } = useTranslation('category');
   const { data: places } = useSearchCategoryPlaces(searchParams);
+  const { mutateAsync, isPending } = useGetPlaceDetailKakaoId();
+
   const pin = PIN.find(
     ({ code }) => code === searchParams.categoryCode
   )?.category;
@@ -37,18 +44,30 @@ const CategorySearchList = ({ searchParams }: CategorySearchListProps) => {
 
   usePlaceMarker({ places: markerArr, pin });
 
-  return places?.map((place, idx) => (
-    <ListItem
-      key={idx}
-      RightIcon={
-        <AddBookmarkModal data={{ ...place }}>
-          <SaveIcon isActive={place.bookmarkedIdList.length > 0} />
-        </AddBookmarkModal>
-      }
-      title={place.placeName}
-      description={t(place.type)}
-    />
-  ));
+  const handlePlaceDetail = async (param: PlaceDetailKakaoIdRequest) => {
+    if (isPending) return null;
+
+    await mutateAsync(param);
+  };
+
+  return (
+    <>
+      {isPending && <FullPageLoading />}
+      {places?.map((place, idx) => (
+        <ListItem
+          key={idx}
+          RightIcon={
+            <AddBookmarkModal data={{ ...place }}>
+              <SaveIcon isActive={place.bookmarkedIdList.length > 0} />
+            </AddBookmarkModal>
+          }
+          title={place.placeName}
+          description={t(place.type)}
+          onClick={() => handlePlaceDetail(place)}
+        />
+      ))}
+    </>
+  );
 };
 
 export default CategorySearchList;

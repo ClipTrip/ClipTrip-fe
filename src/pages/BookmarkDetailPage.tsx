@@ -3,7 +3,7 @@ import ButtonText from '@/components/common/ButtonText';
 import Map from '@/components/common/Map';
 import Navigation from '@/components/common/Navigation';
 import ArrowBackIcon from '@/components/icons/system/ArrowBackIcon';
-import BookmarkDetailListSheet from '@/components/pages/Places/[placesId]/BookmarkDetailListSheet';
+import BookmarkDetailListSheet from '@/components/pages/Places/bookmark/[bookmarkId]/BookmarkDetailListSheet';
 import { usePatchBookmark } from '@/hooks/useBookmark';
 import type { BookmarkDetailResponse } from '@/types/bookmarks';
 import { useCallback, useState } from 'react';
@@ -11,18 +11,18 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 type placeListType = BookmarkDetailResponse['data']['placeList'];
 
-const PlaceDetailPage = () => {
+const BookmarkDetailPage = () => {
   const navigate = useNavigate();
-  const { placeId } = useParams<{ placeId: string }>();
+  const { bookmarkId } = useParams<{ bookmarkId: string }>();
 
   const [places, setPlaces] = useState<placeListType>([]);
   const { mutateAsync, isPending: isPatchPending } = usePatchBookmark();
 
   const handleSave = async () => {
-    if (isPatchPending || !placeId) return null;
+    if (isPatchPending || !bookmarkId) return null;
 
     await mutateAsync({
-      bookmarkId: +placeId,
+      bookmarkId: +bookmarkId,
       data: { placeInfoRequests: places },
     });
   };
@@ -60,4 +60,4 @@ const PlaceDetailPage = () => {
   );
 };
 
-export default PlaceDetailPage;
+export default BookmarkDetailPage;

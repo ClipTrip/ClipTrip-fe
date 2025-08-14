@@ -5,6 +5,7 @@ import { usePlaceMarker } from '@/hooks/useMap';
 import { useSearchLuggagePlaces } from '@/hooks/usePlace';
 import type { CategoryPlacesRequest } from '@/types/place';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 interface LuggageSearchListProps {
   searchParams: CategoryPlacesRequest;
@@ -15,6 +16,7 @@ const LuggageSearchList = ({ searchParams }: LuggageSearchListProps) => {
   const { data: placesData } = useSearchLuggagePlaces({
     ...searchParams,
   });
+  const navigate = useNavigate();
   const places = placesData?.data;
 
   const markerArr = places?.map((place) => ({
@@ -39,6 +41,7 @@ const LuggageSearchList = ({ searchParams }: LuggageSearchListProps) => {
       }
       title={place.placeName}
       description={t('LUGGAGE_STORAGE')}
+      onClick={() => navigate(`/places/${place.placeId}`)}
     />
   ));
 };

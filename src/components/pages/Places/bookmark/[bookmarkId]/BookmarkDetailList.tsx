@@ -13,6 +13,7 @@ import { usePlaceCenter, usePlaceMarker } from '@/hooks/useMap';
 import type { BookmarkDetailResponse } from '@/types/bookmarks';
 import { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 interface BookmarkDetailListProps {
   placeList: BookmarkDetailResponse['data']['placeList'];
@@ -30,6 +31,7 @@ const BookmarkDetailList = ({
     useState<BookmarkDetailResponse['data']['placeList'][number]>();
   const [open, setOpen] = useState(false);
   const [places, setPlaces] = useState(placeList);
+  const navigate = useNavigate();
 
   const markerArr = placeList?.map((place) => ({
     latitude: place.latitude,
@@ -103,6 +105,7 @@ const BookmarkDetailList = ({
             title={place.placeName}
             description={place.roadAddress}
             Pin={PinNumberIcon.bind(null, { number: idx + 1 })}
+            onClick={() => navigate(`/places/${place.placeId}`)}
           />
         </Fragment>
       ))}
