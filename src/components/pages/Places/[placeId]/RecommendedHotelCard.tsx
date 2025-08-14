@@ -18,6 +18,7 @@ const RecommendedHotelCard = ({ src, alt }: RecommendedHotelCardProps) => {
       <h3 className='body_m-prominent text-sy_label-normal'>장소 이름</h3>
 
       <ButtonChip
+        className='w-fit'
         label='일정에 추가'
         Icon={AddIcon}
       />

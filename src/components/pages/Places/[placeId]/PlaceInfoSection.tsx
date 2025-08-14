@@ -1,31 +1,59 @@
 import ListItem_v2 from '@/components/common/ListItem_v2';
-import HomePageIcon from '@/components/icons/system/HomePageIcon';
 import LocationIcon from '@/components/icons/system/LocationIcon';
-import TimeIcon from '@/components/icons/system/TimeIcon';
+import PhoneIcon from '@/components/icons/system/PhoneIcon';
 import PlaceInfoHeader from '@/components/pages/Places/[placeId]/PlaceInfoHeader';
 import RecommendedHotels from '@/components/pages/Places/[placeId]/RecommendedHotels';
+import { Skeleton } from '@/components/ui/skeleton';
+import type { PlaceDetailResponse } from '@/types/place';
 
-const PlaceInfoSection = () => {
+interface PlaceInfoSectionProps {
+  data?: PlaceDetailResponse['data'];
+  isPending: boolean;
+}
+
+const PlaceInfoSection = ({ data, isPending }: PlaceInfoSectionProps) => {
   return (
     <section className='gap-024 flex flex-col pb-6'>
-      <PlaceInfoHeader />
+      {!isPending && data && (
+        <>
+          <PlaceInfoHeader data={data} />
+          <div>
+            <ListItem_v2
+              text={data.roadAddress}
+              Icon={LocationIcon}
+            />
+            <ListItem_v2
+              text={data.phone}
+              Icon={PhoneIcon}
+            />
+          </div>
 
-      <div>
-        <ListItem_v2
-          text='16:00 ~ 22:30'
-          Icon={TimeIcon}
-        />
-        <ListItem_v2
-          text='서울특별시 중구 태평로1가'
-          Icon={LocationIcon}
-        />
-        <ListItem_v2
-          text='https://colby.info'
-          Icon={HomePageIcon}
-        />
-      </div>
+          <RecommendedHotels />
+        </>
+      )}
+      {isPending && (
+        <>
+          <div className='flex flex-col gap-8'>
+            <div>
+              <Skeleton className='h-12 w-full' />
+              <Skeleton className='h-6 w-full' />
+            </div>
 
-      <RecommendedHotels />
+            <Skeleton className='h-10 w-full' />
+          </div>
+
+          <div>
+            <Skeleton className='h-11 w-full' />
+            <Skeleton className='h-11 w-full' />
+          </div>
+
+          <div>
+            <div className='flex h-[70px] items-center'>
+              <Skeleton className='h-7 w-full' />
+            </div>
+          </div>
+        </>
+      )}
     </section>
   );
 };
