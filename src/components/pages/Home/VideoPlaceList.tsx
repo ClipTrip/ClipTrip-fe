@@ -2,9 +2,11 @@ import ButtonActionFill from '@/components/common/ButtonActionFill';
 import ButtonChip from '@/components/common/ButtonChip';
 import Driver from '@/components/common/Driver';
 import ListItem from '@/components/common/ListItem';
+import Map from '@/components/common/Map';
 import SectionTitle from '@/components/common/SectionTitle';
 import AddCircleIcon from '@/components/icons/system/AddCircleIcon';
 import SortableListItem from '@/components/pages/Home/SortableListItem';
+import { usePlaceCenter, usePlaceMarker } from '@/hooks/useMap';
 import type { VideosResponse } from '@/types/video';
 import {
   closestCenter,
@@ -75,11 +77,27 @@ const VideoPlaceList = ({
     setPlaceList((prev) => [...prev, addItem]);
   };
 
+  const markerArr = placeList?.map((place) => ({
+    ...place,
+  }));
+
+  usePlaceCenter({
+    latitude: placeList[0].latitude,
+    longitude: placeList[0].longitude,
+  });
+  usePlaceMarker({
+    places: markerArr,
+    pin: 'number',
+  });
+
   return (
     <div className='gap-012 flex flex-col pb-[72px]'>
       <div className='gap-008 flex flex-col items-center'>
         <SectionTitle title={t('sectionTitle_placeList')} />
-        <div className='bg-sy_container-neutral-normal h-[312px] w-[312px]'></div>
+
+        <div className='bg-sy_container-neutral-normal h-[312px] w-[312px]'>
+          <Map />
+        </div>
       </div>
 
       <div>
