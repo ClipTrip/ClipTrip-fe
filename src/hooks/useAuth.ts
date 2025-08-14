@@ -5,6 +5,8 @@ import type {
   LoginRequest,
   LoginResponse,
   LogOutResponse,
+  RegisterRequest,
+  RegisterResponse,
 } from '@/types/auth';
 import { toast } from 'sonner';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -50,6 +52,21 @@ export const useLogin = () => {
     },
   });
 };
+
+export const useRegister = () => {
+  const navigate = useNavigate();
+
+  return useMutation<RegisterResponse, AxiosError<ApiFailResponse>, RegisterRequest>({
+    mutationFn: (data) => authApi.register(data),
+    onSuccess: () => {
+      toast.success("회원가입이 완료되었습니다.")
+      navigate('/login');
+    },
+    onError: (error) => {
+      toast.error(error.response?.data.message);
+    },
+  })
+}
 
 export const useLogout = () => {
   const navigate = useNavigate();

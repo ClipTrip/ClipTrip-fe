@@ -1,5 +1,5 @@
 import { instance } from '@/lib/axios';
-import type { LoginRequest, LoginResponse } from '@/types/auth';
+import type {LoginRequest, LoginResponse, RegisterRequest, RegisterResponse} from '@/types/auth';
 import axios from 'axios';
 
 export const authApi = {
@@ -16,6 +16,15 @@ export const authApi = {
       {
         withCredentials: true,
       }
+    );
+
+    return res.data;
+  },
+
+  register: async (data: RegisterRequest) => {
+    const res = await axios.post<RegisterResponse>(
+      `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/sign-up`,
+      data
     );
 
     return res.data;

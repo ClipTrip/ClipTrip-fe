@@ -39,7 +39,7 @@ const SelectField = ({ datas, placeHolder, onChange }: SelectFieldProps) => {
           <button
             type='button'
             className={cn(
-              'p-020 py-016 bg-sy_container-neutral-normal rounded-020 body_m-prominent relative flex w-full justify-between',
+              'p-012 py-016 bg-sy_container-neutral-normal rounded-020 body_m-prominent relative flex w-full justify-between',
               open ? 'border-sy_line-super z-50 border' : 'z-20 border-none'
             )}
           >

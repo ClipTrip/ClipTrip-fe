@@ -13,7 +13,16 @@
   "selectField_language-02": "Korean",
   "selectField_country": "Country",
   "selectField_country-01": "United States",
-  "selectField_country-02": "Korea",
+  "selectField_country-02": "South Korea",
   "selectField_country-03": "China",
-  "selectField_country-04": "Japan"
+  "selectField_country-04": "Japan",
+  "selectField_country-05": "Taiwan",
+  "selectField_country-06": "Hong Kong",
+  "selectField_country-07": "Thailand",
+  "selectField_country-08": "India",
+  "selectField_country-09": "Germany",
+  "selectField_country-10": "France",
+  "selectField_country-11": "United Kingdom",
+  "selectField_country-12": "Canada",
+  "selectField_country-13": "Australia"
 }

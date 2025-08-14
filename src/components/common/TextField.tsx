@@ -28,7 +28,7 @@ const TextField = ({
   return (
     <div
       className={cn(
-        'bg-sy_container-neutral-normal rounded-010 h-fit w-[312px]',
+        'bg-sy_container-neutral-normal rounded-020 h-fit w-[312px]',
         className
       )}
     >
@@ -37,7 +37,7 @@ const TextField = ({
           type={type}
           data-slot='input'
           className={cn(
-            'placeholder:label_m placeholder:text-sy_label-light p-012 rounded-010 text-sy_label-normal label_m h-14 w-full outline-none',
+            'placeholder:label_m placeholder:text-sy_label-light p-012 rounded-020 text-sy_label-normal label_m h-14 w-full outline-none',
             'focus:border-sy_line-super focus:border',
             isError
               && 'border-sy_status-negative-normal focus:border-sy_status-negative-normal border',
