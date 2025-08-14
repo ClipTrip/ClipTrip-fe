@@ -1,10 +1,23 @@
+import PinNoneIcon from '@/components/icons/system/PinNoneIcon';
+import PinNumIcon from '@/components/icons/system/PinNumIcon';
 import { useMapStore } from '@/store/mapStore';
 import type { CategoryType } from '@/types/place';
-import { useEffect } from 'react';
+import { useEffect, type SVGProps } from 'react';
+import ReactDOMServer from 'react-dom/server';
+
+function svgComponentToDataUrl(
+  Component: React.FC<SVGProps<SVGSVGElement>>,
+  props: SVGProps<SVGSVGElement> = {}
+) {
+  const svgString = ReactDOMServer.renderToStaticMarkup(
+    <Component {...props} />
+  );
+  return `data:image/svg+xml;base64,${btoa(svgString)}`;
+}
 
 interface usePlaceMarkerProps {
   places?: { latitude: number; longitude: number }[];
-  pin?: CategoryType | CategoryType[];
+  pin?: CategoryType | CategoryType[] | 'number';
 }
 
 const PIN: { id: CategoryType; src: string }[] = [
@@ -21,9 +34,19 @@ export const usePlaceMarker = ({ places, pin }: usePlaceMarkerProps) => {
   const map = useMapStore((state) => state.map);
   const addMarker = useMapStore((state) => state.addMarker);
   const clearMarkers = useMapStore((state) => state.clearMarkers);
-  const pinImg = Array.isArray(pin)
-    ? pin.map((p) => PIN.find(({ id }) => id === p)?.src)
-    : PIN.find(({ id }) => id === pin)?.src;
+  let pinImg:
+    | naver.maps.MarkerOptions['icon']
+    | naver.maps.MarkerOptions['icon'][];
+
+  if (Array.isArray(pin)) {
+    pinImg = pin.map((p) => PIN.find(({ id }) => id === p)?.src);
+  } else {
+    if (pin === 'number')
+      pinImg = places?.map((_, idx) =>
+        svgComponentToDataUrl(PinNumIcon.bind(null, { number: idx + 1 }))
+      );
+    else pinImg = PIN.find(({ id }) => id === pin)?.src;
+  }
 
   useEffect(() => {
     clearMarkers();
@@ -33,7 +56,9 @@ export const usePlaceMarker = ({ places, pin }: usePlaceMarkerProps) => {
       const marker = new naver.maps.Marker({
         position: new naver.maps.LatLng(place.latitude, place.longitude),
         map,
-        icon: pinImg && Array.isArray(pinImg) ? pinImg[idx] : pinImg,
+        icon:
+          (pinImg && Array.isArray(pinImg) ? pinImg[idx] : pinImg)
+          || svgComponentToDataUrl(PinNoneIcon),
       });
       addMarker(marker);
     });
