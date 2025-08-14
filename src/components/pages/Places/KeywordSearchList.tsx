@@ -2,8 +2,14 @@ import ListItem from '@/components/common/ListItem';
 import SaveIcon from '@/components/icons/system/SaveIcon';
 import AddBookmarkModal from '@/components/pages/Places/AddBookmarkModal';
 import { usePlaceMarker } from '@/hooks/useMap';
-import { useSearchKeywordPlaces } from '@/hooks/usePlace';
-import type { KeywordPlacesRequest } from '@/types/place';
+import {
+  useGetPlaceDetailKakaoId,
+  useSearchKeywordPlaces,
+} from '@/hooks/usePlace';
+import type {
+  KeywordPlacesRequest,
+  PlaceDetailKakaoIdRequest,
+} from '@/types/place';
 import { useTranslation } from 'react-i18next';
 
 interface KeywordSearchListProps {
@@ -13,6 +19,8 @@ interface KeywordSearchListProps {
 const KeywordSearchList = ({ searchParams }: KeywordSearchListProps) => {
   const { t } = useTranslation('category');
   const { data: placesData } = useSearchKeywordPlaces(searchParams);
+  const { mutateAsync, isPending } = useGetPlaceDetailKakaoId();
+
   const places = placesData?.data;
 
   const markerArr = places?.map((place) => ({
@@ -20,6 +28,12 @@ const KeywordSearchList = ({ searchParams }: KeywordSearchListProps) => {
   }));
 
   usePlaceMarker({ places: markerArr, pin: places?.map(({ type }) => type) });
+
+  const handlePlaceDetail = async (param: PlaceDetailKakaoIdRequest) => {
+    if (isPending) return null;
+
+    await mutateAsync(param);
+  };
 
   return (
     <>
@@ -33,6 +47,7 @@ const KeywordSearchList = ({ searchParams }: KeywordSearchListProps) => {
           }
           title={place.placeName}
           description={t(place.type)}
+          onClick={() => handlePlaceDetail(place)}
         />
       ))}
     </>

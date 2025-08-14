@@ -20,7 +20,7 @@ const SectionTitle = ({
 }: SectionTitleProps) => {
   return (
     <div className='px-012 w-full'>
-      <div className='flex h-12 items-center'>
+      <div className='flex items-center'>
         {LeadingIcon && <ButtonIcon Icon={LeadingIcon} />}
         <h2
           className={cn(

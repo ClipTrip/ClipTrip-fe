@@ -4,6 +4,8 @@ import type {
   KeywordPlacesRequest,
   LuggagePlacesRequest,
   LuggagePlacesResponse,
+  PlaceDetailKakaoIdRequest,
+  PlaceDetailResponse,
   SearchPlacesResponse,
 } from '@/types/place';
 
@@ -36,6 +38,23 @@ export const placeApi = {
       {
         params,
       }
+    );
+
+    return res.data;
+  },
+
+  getPlaceDetail: async (placeId: string) => {
+    const res = await instance.get<PlaceDetailResponse>(
+      `/api/v1/places/${placeId}`
+    );
+
+    return res.data;
+  },
+
+  postPlaceDetailKakaoId: async (params: PlaceDetailKakaoIdRequest) => {
+    const res = await instance.post<PlaceDetailResponse>(
+      `/api/v1/places/by-external-id`,
+      params
     );
 
     return res.data;

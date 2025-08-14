@@ -1,3 +1,4 @@
+import type { ACCESSIBILITY } from '@/constants/accessibility';
 import type { CATEGORY, CATEGORY_CODE } from '@/constants/category';
 import type { ApiSuccessResponse } from '@/types/api';
 import type { LanguageName } from '@/types/type';
@@ -31,6 +32,8 @@ export interface SearchResponsePlace {
 export type CategoryType = (typeof CATEGORY)[keyof typeof CATEGORY];
 export type CategoryCodeType =
   (typeof CATEGORY_CODE)[keyof typeof CATEGORY_CODE];
+export type AccessibilityType =
+  (typeof ACCESSIBILITY)[keyof typeof ACCESSIBILITY];
 
 export interface KeywordPlacesRequest {
   query: string;
@@ -63,3 +66,29 @@ export type LuggagePlaces = {
   placeId: number;
   bookmarkedIdList?: number[];
 } & Omit<SearchResponsePlace, 'phone' | 'kakaoPlaceId'>;
+
+export interface PlaceDetailResponse extends ApiSuccessResponse {
+  data: {
+    placeId: number;
+    placeName: string;
+    roadAddress: string;
+    phone: string;
+    type: CategoryType;
+    longitude: number;
+    latitude: number;
+    accessibilityFeatures: AccessibilityType[];
+    imageUrl: string;
+    bookmarkedIdList: number[];
+    kakaoPlaceId: string;
+  };
+}
+
+export interface PlaceDetailKakaoIdRequest {
+  latitude: number;
+  longitude: number;
+  roadAddress: string;
+  placeName: string;
+  phone: string;
+  type: CategoryType;
+  kakaoPlaceId: string;
+}

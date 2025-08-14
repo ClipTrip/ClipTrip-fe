@@ -6,9 +6,17 @@ import type {
   KeywordPlacesRequest,
   LuggagePlacesRequest,
   LuggagePlacesResponse,
+  PlaceDetailKakaoIdRequest,
+  PlaceDetailResponse,
   SearchPlacesResponse,
 } from '@/types/place';
-import { useQueries, useQuery } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQueries,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 export const useSearchKeywordPlaces = (params: KeywordPlacesRequest) => {
   return useQuery<SearchPlacesResponse, ApiFailResponse>({
@@ -69,5 +77,29 @@ export const useSearchLuggagePlaces = (params: LuggagePlacesRequest) => {
     queryFn: () => placeApi.getLuggagePlaces(params),
     queryKey: ['places', 'luggage', params.latitude, params.longitude],
     enabled: !!params.latitude && !!params.longitude,
+  });
+};
+
+export const useGetPlaceDetailPlaceId = (placeId?: string) => {
+  return useQuery<PlaceDetailResponse, ApiFailResponse>({
+    queryFn: () => placeApi.getPlaceDetail(placeId!),
+    queryKey: ['places', placeId],
+    enabled: !!placeId,
+  });
+};
+
+export const useGetPlaceDetailKakaoId = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  return useMutation<
+    PlaceDetailResponse,
+    ApiFailResponse,
+    PlaceDetailKakaoIdRequest
+  >({
+    mutationFn: (params) => placeApi.postPlaceDetailKakaoId(params),
+    onSuccess: (res) => {
+      queryClient.setQueryData(['places', res.data.placeId], res);
+      navigate(`/places/${res.data.placeId}`);
+    },
   });
 };
