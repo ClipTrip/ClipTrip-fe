@@ -15,12 +15,14 @@ interface TermsAgreementProps {
   isCheck: CheckState;
   isGoNext: boolean;
   onCheck: (key: 'all' | 'privacy' | 'service', value: boolean) => void;
+  onClickGoNext: () => void;
 }
 
 const TermsAgreement = ({
   isCheck,
   isGoNext,
   onCheck,
+  onClickGoNext,
 }: TermsAgreementProps) => {
   const [isShowTerms, setIsShowTerms] = useState(false);
   const [type, setType] = useState<string>('');
@@ -68,6 +70,7 @@ const TermsAgreement = ({
           <ButtonActionFill
             className='mb-[28px] mt-[28px]'
             disabled={!isCheck.all}
+            onClick={onClickGoNext}
           >
             {t('buttonAction:button-action_accept')}
           </ButtonActionFill>
