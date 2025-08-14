@@ -31,10 +31,10 @@ const LuggageSearchList = ({ searchParams }: LuggageSearchListProps) => {
           data={{
             ...place,
             type: place.type || 'LUGGAGE_STORAGE',
-            kakaoPlaceId: place.placeId.toString(),
+            kakaoPlaceId: '',
           }}
         >
-          <SaveIcon />
+          <SaveIcon isActive={place.bookmarkedIdList.length > 0} />
         </AddBookmarkModal>
       }
       title={place.placeName}

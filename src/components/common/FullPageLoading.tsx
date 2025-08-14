@@ -1,9 +1,19 @@
 import { createPortal } from 'react-dom';
 import Loading from '@/components/common/Loading';
+import { cn } from '@/lib/utils';
 
-const FullPageLoading = () => {
+interface FullPageLoadingProps {
+  className?: string;
+}
+
+const FullPageLoading = ({ className }: FullPageLoadingProps) => {
   return createPortal(
-    <div className='fixed inset-0 z-[9999] flex items-center justify-center bg-black/60'>
+    <div
+      className={cn(
+        'fixed inset-0 z-[9999] flex items-center justify-center bg-black/60',
+        className
+      )}
+    >
       <Loading />
     </div>,
     document.body

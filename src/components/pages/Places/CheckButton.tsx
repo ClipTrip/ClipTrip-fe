@@ -1,6 +1,12 @@
+import FullPageLoading from '@/components/common/FullPageLoading';
 import CheckCircleIcon from '@/components/icons/system/CheckCircleIcon';
-import { useAddBookmark, useDeleteBookmarkPlace } from '@/hooks/useBookmark';
-import type { AddBookmarkProps } from '@/types/bookmarks';
+import { useDeleteBookmarkPlace } from '@/hooks/useBookmark';
+import type { ApiFailResponse } from '@/types/api';
+import type {
+  AddBookmarkProps,
+  CreateBookmarkResponse,
+} from '@/types/bookmarks';
+import type { UseMutateAsyncFunction } from '@tanstack/react-query';
 import { useState } from 'react';
 
 interface CheckButtonProps {
@@ -9,6 +15,13 @@ interface CheckButtonProps {
   defaultCheck?: boolean;
   placeId?: number;
   kakaoPlaceId?: string;
+  isPending: boolean;
+  mutateAsync: UseMutateAsyncFunction<
+    CreateBookmarkResponse,
+    ApiFailResponse,
+    AddBookmarkProps,
+    AddBookmarkProps
+  >;
 }
 
 const CheckButton = ({
@@ -17,9 +30,11 @@ const CheckButton = ({
   defaultCheck = false,
   placeId,
   kakaoPlaceId,
+  isPending,
+  mutateAsync,
 }: CheckButtonProps) => {
   const [checked, setChecked] = useState(defaultCheck);
-  const { mutateAsync, isPending } = useAddBookmark();
+
   const { mutateAsync: deleteMutate, isPending: deleteIsPending } =
     useDeleteBookmarkPlace();
 
@@ -32,15 +47,18 @@ const CheckButton = ({
   };
 
   return (
-    <button
-      onClick={handleClick}
-      className='flex size-12 items-center justify-center'
-    >
-      <CheckCircleIcon
-        className='size-6'
-        isActive={checked}
-      />
-    </button>
+    <>
+      {isPending && <FullPageLoading className='bg-black/0' />}
+      <button
+        onClick={handleClick}
+        className='flex size-12 items-center justify-center'
+      >
+        <CheckCircleIcon
+          className='size-6'
+          isActive={checked}
+        />
+      </button>
+    </>
   );
 };
 

@@ -10,7 +10,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { useGetBookmark } from '@/hooks/useBookmark';
+import { useAddBookmark, useGetBookmark } from '@/hooks/useBookmark';
 import type {
   LuggagePlaces,
   PlaceList,
@@ -27,6 +27,8 @@ interface AddBookmarkModalContentProps {
 
 const AddBookmarkModalContent = ({ data }: AddBookmarkModalContentProps) => {
   const { data: places } = useGetBookmark();
+  const { mutateAsync, isPending } = useAddBookmark();
+
   return places?.data.map((place) => (
     <ListItem
       LeftIcon={
@@ -36,6 +38,8 @@ const AddBookmarkModalContent = ({ data }: AddBookmarkModalContentProps) => {
           defaultCheck={data?.bookmarkedIdList?.includes(place.bookmarkId)}
           placeId={'placeId' in data ? data.placeId : undefined}
           kakaoPlaceId={'kakaoPlaceId' in data ? data.kakaoPlaceId : undefined}
+          isPending={isPending}
+          mutateAsync={mutateAsync}
         />
       }
       title={place.name}
