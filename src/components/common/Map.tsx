@@ -40,7 +40,10 @@ const Map = ({ className, style }: MapProps) => {
   return (
     <div
       ref={mapRef}
-      className={cn('h-full w-full', className)}
+      className={cn(
+        'h-full w-full [&>div:nth-child(3)]:hidden [&>div:nth-child(6)]:hidden',
+        className
+      )}
       style={style}
     />
   );
