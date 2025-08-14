@@ -7,3 +7,7 @@ export interface GetSchedulesResponse extends ApiSuccessResponse {
     description: string;
   }[];
 }
+
+export interface DeleteScheduleResponse extends ApiSuccessResponse {
+  data: number;
+}

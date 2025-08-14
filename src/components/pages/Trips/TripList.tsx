@@ -1,9 +1,18 @@
 import ListItem from '@/components/common/ListItem';
+import Menu from '@/components/common/Menu';
 import AddIcon from '@/components/icons/system/AddIcon';
 import MoreIcon from '@/components/icons/system/MoreIcon';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useDeleteSchedule } from '@/hooks/useSchedule';
 import type { ApiFailResponse } from '@/types/api';
 import type { GetSchedulesResponse } from '@/types/schedule';
+import { useTranslation } from 'react-i18next';
 
 interface TripListProps {
   data?: GetSchedulesResponse['data'];
@@ -12,6 +21,15 @@ interface TripListProps {
 }
 
 const TripList = ({ data, isPending, error }: TripListProps) => {
+  const { t } = useTranslation(['menu']);
+  const { mutateAsync, isPending: deleteIsPending } = useDeleteSchedule();
+
+  const handleDelete = async (id: number) => {
+    if (deleteIsPending) return null;
+
+    await mutateAsync(id);
+  };
+
   return (
     <div className='pb-[104px]'>
       <header className='px-012 flex h-[69px] items-center justify-between'>
@@ -30,7 +48,27 @@ const TripList = ({ data, isPending, error }: TripListProps) => {
           key={v.scheduleId}
           title={v.scheduleName}
           description={v.description}
-          RightIcon={MoreIcon}
+          RightIcon={
+            <DropdownMenu>
+              <DropdownMenuTrigger className='flex h-12 w-12 cursor-pointer items-center justify-center'>
+                <MoreIcon className='text-sy_icon-neutral-light size-6' />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align='start'
+                className='p-0'
+              >
+                <DropdownMenuItem className='p-0'>
+                  <Menu>
+                    <Menu.Item
+                      title={t('menu_delete')}
+                      variant='negative'
+                      onClick={() => handleDelete(v.scheduleId)}
+                    />
+                  </Menu>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          }
         />
       ))}
 
