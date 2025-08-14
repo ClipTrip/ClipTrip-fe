@@ -81,7 +81,7 @@ const BookmarkList = ({ places }: BookmarkListProps) => {
           }
           title={name}
           onClick={() => {
-            navigate(`/places/${bookmarkId}`);
+            navigate(`/places/bookmark/${bookmarkId}`);
           }}
         />
       ))}

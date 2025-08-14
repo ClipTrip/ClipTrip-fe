@@ -1,9 +1,9 @@
 import ProtectedRouteLayout from '@/layout/ProtectedRouteLayout';
 import RootLayout from '@/layout/RootLayout';
+import BookmarkDetailPage from '@/pages/BookmarkDetailPage';
 import Home from '@/pages/Home';
 import LoginPage from '@/pages/LoginPage';
 import OnboardingPage from '@/pages/OnboardingPage';
-import PlaceDetailPage from '@/pages/PlaceDetailPage';
 import Places from '@/pages/Places';
 import Profile from '@/pages/Profile';
 import RegisterPage from '@/pages/RegisterPage';
@@ -37,7 +37,10 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       { path: pagePath.PLACES, element: <Places /> },
-      { path: `${pagePath.PLACES}/:placeId`, element: <PlaceDetailPage /> },
+      {
+        path: `${pagePath.PLACES}/bookmark/:bookmarkId`,
+        element: <BookmarkDetailPage />,
+      },
       {
         path: pagePath.PROFILE,
         element: <Profile />,

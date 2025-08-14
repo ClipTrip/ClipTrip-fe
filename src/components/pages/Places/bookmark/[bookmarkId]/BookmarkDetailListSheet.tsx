@@ -7,7 +7,7 @@ import {
 import Menu from '@/components/common/Menu';
 import SectionTitle from '@/components/common/SectionTitle';
 import MoreIcon from '@/components/icons/system/MoreIcon';
-import BookmarkDetailList from '@/components/pages/Places/[placesId]/BookmarkDetailList';
+import BookmarkDetailList from '@/components/pages/Places/bookmark/[bookmarkId]/BookmarkDetailList';
 import { Sheet, type SheetRef } from 'react-modal-sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useTranslation } from 'react-i18next';
@@ -44,12 +44,12 @@ const BookmarkDetailListSheet = ({
   const ref = useRef<SheetRef>(null);
   const [open, setOpen] = useState(false);
   const [defaultName, setDefaultName] = useState('');
-  const { placeId } = useParams<{ placeId: string }>();
+  const { bookmarkId: bookmarkIds } = useParams<{ bookmarkId: string }>();
   const {
     data: bookmarkDetail,
     isError,
     isPending,
-  } = useGetBookmarkDetail(placeId);
+  } = useGetBookmarkDetail(bookmarkIds);
   const { mutateAsync, isPending: deleteIsPending } = useDeleteBookmark();
   const navigate = useNavigate();
 
