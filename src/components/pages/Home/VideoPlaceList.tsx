@@ -82,8 +82,8 @@ const VideoPlaceList = ({
   }));
 
   usePlaceCenter({
-    latitude: placeList[0].latitude,
-    longitude: placeList[0].longitude,
+    latitude: placeList[0]?.latitude,
+    longitude: placeList[0]?.longitude,
   });
   usePlaceMarker({
     places: markerArr,
