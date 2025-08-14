@@ -4,6 +4,7 @@ import BookmarkDetailPage from '@/pages/BookmarkDetailPage';
 import Home from '@/pages/Home';
 import LoginPage from '@/pages/LoginPage';
 import OnboardingPage from '@/pages/OnboardingPage';
+import PlaceCardPage from '@/pages/PlaceCardPage';
 import Places from '@/pages/Places';
 import Profile from '@/pages/Profile';
 import RegisterPage from '@/pages/RegisterPage';
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: `${pagePath.PLACES}/bookmark/:bookmarkId`,
         element: <BookmarkDetailPage />,
+      },
+      {
+        path: `${pagePath.PLACES}/:placeId`,
+        element: <PlaceCardPage />,
       },
       {
         path: pagePath.PROFILE,
