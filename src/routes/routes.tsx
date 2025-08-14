@@ -7,7 +7,7 @@ import PlaceDetailPage from '@/pages/PlaceDetailPage';
 import Places from '@/pages/Places';
 import Profile from '@/pages/Profile';
 import RegisterPage from '@/pages/RegisterPage';
-import Trips from '@/pages/Trips';
+import TripsPage from '@/pages/TripsPage';
 import { pagePath } from '@/routes/pagePath';
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -22,10 +22,6 @@ const router = createBrowserRouter([
       },
       { path: pagePath.LOGIN, element: <LoginPage /> },
       { path: pagePath.REGISTER, element: <RegisterPage /> },
-      {
-        path: pagePath.TRIPS,
-        element: <Trips />,
-      },
     ],
   },
   {
@@ -41,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: pagePath.PROFILE,
         element: <Profile />,
+      },
+      {
+        path: pagePath.TRIPS,
+        element: <TripsPage />,
       },
     ],
   },
