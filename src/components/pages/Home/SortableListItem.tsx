@@ -1,4 +1,3 @@
-// components/common/SortableListItem.tsx
 import { useSortable } from '@dnd-kit/sortable';
 import DragIcon from '@/components/icons/system/DragIcon';
 import PinNumberIcon from '@/components/icons/system/PinNumberIcon';
@@ -43,7 +42,9 @@ const SortableListItem = ({
             ? RemoveCircleIcon
             : PinNumberIcon.bind(null, { number: idx + 1 })
         }
-        onPinClick={onRemove}
+        onPinClick={() => {
+          if (mode === 'edit') onRemove?.();
+        }}
         RightIcon={
           mode === 'edit' && (
             <button
