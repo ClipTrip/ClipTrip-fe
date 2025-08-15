@@ -10,7 +10,7 @@ import MoreIcon from '@/components/icons/system/MoreIcon';
 import { Sheet, type SheetRef } from 'react-modal-sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useTranslation } from 'react-i18next';
-import { useRef, useState } from 'react';
+import { useRef, useState, type Dispatch, type SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDeleteSchedule, usePatchSchedule } from '@/hooks/useSchedule';
 import FullPageLoading from '@/components/common/FullPageLoading';
@@ -42,12 +42,16 @@ interface TripDetailListSheetProps {
   scheduleId: number;
   scheduleDetail: GetScheduleDetailResponse;
   durationData: number[] | null;
+  mode: 'view' | 'edit';
+  setMode: Dispatch<SetStateAction<'view' | 'edit'>>;
 }
 
 const TripDetailListSheet = ({
   scheduleId,
   scheduleDetail,
   durationData,
+  mode,
+  setMode,
 }: TripDetailListSheetProps) => {
   const { t } = useTranslation([
     'appBar',
@@ -64,7 +68,6 @@ const TripDetailListSheet = ({
   const navigate = useNavigate();
   const { mutateAsync: patchMutate, isPending: patchIsPending } =
     usePatchSchedule();
-  const [mode, setMode] = useState<'view' | 'edit'>('view');
   const [places, setPlaces] = useState(scheduleDetail.data.placeList);
 
   const { mutateAsync, isPending: deleteIsPending } = useDeleteSchedule();
@@ -202,6 +205,9 @@ const TripDetailListSheet = ({
                 <ButtonChip
                   Icon={AddIcon}
                   label={t('buttonChip:button-chip_addPlace')}
+                  onClick={() =>
+                    navigate(`/places?mode=schedule&scheduleId=${scheduleId}`)
+                  }
                 />
                 <ButtonChip
                   label={t(

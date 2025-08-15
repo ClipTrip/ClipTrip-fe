@@ -26,7 +26,7 @@ interface TripDetailListProps {
   setPlaces: Dispatch<
     SetStateAction<GetScheduleDetailResponse['data']['placeList']>
   >;
-  mode: 'edit' | 'view';
+  mode: 'edit' | 'view' | 'add';
   durationData: number[] | null;
 }
 

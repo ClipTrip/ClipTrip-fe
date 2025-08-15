@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { useRef, useState } from 'react';
 import FullPageLoading from '@/components/common/FullPageLoading';
 import { useDeleteBookmark, useGetBookmarkDetail } from '@/hooks/useBookmark';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import AddRenameModal from '@/components/pages/Places/AddRenameModal';
 import type { BookmarkDetailResponse } from '@/types/bookmarks';
 
@@ -52,6 +52,9 @@ const BookmarkDetailListSheet = ({
   } = useGetBookmarkDetail(placeId);
   const { mutateAsync, isPending: deleteIsPending } = useDeleteBookmark();
   const navigate = useNavigate();
+
+  const [sp] = useSearchParams();
+  const mode = sp.get('mode') as null | 'schedule';
 
   if (isPending || deleteIsPending) {
     return <FullPageLoading />;
@@ -101,32 +104,34 @@ const BookmarkDetailListSheet = ({
                 size='l'
                 title={bookmarkDetail.data.name}
                 RightIcon={
-                  <DropdownMenu>
-                    <DropdownMenuTrigger className='flex h-12 w-12 items-center justify-center'>
-                      <MoreIcon className='size-6' />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      align='start'
-                      className='p-0'
-                    >
-                      <DropdownMenuItem className='p-0'>
-                        <Menu>
-                          <Menu.Item
-                            title={t('menu:menu_rename')}
-                            onClick={() => {
-                              setDefaultName(bookmarkDetail.data.name);
-                              setOpen(true);
-                            }}
-                          />
-                          <Menu.Item
-                            title={t('menu:menu_delete')}
-                            variant='negative'
-                            onClick={handleDeleteBookmark}
-                          />
-                        </Menu>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  mode !== 'schedule' && (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger className='flex h-12 w-12 items-center justify-center'>
+                        <MoreIcon className='size-6' />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent
+                        align='start'
+                        className='p-0'
+                      >
+                        <DropdownMenuItem className='p-0'>
+                          <Menu>
+                            <Menu.Item
+                              title={t('menu:menu_rename')}
+                              onClick={() => {
+                                setDefaultName(bookmarkDetail.data.name);
+                                setOpen(true);
+                              }}
+                            />
+                            <Menu.Item
+                              title={t('menu:menu_delete')}
+                              variant='negative'
+                              onClick={handleDeleteBookmark}
+                            />
+                          </Menu>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  )
                 }
               />
             </div>

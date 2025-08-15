@@ -1,4 +1,5 @@
 import ListItem from '@/components/common/ListItem';
+import AddCircleIcon from '@/components/icons/system/AddCircleIcon';
 import SaveIcon from '@/components/icons/system/SaveIcon';
 import AddBookmarkModal from '@/components/pages/Places/AddBookmarkModal';
 import { usePlaceMarker } from '@/hooks/useMap';
@@ -9,6 +10,7 @@ import type {
   CategoryType,
 } from '@/types/place';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 
 interface CategorySearchListProps {
   searchParams: CategoryPlacesRequest;
@@ -26,6 +28,8 @@ const PIN: { category: CategoryType; code: CategoryCodeType | 'CT1,AT4' }[] = [
 
 const CategorySearchList = ({ searchParams }: CategorySearchListProps) => {
   const { t } = useTranslation('category');
+  const [sp] = useSearchParams();
+  const mode = sp.get('mode') as null | 'schedule';
   const { data: places } = useSearchCategoryPlaces(searchParams);
   const pin = PIN.find(
     ({ code }) => code === searchParams.categoryCode
@@ -41,9 +45,18 @@ const CategorySearchList = ({ searchParams }: CategorySearchListProps) => {
     <ListItem
       key={idx}
       RightIcon={
-        <AddBookmarkModal data={{ ...place }}>
-          <SaveIcon isActive={place.bookmarkedIdList.length > 0} />
-        </AddBookmarkModal>
+        mode !== 'schedule' && (
+          <AddBookmarkModal data={{ ...place }}>
+            <SaveIcon isActive={place.bookmarkedIdList.length > 0} />
+          </AddBookmarkModal>
+        )
+      }
+      LeftIcon={
+        mode === 'schedule' && (
+          <button className='flex h-[54px] cursor-pointer justify-start pr-3 pt-[3px]'>
+            <AddCircleIcon />
+          </button>
+        )
       }
       title={place.placeName}
       description={t(place.type)}

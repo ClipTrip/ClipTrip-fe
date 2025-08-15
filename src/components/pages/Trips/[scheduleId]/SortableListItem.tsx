@@ -11,7 +11,7 @@ interface Props {
   title: string;
   category: string;
   time?: number;
-  mode: 'view' | 'edit';
+  mode: 'view' | 'edit' | 'add';
   onClick?: () => void;
   onRemove?: () => void;
 }
