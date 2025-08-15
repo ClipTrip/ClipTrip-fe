@@ -10,13 +10,9 @@ import MoreIcon from '@/components/icons/system/MoreIcon';
 import { Sheet, type SheetRef } from 'react-modal-sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useTranslation } from 'react-i18next';
-import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import {
-  useDeleteSchedule,
-  useGetScheduleDetail,
-  usePatchSchedule,
-} from '@/hooks/useSchedule';
+import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDeleteSchedule, usePatchSchedule } from '@/hooks/useSchedule';
 import FullPageLoading from '@/components/common/FullPageLoading';
 import TripDetailList from '@/components/pages/Trips/[scheduleId]/TripDetailList';
 import ButtonChip from '@/components/common/ButtonChip';
@@ -41,44 +37,32 @@ for (let i = start; i >= end; i -= 0.05) {
   snapPoints.push(parseFloat(i.toFixed(2)));
 }
 
-const TripDetailListSheet = () => {
+interface TripDetailListSheetProps {
+  scheduleId: number;
+  scheduleDetail: GetScheduleDetailResponse;
+}
+
+const TripDetailListSheet = ({
+  scheduleId,
+  scheduleDetail,
+}: TripDetailListSheetProps) => {
   const { t } = useTranslation(['appBar', 'textField', 'menu', 'buttonChip']);
   const ref = useRef<SheetRef>(null);
   const [open, setOpen] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [range, setRange] = useState<DateRange>();
   const [defaultName, setDefaultName] = useState('');
-  const { scheduleId: id } = useParams<{ scheduleId: string }>();
   const navigate = useNavigate();
   const { mutateAsync: patchMutate, isPending: patchIsPending } =
     usePatchSchedule();
   const [mode, setMode] = useState<'view' | 'edit'>('view');
-  const [places, setPlaces] = useState<
-    GetScheduleDetailResponse['data']['placeList']
-  >([]);
+  const [places, setPlaces] = useState(scheduleDetail.data.placeList);
 
-  const {
-    data: scheduleDetail,
-    isPending,
-    isError,
-    error,
-  } = useGetScheduleDetail(id);
   const { mutateAsync, isPending: deleteIsPending } = useDeleteSchedule();
 
-  useEffect(() => {
-    if (scheduleDetail?.data.placeList)
-      setPlaces(scheduleDetail.data.placeList);
-  }, [scheduleDetail?.data.placeList]);
-
-  if (isPending || deleteIsPending) {
+  if (deleteIsPending) {
     return <FullPageLoading />;
   }
-
-  if (isError) {
-    return <div>{error.message}</div>;
-  }
-
-  const scheduleId = scheduleDetail.data.scheduleId;
 
   const handleDeleteSchedule = async () => {
     if (deleteIsPending) return null;

@@ -1,8 +1,11 @@
 import PinNoneIcon from '@/components/icons/system/PinNoneIcon';
 import PinNumIcon from '@/components/icons/system/PinNumIcon';
+import { useWaypoints } from '@/hooks/useDirection';
 import { useMapStore } from '@/store/mapStore';
+import type { WaypointsRequest, WaypointsResponse } from '@/types/direction';
 import type { CategoryType } from '@/types/place';
-import { useEffect, type SVGProps } from 'react';
+import type { GetScheduleDetailResponse } from '@/types/schedule';
+import { useEffect, useState, type SVGProps } from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 function svgComponentToDataUrl(
@@ -83,4 +86,76 @@ export const usePlaceCenter = (coords?: usePlaceCenterProps) => {
     map.setCenter(center);
     setCenter(latitude, longitude);
   }, [coords, map, setCenter]);
+};
+
+export const useDrawPolyline = (
+  placeList?: GetScheduleDetailResponse['data']['placeList']
+) => {
+  const map = useMapStore((state) => state.map);
+  const addPolyline = useMapStore((state) => state.addPolyline);
+  const clearPolyline = useMapStore((state) => state.clearPolyline);
+  const { mutateAsync, isPending } = useWaypoints();
+
+  const [routeData, setRouteData] = useState<
+    | WaypointsResponse['data']['routes'][number]['sections'][number]['roads'][]
+    | null
+  >(null);
+
+  useEffect(() => {
+    if (!placeList || placeList.length < 2 || isPending) return;
+
+    const fetchRoute = async () => {
+      const origin = placeList[0];
+      const destination = placeList[placeList.length - 1];
+      const wayPointsList = placeList.slice(1, -1);
+
+      const waypointsData: WaypointsRequest = {
+        originName: origin.placeName,
+        originLatitude: origin.latitude,
+        originLongitude: origin.longitude,
+        destinationName: destination.placeName,
+        destinationLatitude: destination.latitude,
+        destinationLongitude: destination.longitude,
+        wayPoints: wayPointsList.map((p) => ({
+          name: p.placeName,
+          latitude: p.latitude,
+          longitude: p.longitude,
+        })),
+      };
+
+      try {
+        const data = await mutateAsync(waypointsData);
+        setRouteData(data.data?.routes[0].sections.map((v) => v.roads));
+      } catch (e) {
+        console.error('Polyline API 호출 실패', e);
+      }
+    };
+
+    fetchRoute();
+  }, [placeList]);
+
+  useEffect(() => {
+    if (!map || !routeData) return;
+
+    clearPolyline();
+
+    routeData.forEach((segmentArray) => {
+      segmentArray.forEach((segment) => {
+        const coords = [];
+        const verts = segment.vertexes;
+
+        for (let i = 0; i < verts.length; i += 2) {
+          coords.push(new naver.maps.LatLng(verts[i + 1], verts[i]));
+        }
+
+        const polyline = new naver.maps.Polyline({
+          map: map,
+          path: coords,
+          strokeWeight: 3,
+        });
+
+        addPolyline(polyline);
+      });
+    });
+  }, [map, routeData]);
 };
