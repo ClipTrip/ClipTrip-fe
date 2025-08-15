@@ -58,7 +58,10 @@ const BookmarkListSheet = () => {
       >
         <Sheet.Container style={{ boxShadow: 'none' }}>
           <Sheet.Header className='flex h-12 items-center' />
-          <Sheet.Content className={cn('gap-016 pb-[104px]')}>
+          <Sheet.Content
+            className={cn('gap-016 pb-[104px]')}
+            disableDrag
+          >
             <div className={'flex flex-col items-end'}>
               <SectionTitle
                 size='l'

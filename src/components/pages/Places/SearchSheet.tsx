@@ -43,7 +43,10 @@ const SearchSheet = ({ searchParams }: SearchSheetProps) => {
       >
         <Sheet.Container style={{ boxShadow: 'none' }}>
           <Sheet.Header className='flex h-12 items-center' />
-          <Sheet.Content className={cn('gap-016 pb-[104px]')}>
+          <Sheet.Content
+            className={cn('gap-016 pb-[104px]')}
+            disableDrag
+          >
             <ScrollArea className={cn('h-[calc(60dvh-70px)] w-full')}>
               {'query' in searchParams && (
                 <KeywordSearchList searchParams={searchParams} />
