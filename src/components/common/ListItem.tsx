@@ -31,7 +31,7 @@ const ListItem = ({
   return (
     <div
       className={cn(
-        'py-008 pr-012 pl-024 bg-sy_container-neutral-white active:bg-sy_container-neutral-normal flex cursor-pointer',
+        'py-008 pr-012 pl-024 bg-sy_container-neutral-white active:bg-sy_container-neutral-normal flex cursor-pointer items-center',
         className
       )}
     >

@@ -1,6 +1,7 @@
 import ListItem from '@/components/common/ListItem';
 import SaveIcon from '@/components/icons/system/SaveIcon';
 import AddBookmarkModal from '@/components/pages/Places/AddBookmarkModal';
+import TripAddButton from '@/components/pages/Trips/[scheduleId]/TripAddButton';
 import { usePlaceMarker } from '@/hooks/useMap';
 import {
   useGetPlaceDetailKakaoId,
@@ -11,6 +12,7 @@ import type {
   PlaceDetailKakaoIdRequest,
 } from '@/types/place';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 
 interface KeywordSearchListProps {
   searchParams: KeywordPlacesRequest;
@@ -18,10 +20,12 @@ interface KeywordSearchListProps {
 
 const KeywordSearchList = ({ searchParams }: KeywordSearchListProps) => {
   const { t } = useTranslation('category');
+  const [sp] = useSearchParams();
   const { data: placesData } = useSearchKeywordPlaces(searchParams);
   const { mutateAsync, isPending } = useGetPlaceDetailKakaoId();
 
   const places = placesData?.data;
+  const mode = sp.get('mode') as null | 'schedule';
 
   const markerArr = places?.map((place) => ({
     ...place,
@@ -41,10 +45,13 @@ const KeywordSearchList = ({ searchParams }: KeywordSearchListProps) => {
         <ListItem
           key={idx}
           RightIcon={
-            <AddBookmarkModal data={{ ...place }}>
-              <SaveIcon isActive={place.bookmarkedIdList.length > 0} />
-            </AddBookmarkModal>
+            mode !== 'schedule' && (
+              <AddBookmarkModal data={{ ...place }}>
+                <SaveIcon isActive={place.bookmarkedIdList.length > 0} />
+              </AddBookmarkModal>
+            )
           }
+          LeftIcon={<TripAddButton place={place} />}
           title={place.placeName}
           description={t(place.type)}
           onClick={() => handlePlaceDetail(place)}

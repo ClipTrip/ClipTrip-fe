@@ -5,7 +5,7 @@ import type { ElementType, ReactNode } from 'react';
 
 interface SectionTitleProps {
   title: string;
-  description?: string;
+  description?: string | ReactNode;
   LeadingIcon?: ElementType;
   RightIcon?: ElementType | ReactNode;
   size?: 'm' | 'l';
@@ -38,8 +38,10 @@ const SectionTitle = ({
             <ButtonIcon Icon={RightIcon as ElementType} />
           )}
       </div>
-      {description && (
+      {description && typeof description === 'string' ? (
         <span className='px-012 text-sy_label-light'>{description}</span>
+      ) : (
+        description
       )}
     </div>
   );
