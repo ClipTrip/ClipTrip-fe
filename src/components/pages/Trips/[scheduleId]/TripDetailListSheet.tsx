@@ -12,12 +12,12 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useTranslation } from 'react-i18next';
 import { useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import AddRenameModal from '@/components/pages/Places/AddRenameModal';
 import { useDeleteSchedule, useGetScheduleDetail } from '@/hooks/useSchedule';
 import FullPageLoading from '@/components/common/FullPageLoading';
 import TripDetailList from '@/components/pages/Trips/[scheduleId]/TripDetailList';
 import ButtonChip from '@/components/common/ButtonChip';
 import AddIcon from '@/components/icons/system/AddIcon';
+import RenameModal from '@/components/pages/Trips/RenameModal';
 
 const pixel = 104;
 const height = window.innerHeight;
@@ -69,10 +69,11 @@ const TripDetailListSheet = () => {
   return (
     <>
       {open && (
-        <AddRenameModal
+        <RenameModal
           defaultName={defaultName}
           open={open}
           onOpenChange={setOpen}
+          scheduleId={scheduleId}
         />
       )}
       <Sheet
@@ -131,7 +132,7 @@ const TripDetailListSheet = () => {
               </div>
             </div>
 
-            <ScrollArea className='h-[calc(80dvh-274px)] w-full'>
+            <ScrollArea className='h-[calc(80dvh-314px)] w-full'>
               <TripDetailList placeList={placeList} />
             </ScrollArea>
           </Sheet.Content>
