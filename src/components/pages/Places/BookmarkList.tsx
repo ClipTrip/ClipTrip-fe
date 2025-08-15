@@ -91,7 +91,7 @@ const BookmarkList = ({ places }: BookmarkListProps) => {
           title={name}
           onClick={() => {
             navigate(
-              `/places/${bookmarkId}${mode === 'schedule' ? tripSearchParam : ''}`
+              `/places/bookmark/${bookmarkId}${mode === 'schedule' ? tripSearchParam : ''}`
             );
           }}
         />

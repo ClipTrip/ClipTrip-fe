@@ -7,13 +7,15 @@ import BookmarkDetailListSheet from '@/components/pages/Places/bookmark/[bookmar
 import { usePatchBookmark } from '@/hooks/useBookmark';
 import type { BookmarkDetailResponse } from '@/types/bookmarks';
 import { useCallback, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 type placeListType = BookmarkDetailResponse['data']['placeList'];
 
 const BookmarkDetailPage = () => {
   const navigate = useNavigate();
   const { bookmarkId } = useParams<{ bookmarkId: string }>();
+  const [sp] = useSearchParams();
+  const mode = sp.get('mode') as null | 'schedule';
 
   const [places, setPlaces] = useState<placeListType>([]);
   const { mutateAsync, isPending: isPatchPending } = usePatchBookmark();
@@ -41,10 +43,12 @@ const BookmarkDetailPage = () => {
         LeadingIcon={ArrowBackIcon}
         onLeadingIconClick={() => navigate(-1)}
         ThirdIcon={
-          <ButtonText
-            title='저장'
-            onClick={handleSave}
-          />
+          mode !== 'schedule' && (
+            <ButtonText
+              title='저장'
+              onClick={handleSave}
+            />
+          )
         }
       />
 
