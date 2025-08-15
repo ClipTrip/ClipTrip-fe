@@ -3,13 +3,14 @@ import DragIcon from '@/components/icons/system/DragIcon';
 import PinNumberIcon from '@/components/icons/system/PinNumberIcon';
 import RemoveCircleIcon from '@/components/icons/system/RemoveCircleIcon';
 import TripDetailListItem from '@/components/pages/Trips/[scheduleId]/TripDetailListItem';
+import { formatSeconds } from '@/utils/format';
 
 interface Props {
   id: number;
   idx: number;
   title: string;
   category: string;
-  time: number;
+  time?: number;
   mode: 'view' | 'edit';
   onClick?: () => void;
   onRemove?: () => void;
@@ -41,7 +42,7 @@ const SortableListItem = ({
       <TripDetailListItem
         title={title}
         category={category}
-        time={time}
+        time={time ? formatSeconds(time) : undefined}
         onClick={onClick}
         Pin={
           mode === 'edit'

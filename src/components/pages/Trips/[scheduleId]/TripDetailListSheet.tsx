@@ -41,11 +41,13 @@ for (let i = start; i >= end; i -= 0.05) {
 interface TripDetailListSheetProps {
   scheduleId: number;
   scheduleDetail: GetScheduleDetailResponse;
+  durationData: number[] | null;
 }
 
 const TripDetailListSheet = ({
   scheduleId,
   scheduleDetail,
+  durationData,
 }: TripDetailListSheetProps) => {
   const { t } = useTranslation([
     'appBar',
@@ -218,6 +220,7 @@ const TripDetailListSheet = ({
                 places={places}
                 setPlaces={setPlaces}
                 mode={mode}
+                durationData={durationData}
               />
             </ScrollArea>
           </Sheet.Content>

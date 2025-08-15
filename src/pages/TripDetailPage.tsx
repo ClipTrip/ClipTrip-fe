@@ -19,7 +19,7 @@ const TripDetailPage = () => {
   } = useGetScheduleDetail(scheduleId);
 
   const placeList = scheduleDetail?.data.placeList;
-  useDrawPolyline(placeList);
+  const { durationData } = useDrawPolyline(placeList);
 
   return (
     <>
@@ -36,6 +36,7 @@ const TripDetailPage = () => {
         <TripDetailListSheet
           scheduleId={scheduleDetail.data.scheduleId}
           scheduleDetail={scheduleDetail}
+          durationData={durationData}
         />
       )}
 

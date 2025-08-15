@@ -100,6 +100,10 @@ export const useDrawPolyline = (
     | WaypointsResponse['data']['routes'][number]['sections'][number]['roads'][]
     | null
   >(null);
+  const [durationData, setDurationData] = useState<
+    | WaypointsResponse['data']['routes'][number]['sections'][number]['duration'][]
+    | null
+  >(null);
 
   useEffect(() => {
     if (!placeList || placeList.length < 2 || isPending) return;
@@ -126,6 +130,7 @@ export const useDrawPolyline = (
       try {
         const data = await mutateAsync(waypointsData);
         setRouteData(data.data?.routes[0].sections.map((v) => v.roads));
+        setDurationData(data.data.routes[0].sections.map((v) => v.duration));
       } catch (e) {
         console.error('Polyline API 호출 실패', e);
       }
@@ -158,4 +163,6 @@ export const useDrawPolyline = (
       });
     });
   }, [map, routeData]);
+
+  return { routeData, durationData };
 };

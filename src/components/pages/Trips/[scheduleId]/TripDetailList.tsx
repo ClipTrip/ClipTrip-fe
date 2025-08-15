@@ -27,9 +27,15 @@ interface TripDetailListProps {
     SetStateAction<GetScheduleDetailResponse['data']['placeList']>
   >;
   mode: 'edit' | 'view';
+  durationData: number[] | null;
 }
 
-const TripDetailList = ({ mode, places, setPlaces }: TripDetailListProps) => {
+const TripDetailList = ({
+  mode,
+  places,
+  durationData,
+  setPlaces,
+}: TripDetailListProps) => {
   const { t } = useTranslation('category');
 
   const [deletePlaceList, setDeletePlaceList] = useState<
@@ -100,7 +106,7 @@ const TripDetailList = ({ mode, places, setPlaces }: TripDetailListProps) => {
                 idx={idx}
                 title={place.placeName}
                 category={t(place.type)}
-                time={79}
+                time={durationData ? durationData[idx] : undefined}
                 mode={mode}
                 onRemove={() => handleRemove(place.placeId)}
               />

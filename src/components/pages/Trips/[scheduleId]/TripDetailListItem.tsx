@@ -5,7 +5,7 @@ interface TripDetailListItemProps {
   Pin?: ElementType;
   title: string;
   category: string;
-  time: number;
+  time?: string;
   className?: string;
   RightIcon?: ReactNode;
   onClick?: () => void;
@@ -34,8 +34,12 @@ const TripDetailListItem = ({
           <button onClick={onPinClick}>
             <Pin />
           </button>
-          <div className='absolute left-3 top-6 h-[47px] border' />
-          <div className='absolute left-3 top-[71px] w-4 border' />
+          {time !== undefined && (
+            <>
+              <div className='absolute left-3 top-6 h-[47px] border' />
+              <div className='absolute left-3 top-[71px] w-4 border' />
+            </>
+          )}
         </div>
       )}
       <button
@@ -52,7 +56,9 @@ const TripDetailListItem = ({
           {title}
         </h2>
         <p className='body_m text-sy_label-light'>{category}</p>
-        <p className='body_m text-sy_label-light'>{time}분</p>
+        {time !== undefined && (
+          <p className='body_m text-sy_label-light'>{time}</p>
+        )}
       </button>
       {RightIcon}
     </div>
