@@ -7,6 +7,7 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import type { ApiFailResponse } from '@/types/api';
 import type { GetSchedulesResponse } from '@/types/schedule';
+import { useNavigate } from 'react-router-dom';
 
 interface TripCardListProps {
   data?: GetSchedulesResponse['data'];
@@ -15,6 +16,8 @@ interface TripCardListProps {
 }
 
 const TripCardList = ({ data, error, isPending }: TripCardListProps) => {
+  const navigate = useNavigate();
+
   return (
     <div className='mb-4 w-[360px] pl-4'>
       <Carousel className='w-full'>
@@ -24,11 +27,16 @@ const TripCardList = ({ data, error, isPending }: TripCardListProps) => {
               key={v.scheduleId}
               className='pl-008 basis-auto'
             >
-              <TripCard
-                size={data.length}
-                title={v.scheduleName}
-                description={v.description}
-              />
+              <button
+                className='cursor-pointer text-left'
+                onClick={() => navigate(`/trips/${v.scheduleId}`)}
+              >
+                <TripCard
+                  size={data.length}
+                  title={v.scheduleName}
+                  description={v.description}
+                />
+              </button>
             </CarouselItem>
           ))}
           {!isPending && data?.length === 0 && (
