@@ -23,6 +23,7 @@ import type { DateRange } from 'react-day-picker';
 import Calendar from '@/components/common/Calendar';
 import { formatDateRange } from '@/utils/format';
 import type { GetScheduleDetailResponse } from '@/types/schedule';
+import { toast } from 'sonner';
 
 const pixel = 104;
 const height = window.innerHeight;
@@ -46,7 +47,13 @@ const TripDetailListSheet = ({
   scheduleId,
   scheduleDetail,
 }: TripDetailListSheetProps) => {
-  const { t } = useTranslation(['appBar', 'textField', 'menu', 'buttonChip']);
+  const { t } = useTranslation([
+    'appBar',
+    'textField',
+    'menu',
+    'buttonChip',
+    'toast',
+  ]);
   const ref = useRef<SheetRef>(null);
   const [open, setOpen] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
@@ -97,6 +104,15 @@ const TripDetailListSheet = ({
     }
 
     setMode((mode) => (mode === 'view' ? 'edit' : 'view'));
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toast.success(t('toast:toast_copyLink'));
+    } catch (err) {
+      console.error('복사 실패', err);
+    }
   };
 
   return (
@@ -163,6 +179,10 @@ const TripDetailListSheet = ({
                               setDefaultName(scheduleDetail.data.scheduleName);
                               setOpen(true);
                             }}
+                          />
+                          <Menu.Item
+                            title={t('menu:menu_share')}
+                            onClick={handleCopy}
                           />
                           <Menu.Item
                             title={t('menu:menu_delete')}
