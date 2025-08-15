@@ -1,4 +1,8 @@
 {
   "button-chip_edit": "편집",
-  "button-chip_done": "완료"
+  "button-chip_done": "완료",
+  "button-chip_addStays": "일정에 추가",
+  "button-chip_addLikesList": "새 목록",
+  "button-chip_search": "현 위치에서 검색",
+  "button-chip_addPlace": "장소 추가"
 }
