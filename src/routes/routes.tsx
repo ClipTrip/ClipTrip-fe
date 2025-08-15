@@ -7,6 +7,7 @@ import PlaceDetailPage from '@/pages/PlaceDetailPage';
 import Places from '@/pages/Places';
 import Profile from '@/pages/Profile';
 import RegisterPage from '@/pages/RegisterPage';
+import TripDetailPage from '@/pages/TripDetailPage';
 import TripsPage from '@/pages/TripsPage';
 import { pagePath } from '@/routes/pagePath';
 import { createBrowserRouter } from 'react-router-dom';
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
         path: pagePath.TRIPS,
         element: <TripsPage />,
       },
+      { path: `${pagePath.TRIPS}/:scheduleId`, element: <TripDetailPage /> },
     ],
   },
 ]);

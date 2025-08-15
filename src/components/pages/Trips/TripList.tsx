@@ -13,6 +13,7 @@ import { useDeleteSchedule } from '@/hooks/useSchedule';
 import type { ApiFailResponse } from '@/types/api';
 import type { GetSchedulesResponse } from '@/types/schedule';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 interface TripListProps {
   data?: GetSchedulesResponse['data'];
@@ -23,6 +24,7 @@ interface TripListProps {
 const TripList = ({ data, isPending, error }: TripListProps) => {
   const { t } = useTranslation(['menu']);
   const { mutateAsync, isPending: deleteIsPending } = useDeleteSchedule();
+  const navigate = useNavigate();
 
   const handleDelete = async (id: number) => {
     if (deleteIsPending) return null;
@@ -69,6 +71,7 @@ const TripList = ({ data, isPending, error }: TripListProps) => {
               </DropdownMenuContent>
             </DropdownMenu>
           }
+          onClick={() => navigate(`/trips/${v.scheduleId}`)}
         />
       ))}
 

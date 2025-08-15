@@ -2,6 +2,7 @@ import { scheduleApi } from '@/services/scheduleService';
 import type { ApiFailResponse } from '@/types/api';
 import type {
   DeleteScheduleResponse,
+  GetScheduleDetailResponse,
   GetSchedulesResponse,
 } from '@/types/schedule';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -11,6 +12,14 @@ export const useGetSchedules = () => {
   return useQuery<GetSchedulesResponse, ApiFailResponse>({
     queryFn: () => scheduleApi.getSchedules(),
     queryKey: ['schedules'],
+  });
+};
+
+export const useGetScheduleDetail = (id?: string) => {
+  return useQuery<GetScheduleDetailResponse, ApiFailResponse>({
+    queryFn: () => scheduleApi.getScheduleDetail(+id!),
+    queryKey: ['schedules', id],
+    enabled: !!id,
   });
 };
 
