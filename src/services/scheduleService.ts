@@ -3,6 +3,8 @@ import type {
   DeleteScheduleResponse,
   GetScheduleDetailResponse,
   GetSchedulesResponse,
+  PatchScheduleProps,
+  PatchScheduleResponse,
 } from '@/types/schedule';
 
 export const scheduleApi = {
@@ -23,6 +25,15 @@ export const scheduleApi = {
   deleteSchedule: async (scheduleId: number) => {
     const res = await instance.delete<DeleteScheduleResponse>(
       `/api/v1/schedules/${scheduleId}`
+    );
+
+    return res.data;
+  },
+
+  patchBookmark: async ({ scheduleId, data }: PatchScheduleProps) => {
+    const res = await instance.patch<PatchScheduleResponse>(
+      `/api/v1/schedules/${scheduleId}`,
+      data
     );
 
     return res.data;

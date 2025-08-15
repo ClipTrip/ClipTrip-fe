@@ -33,3 +33,29 @@ export interface GetScheduleDetailResponse extends ApiSuccessResponse {
     ];
   };
 }
+
+export interface PatchScheduleRequest {
+  scheduleName?: string;
+  description?: string;
+  placeInfoRequests?: {
+    placeOrder: number;
+    placeInfo: {
+      latitude: number;
+      longitude: number;
+      roadAddress: string;
+      placeName: string;
+      phone: string;
+      type: CategoryType;
+      kakaoPlaceId: string;
+    };
+  }[];
+}
+
+export interface PatchScheduleProps {
+  data: PatchScheduleRequest;
+  scheduleId: number;
+}
+
+export interface PatchScheduleResponse extends ApiSuccessResponse {
+  data: number;
+}

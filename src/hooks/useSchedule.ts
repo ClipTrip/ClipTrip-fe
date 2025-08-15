@@ -4,6 +4,8 @@ import type {
   DeleteScheduleResponse,
   GetScheduleDetailResponse,
   GetSchedulesResponse,
+  PatchScheduleProps,
+  PatchScheduleResponse,
 } from '@/types/schedule';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -34,6 +36,28 @@ export const useDeleteSchedule = () => {
         exact: true,
       });
       toast.success('일정이 삭제되었습니다.');
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+};
+
+export const usePatchSchedule = () => {
+  const queryClient = useQueryClient();
+  return useMutation<
+    PatchScheduleResponse,
+    ApiFailResponse,
+    PatchScheduleProps,
+    PatchScheduleProps
+  >({
+    mutationFn: ({ scheduleId, data }) =>
+      scheduleApi.patchBookmark({ scheduleId, data }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['schedules'],
+      });
+      toast.success('북마크가 수정 되었습니다.');
     },
     onError: (error) => {
       toast.error(error.message);
