@@ -10,7 +10,7 @@ import MoreIcon from '@/components/icons/system/MoreIcon';
 import { Sheet, type SheetRef } from 'react-modal-sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useTranslation } from 'react-i18next';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   useDeleteSchedule,
@@ -26,6 +26,7 @@ import CalendarIcon from '@/components/icons/system/CalendarIcon';
 import type { DateRange } from 'react-day-picker';
 import Calendar from '@/components/common/Calendar';
 import { formatDateRange } from '@/utils/format';
+import type { GetScheduleDetailResponse } from '@/types/schedule';
 
 const pixel = 104;
 const height = window.innerHeight;
@@ -51,6 +52,10 @@ const TripDetailListSheet = () => {
   const navigate = useNavigate();
   const { mutateAsync: patchMutate, isPending: patchIsPending } =
     usePatchSchedule();
+  const [mode, setMode] = useState<'view' | 'edit'>('view');
+  const [places, setPlaces] = useState<
+    GetScheduleDetailResponse['data']['placeList']
+  >([]);
 
   const {
     data: scheduleDetail,
@@ -59,6 +64,11 @@ const TripDetailListSheet = () => {
     error,
   } = useGetScheduleDetail(id);
   const { mutateAsync, isPending: deleteIsPending } = useDeleteSchedule();
+
+  useEffect(() => {
+    if (scheduleDetail?.data.placeList)
+      setPlaces(scheduleDetail.data.placeList);
+  }, [scheduleDetail?.data.placeList]);
 
   if (isPending || deleteIsPending) {
     return <FullPageLoading />;
@@ -69,7 +79,6 @@ const TripDetailListSheet = () => {
   }
 
   const scheduleId = scheduleDetail.data.scheduleId;
-  const placeList = scheduleDetail.data.placeList;
 
   const handleDeleteSchedule = async () => {
     if (deleteIsPending) return null;
@@ -86,6 +95,24 @@ const TripDetailListSheet = () => {
       scheduleId,
       data: { description: date },
     });
+  };
+
+  const handleMode = async () => {
+    if (patchIsPending || !scheduleId) return null;
+
+    if (mode === 'edit') {
+      const placeInfo = places.map((v, i) => ({
+        placeOrder: i,
+        placeInfo: v,
+      }));
+
+      await patchMutate({
+        scheduleId,
+        data: { placeInfoRequests: placeInfo },
+      });
+    }
+
+    setMode((mode) => (mode === 'view' ? 'edit' : 'view'));
   };
 
   return (
@@ -118,7 +145,10 @@ const TripDetailListSheet = () => {
       >
         <Sheet.Container style={{ boxShadow: 'none' }}>
           <Sheet.Header className='flex h-12 items-center' />
-          <Sheet.Content className='gap-024 pb-[104px]'>
+          <Sheet.Content
+            className='gap-024 pb-[104px]'
+            disableDrag
+          >
             <div className={'flex flex-col items-end'}>
               <SectionTitle
                 size='l'
@@ -167,12 +197,24 @@ const TripDetailListSheet = () => {
                   Icon={AddIcon}
                   label={t('buttonChip:button-chip_addPlace')}
                 />
-                <ButtonChip label={t('buttonChip:button-chip_edit')} />
+                <ButtonChip
+                  label={t(
+                    mode === 'view'
+                      ? 'buttonChip:button-chip_edit'
+                      : 'buttonChip:button-chip_done'
+                  )}
+                  isActive={mode === 'edit'}
+                  onClick={handleMode}
+                />
               </div>
             </div>
 
             <ScrollArea className='h-[calc(80dvh-314px)] w-full'>
-              <TripDetailList placeList={placeList} />
+              <TripDetailList
+                places={places}
+                setPlaces={setPlaces}
+                mode={mode}
+              />
             </ScrollArea>
           </Sheet.Content>
         </Sheet.Container>

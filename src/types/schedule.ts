@@ -18,19 +18,17 @@ export interface GetScheduleDetailResponse extends ApiSuccessResponse {
     scheduleId: number;
     scheduleName: string;
     description: string;
-    placeList: [
-      {
-        placeId: number;
-        placeName: string;
-        roadAddress: string;
-        phone: string;
-        type: CategoryType;
-        longitude: number;
-        latitude: number;
-        placeOrder: number;
-        kakaoPlaceId: string;
-      },
-    ];
+    placeList: {
+      placeId: number;
+      placeName: string;
+      roadAddress: string;
+      phone: string;
+      type: CategoryType;
+      longitude: number;
+      latitude: number;
+      placeOrder: number;
+      kakaoPlaceId: string;
+    }[];
   };
 }
 

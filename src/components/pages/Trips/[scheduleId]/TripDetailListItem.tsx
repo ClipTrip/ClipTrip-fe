@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { type ElementType } from 'react';
+import { type ElementType, type ReactNode } from 'react';
 
 interface TripDetailListItemProps {
   Pin?: ElementType;
@@ -7,7 +7,9 @@ interface TripDetailListItemProps {
   category: string;
   time: number;
   className?: string;
+  RightIcon?: ReactNode;
   onClick?: () => void;
+  onPinClick?: () => void;
 }
 
 const TripDetailListItem = ({
@@ -16,7 +18,9 @@ const TripDetailListItem = ({
   category,
   time,
   className,
+  RightIcon,
   onClick,
+  onPinClick,
 }: TripDetailListItemProps) => {
   return (
     <div
@@ -27,7 +31,7 @@ const TripDetailListItem = ({
     >
       {Pin && (
         <div className='pr-012 relative h-[82px] w-9'>
-          <button>
+          <button onClick={onPinClick}>
             <Pin />
           </button>
           <div className='absolute left-3 top-6 h-[47px] border' />
@@ -50,6 +54,7 @@ const TripDetailListItem = ({
         <p className='body_m text-sy_label-light'>{category}</p>
         <p className='body_m text-sy_label-light'>{time}분</p>
       </button>
+      {RightIcon}
     </div>
   );
 };
