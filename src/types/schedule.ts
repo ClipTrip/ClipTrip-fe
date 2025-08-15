@@ -37,16 +37,18 @@ export interface PatchScheduleRequest {
   description?: string;
   placeInfoRequests?: {
     placeOrder: number;
-    placeInfo: {
-      latitude: number;
-      longitude: number;
-      roadAddress: string;
-      placeName: string;
-      phone: string;
-      type: CategoryType;
-      kakaoPlaceId: string;
-    };
+    placeInfo: PatchSchedulePlace;
   }[];
+}
+
+export interface PatchSchedulePlace {
+  latitude: number;
+  longitude: number;
+  roadAddress: string;
+  placeName: string;
+  phone: string;
+  type: CategoryType;
+  kakaoPlaceId: string;
 }
 
 export interface PatchScheduleProps {

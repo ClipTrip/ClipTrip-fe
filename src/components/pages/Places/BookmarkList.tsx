@@ -33,7 +33,7 @@ const BookmarkList = ({ places }: BookmarkListProps) => {
   const mode = sp.get('mode') as null | 'schedule';
   const scheduleId = sp.get('scheduleId');
 
-  const tripSearchParam = `?mode=schedule&schduleId=${scheduleId}`;
+  const tripSearchParam = `?mode=schedule&scheduleId=${scheduleId}`;
 
   const handleDeleteBookmark = async (bookmarkId: number) => {
     if (isPending) return null;

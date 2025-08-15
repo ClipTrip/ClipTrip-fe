@@ -1,7 +1,7 @@
 import ListItem from '@/components/common/ListItem';
-import AddCircleIcon from '@/components/icons/system/AddCircleIcon';
 import SaveIcon from '@/components/icons/system/SaveIcon';
 import AddBookmarkModal from '@/components/pages/Places/AddBookmarkModal';
+import TripAddButton from '@/components/pages/Trips/[scheduleId]/TripAddButton';
 import { usePlaceMarker } from '@/hooks/useMap';
 import { useSearchLuggagePlaces } from '@/hooks/usePlace';
 import type { CategoryPlacesRequest } from '@/types/place';
@@ -43,13 +43,7 @@ const LuggageSearchList = ({ searchParams }: LuggageSearchListProps) => {
           </AddBookmarkModal>
         )
       }
-      LeftIcon={
-        mode === 'schedule' && (
-          <button className='flex h-[54px] cursor-pointer justify-start pr-3 pt-[3px]'>
-            <AddCircleIcon />
-          </button>
-        )
-      }
+      LeftIcon={<TripAddButton place={{ ...place, kakaoPlaceId: '' }} />}
       title={place.placeName}
       description={t('LUGGAGE_STORAGE')}
     />

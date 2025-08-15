@@ -1,9 +1,9 @@
 import ListItem from '@/components/common/ListItem';
 import Menu from '@/components/common/Menu';
-import AddCircleIcon from '@/components/icons/system/AddCircleIcon';
 import MoreIcon from '@/components/icons/system/MoreIcon';
 import PinNumberIcon from '@/components/icons/system/PinNumberIcon';
 import AddBookmarkModal from '@/components/pages/Places/AddBookmarkModal';
+import TripAddButton from '@/components/pages/Trips/[scheduleId]/TripAddButton';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -108,13 +108,7 @@ const BookmarkDetailList = ({
             }
             title={place.placeName}
             description={place.roadAddress}
-            LeftIcon={
-              mode === 'schedule' && (
-                <button className='flex h-[54px] cursor-pointer justify-start pr-3 pt-[3px]'>
-                  <AddCircleIcon />
-                </button>
-              )
-            }
+            LeftIcon={<TripAddButton place={place} />}
             Pin={
               mode !== 'schedule'
                 ? PinNumberIcon.bind(null, { number: idx + 1 })
