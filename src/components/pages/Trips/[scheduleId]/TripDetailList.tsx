@@ -20,6 +20,7 @@ import {
 } from '@dnd-kit/sortable';
 import { useState, type Dispatch, type SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 interface TripDetailListProps {
   places: GetScheduleDetailResponse['data']['placeList'];
@@ -37,6 +38,7 @@ const TripDetailList = ({
   setPlaces,
 }: TripDetailListProps) => {
   const { t } = useTranslation('category');
+  const navigate = useNavigate();
 
   const [deletePlaceList, setDeletePlaceList] = useState<
     GetScheduleDetailResponse['data']['placeList']
@@ -109,6 +111,7 @@ const TripDetailList = ({
                 time={durationData ? durationData[idx] : undefined}
                 mode={mode}
                 onRemove={() => handleRemove(place.placeId)}
+                onClick={() => navigate(`/places/${place.placeId}`)}
               />
             ))}
 
