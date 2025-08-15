@@ -116,7 +116,6 @@ const BookmarkDetailList = ({
                 ? PinNumberIcon.bind(null, { number: idx + 1 })
                 : undefined
             }
-            Pin={PinNumberIcon.bind(null, { number: idx + 1 })}
             onClick={() => navigate(`/places/${place.placeId}`)}
           />
         </Fragment>
