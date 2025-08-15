@@ -1,5 +1,6 @@
 import ButtonActionFill from '@/components/common/ButtonActionFill';
 import ButtonChip from '@/components/common/ButtonChip';
+import Calendar from '@/components/common/Calendar';
 import Driver from '@/components/common/Driver';
 import ListItem from '@/components/common/ListItem';
 import Map from '@/components/common/Map';
@@ -7,7 +8,9 @@ import SectionTitle from '@/components/common/SectionTitle';
 import AddCircleIcon from '@/components/icons/system/AddCircleIcon';
 import SortableListItem from '@/components/pages/Home/SortableListItem';
 import { usePlaceCenter, usePlaceMarker } from '@/hooks/useMap';
+import { usePatchSchedule } from '@/hooks/useSchedule';
 import type { VideosResponse } from '@/types/video';
+import { formatDateRange } from '@/utils/format';
 import {
   closestCenter,
   DndContext,
@@ -22,13 +25,17 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { useState } from 'react';
+import type { DateRange } from 'react-day-picker';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 interface VideoPlaceListProps {
+  scheduleId: number;
   placeList: VideosResponse['data']['scheduleInfoResponse']['placeList'];
 }
 
 const VideoPlaceList = ({
+  scheduleId,
   placeList: defaultPlaceList,
 }: VideoPlaceListProps) => {
   const { t } = useTranslation([
@@ -43,6 +50,10 @@ const VideoPlaceList = ({
   const [deletePlaceList, setDeletePlaceList] = useState<
     VideosResponse['data']['scheduleInfoResponse']['placeList']
   >([]);
+  const [open, setOpen] = useState(false);
+  const [range, setRange] = useState<DateRange>();
+  const { mutateAsync, isPending } = usePatchSchedule();
+  const navigate = useNavigate();
 
   const handleMode = () => {
     setMode((mode) => (mode === 'view' ? 'edit' : 'view'));
@@ -89,6 +100,27 @@ const VideoPlaceList = ({
     places: markerArr,
     pin: 'number',
   });
+
+  const handleCreateSchedule = async () => {
+    const date = formatDateRange(range);
+
+    if (isPending || !scheduleId || !date) return null;
+
+    const placeInfo = placeList.map((v, i) => ({
+      placeOrder: i,
+      placeInfo: v,
+    }));
+
+    await mutateAsync({
+      scheduleId,
+      data: {
+        description: date,
+        placeInfoRequests: placeInfo,
+      },
+    });
+
+    navigate(`/trips/${scheduleId}`);
+  };
 
   return (
     <div className='gap-012 flex flex-col pb-[72px]'>
@@ -157,9 +189,21 @@ const VideoPlaceList = ({
         </div>
 
         <div className='px-024 py-028'>
-          <ButtonActionFill variant='neutral'>
+          <ButtonActionFill
+            variant='neutral'
+            onClick={() => setOpen(true)}
+          >
             {t('buttonAction:button-action_plan')}
           </ButtonActionFill>
+          {open && (
+            <Calendar
+              open={open}
+              range={range}
+              onRange={setRange}
+              onOpenChange={setOpen}
+              onSubmit={handleCreateSchedule}
+            />
+          )}
         </div>
       </div>
 

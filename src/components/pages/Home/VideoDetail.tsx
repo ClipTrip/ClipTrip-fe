@@ -28,7 +28,10 @@ const VideoDetail = ({ data, onBack }: VideoDetailProps) => {
           url={data.videoResponse.url}
           summary={data.videoResponse.summary}
         />
-        <VideoPlaceList placeList={data.scheduleInfoResponse.placeList} />
+        <VideoPlaceList
+          scheduleId={data.scheduleInfoResponse.scheduleId}
+          placeList={data.scheduleInfoResponse.placeList}
+        />
       </div>
     </div>
   );
