@@ -60,7 +60,7 @@ const Calendar = ({
           selected={range}
           onSelect={onRange}
           classNames={{}}
-          className='w-full p-0'
+          className='h-fit w-full'
           locale={language}
         />
 
