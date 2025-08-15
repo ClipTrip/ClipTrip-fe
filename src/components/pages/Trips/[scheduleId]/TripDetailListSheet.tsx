@@ -12,12 +12,20 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useTranslation } from 'react-i18next';
 import { useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDeleteSchedule, useGetScheduleDetail } from '@/hooks/useSchedule';
+import {
+  useDeleteSchedule,
+  useGetScheduleDetail,
+  usePatchSchedule,
+} from '@/hooks/useSchedule';
 import FullPageLoading from '@/components/common/FullPageLoading';
 import TripDetailList from '@/components/pages/Trips/[scheduleId]/TripDetailList';
 import ButtonChip from '@/components/common/ButtonChip';
 import AddIcon from '@/components/icons/system/AddIcon';
 import RenameModal from '@/components/pages/Trips/RenameModal';
+import CalendarIcon from '@/components/icons/system/CalendarIcon';
+import type { DateRange } from 'react-day-picker';
+import Calendar from '@/components/common/Calendar';
+import { formatDateRange } from '@/utils/format';
 
 const pixel = 104;
 const height = window.innerHeight;
@@ -36,9 +44,13 @@ const TripDetailListSheet = () => {
   const { t } = useTranslation(['appBar', 'textField', 'menu', 'buttonChip']);
   const ref = useRef<SheetRef>(null);
   const [open, setOpen] = useState(false);
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const [range, setRange] = useState<DateRange>();
   const [defaultName, setDefaultName] = useState('');
   const { scheduleId: id } = useParams<{ scheduleId: string }>();
   const navigate = useNavigate();
+  const { mutateAsync: patchMutate, isPending: patchIsPending } =
+    usePatchSchedule();
 
   const {
     data: scheduleDetail,
@@ -66,6 +78,16 @@ const TripDetailListSheet = () => {
     navigate('/trips');
   };
 
+  const handleCalendarSubmit = async () => {
+    const date = formatDateRange(range);
+    if (patchIsPending || !scheduleId || !date) return null;
+
+    await patchMutate({
+      scheduleId,
+      data: { description: date },
+    });
+  };
+
   return (
     <>
       {open && (
@@ -74,6 +96,15 @@ const TripDetailListSheet = () => {
           open={open}
           onOpenChange={setOpen}
           scheduleId={scheduleId}
+        />
+      )}
+      {calendarOpen && (
+        <Calendar
+          open={calendarOpen}
+          range={range}
+          onRange={setRange}
+          onOpenChange={setCalendarOpen}
+          onSubmit={handleCalendarSubmit}
         />
       )}
       <Sheet
@@ -92,7 +123,15 @@ const TripDetailListSheet = () => {
               <SectionTitle
                 size='l'
                 title={scheduleDetail.data.scheduleName}
-                description={scheduleDetail.data.description}
+                description={
+                  <button
+                    className='px-012 text-sy_label-light gap-008 flex cursor-pointer items-center'
+                    onClick={() => setCalendarOpen(true)}
+                  >
+                    {scheduleDetail.data.description}
+                    <CalendarIcon className='size-[18px]' />
+                  </button>
+                }
                 RightIcon={
                   <DropdownMenu>
                     <DropdownMenuTrigger className='flex h-12 w-12 items-center justify-center'>

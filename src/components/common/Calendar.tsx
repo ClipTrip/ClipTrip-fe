@@ -17,9 +17,16 @@ interface CalendarProps {
   range?: DateRange;
   onOpenChange?: (open: boolean) => void;
   onRange: (value: DateRange | undefined) => void;
+  onSubmit?: () => void;
 }
 
-const Calendar = ({ open, range, onRange, onOpenChange }: CalendarProps) => {
+const Calendar = ({
+  open,
+  range,
+  onRange,
+  onOpenChange,
+  onSubmit,
+}: CalendarProps) => {
   const { t, i18n } = useTranslation(['buttonAction', 'calendar']);
 
   const handleClose = () => {
@@ -27,6 +34,7 @@ const Calendar = ({ open, range, onRange, onOpenChange }: CalendarProps) => {
   };
 
   const handleSubmit = () => {
+    onSubmit?.();
     onOpenChange?.(false);
   };
 
