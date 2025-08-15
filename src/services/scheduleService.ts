@@ -1,4 +1,5 @@
 import { instance } from '@/lib/axios';
+import type { ApiSuccessResponse } from '@/types/api';
 import type {
   DeleteScheduleResponse,
   GetScheduleDetailResponse,
@@ -30,11 +31,17 @@ export const scheduleApi = {
     return res.data;
   },
 
-  patchBookmark: async ({ scheduleId, data }: PatchScheduleProps) => {
+  patchSchedule: async ({ scheduleId, data }: PatchScheduleProps) => {
     const res = await instance.patch<PatchScheduleResponse>(
       `/api/v1/schedules/${scheduleId}`,
       data
     );
+
+    return res.data;
+  },
+
+  addSchedule: async () => {
+    const res = await instance.post<ApiSuccessResponse>(`/api/v1/schedules`);
 
     return res.data;
   },

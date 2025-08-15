@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useDeleteSchedule } from '@/hooks/useSchedule';
+import { useAddSchedule, useDeleteSchedule } from '@/hooks/useSchedule';
 import type { ApiFailResponse } from '@/types/api';
 import type { GetSchedulesResponse } from '@/types/schedule';
 import { useTranslation } from 'react-i18next';
@@ -24,12 +24,20 @@ interface TripListProps {
 const TripList = ({ data, isPending, error }: TripListProps) => {
   const { t } = useTranslation(['menu']);
   const { mutateAsync, isPending: deleteIsPending } = useDeleteSchedule();
+  const { mutateAsync: addMutate, isPending: addIsPending } = useAddSchedule();
+
   const navigate = useNavigate();
 
   const handleDelete = async (id: number) => {
     if (deleteIsPending) return null;
 
     await mutateAsync(id);
+  };
+
+  const handleAdd = async () => {
+    if (addIsPending) return null;
+
+    await addMutate();
   };
 
   return (
@@ -40,7 +48,10 @@ const TripList = ({ data, isPending, error }: TripListProps) => {
           <span className='title_m text-sy_label-light'>({data?.length})</span>
         </div>
 
-        <button className='flex size-12 cursor-pointer items-center justify-center'>
+        <button
+          className='flex size-12 cursor-pointer items-center justify-center'
+          onClick={handleAdd}
+        >
           <AddIcon className='size-6' />
         </button>
       </header>

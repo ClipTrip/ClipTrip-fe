@@ -1,5 +1,5 @@
 import { scheduleApi } from '@/services/scheduleService';
-import type { ApiFailResponse } from '@/types/api';
+import type { ApiFailResponse, ApiSuccessResponse } from '@/types/api';
 import type {
   DeleteScheduleResponse,
   GetScheduleDetailResponse,
@@ -52,12 +52,30 @@ export const usePatchSchedule = () => {
     PatchScheduleProps
   >({
     mutationFn: ({ scheduleId, data }) =>
-      scheduleApi.patchBookmark({ scheduleId, data }),
+      scheduleApi.patchSchedule({ scheduleId, data }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['schedules'],
       });
-      toast.success('북마크가 수정 되었습니다.');
+      toast.success('일정이 수정 되었습니다.');
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+};
+
+export const useAddSchedule = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<ApiSuccessResponse, ApiFailResponse>({
+    mutationFn: () => scheduleApi.addSchedule(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['schedules'],
+        exact: true,
+      });
+      toast.success('일정이 추가되었습니다.');
     },
     onError: (error) => {
       toast.error(error.message);
