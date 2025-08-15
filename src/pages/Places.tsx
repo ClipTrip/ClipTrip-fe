@@ -31,6 +31,12 @@ const Places = () => {
   const longitude = searchParams.get('longitude');
   const latitude = searchParams.get('latitude');
   const radius = searchParams.get('radius');
+  const scheduleId = searchParams.get('scheduleId');
+  const mode = searchParams.get('mode') as null | 'schedule';
+
+  const modeParams = mode === 'schedule' ? `&mode=${mode}` : '';
+  const scheduleIdParams =
+    scheduleId !== null ? `&scheduleId=${scheduleId}` : '';
 
   const searchMode = !!(longitude && latitude && radius);
 
@@ -41,7 +47,7 @@ const Places = () => {
     if (map) {
       const mapCenter = map.getCenter();
       navigate(
-        `/places?query=${searchRef.current?.value}&longitude=${mapCenter.x}&latitude=${mapCenter.y}&radius=2000`
+        `/places?query=${searchRef.current?.value}&longitude=${mapCenter.x}&latitude=${mapCenter.y}&radius=2000${scheduleIdParams}${modeParams}`
       );
     }
   };
@@ -54,24 +60,36 @@ const Places = () => {
     if (map && category) {
       const mapCenter = map.getCenter();
       navigate(
-        `/places?category=${category}&longitude=${mapCenter.x}&latitude=${mapCenter.y}&radius=2000`
+        `/places?category=${category}&longitude=${mapCenter.x}&latitude=${mapCenter.y}&radius=2000${scheduleIdParams}${modeParams}`
       );
     } else {
-      navigate('/places');
+      navigate(
+        mode !== 'schedule'
+          ? '/places'
+          : `/places?mode=schedule&scheduleId=${scheduleId}`
+      );
       clearMarkers();
     }
   };
 
   return (
     <>
-      {!searchMode && <AppBar title={t('appBar_navi-03')} />}
+      {!searchMode && (
+        <AppBar
+          title={mode !== 'schedule' ? t('appBar_navi-03') : undefined}
+          LeadingIcon={mode === 'schedule' ? CloseIcon : undefined}
+          onLeadingIconClick={() => {
+            if (mode === 'schedule') navigate(`/trips/${scheduleId}`);
+          }}
+        />
+      )}
       {searchMode && (
         <AppBar
           LeadingIcon={CloseIcon}
           onLeadingIconClick={() => {
             if (searchRef.current) searchRef.current.value = '';
             clearMarkers();
-            navigate('/places');
+            navigate(mode === 'schedule' ? `/trips/${scheduleId}` : '/places');
           }}
         />
       )}
@@ -102,7 +120,9 @@ const Places = () => {
         />
       )}
 
-      {!searchMode && <Navigation className='absolute bottom-0 z-50' />}
+      {!searchMode && mode !== 'schedule' && (
+        <Navigation className='absolute bottom-0 z-50' />
+      )}
     </>
   );
 };

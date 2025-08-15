@@ -19,6 +19,8 @@ import enSearchField from '@/locales/en/searchField.json';
 import enTermsOfService2 from '@/locales/en/termsOfService2.json';
 import enTextField from '@/locales/en/textField.json';
 import enCategory from '@/locales/en/category.json';
+import enCalendar from '@/locales/en/calendar.json';
+import enToast from '@/locales/en/toast.json';
 
 import koAppBar from '@/locales/ko/appBar.json';
 import koAccessibility from '@/locales/ko/accessibility.json';
@@ -38,6 +40,8 @@ import koSearchField from '@/locales/ko/searchField.json';
 import koTermsOfService2 from '@/locales/ko/termsOfService2.json';
 import koTextField from '@/locales/ko/textField.json';
 import koCategory from '@/locales/ko/category.json';
+import koCalendar from '@/locales/ko/calendar.json';
+import koToast from '@/locales/ko/toast.json';
 import type { LanguageCode } from '@/types/type';
 
 export const setLanguage = (lang: LanguageCode) => {
@@ -71,6 +75,8 @@ i18n.use(initReactI18next).init({
       termsOfService2: enTermsOfService2,
       textField: enTextField,
       category: enCategory,
+      calendar: enCalendar,
+      toast: enToast,
     },
     ko: {
       appBar: koAppBar,
@@ -91,6 +97,8 @@ i18n.use(initReactI18next).init({
       termsOfService2: koTermsOfService2,
       textField: koTextField,
       category: koCategory,
+      calendar: koCalendar,
+      toast: koToast,
     },
   },
   lng: lang,

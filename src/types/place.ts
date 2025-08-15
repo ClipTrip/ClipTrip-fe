@@ -7,11 +7,12 @@ export interface PlaceList {
   placeId: number;
   placeName: string;
   roadAddress: string;
-  phone?: string;
+  phone: string;
   type: CategoryType;
   longitude: number;
   latitude: number;
   placeOrder: number;
+  kakaoPlaceId: string;
   bookmarkedIdList: number[];
 }
 
@@ -64,8 +65,7 @@ export interface LuggagePlacesResponse extends ApiSuccessResponse {
 
 export type LuggagePlaces = {
   placeId: number;
-  bookmarkedIdList?: number[];
-} & Omit<SearchResponsePlace, 'phone' | 'kakaoPlaceId'>;
+} & Omit<SearchResponsePlace, 'kakaoPlaceId'>;
 
 export interface PlaceDetailResponse extends ApiSuccessResponse {
   data: {

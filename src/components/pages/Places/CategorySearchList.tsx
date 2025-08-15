@@ -2,6 +2,7 @@ import FullPageLoading from '@/components/common/FullPageLoading';
 import ListItem from '@/components/common/ListItem';
 import SaveIcon from '@/components/icons/system/SaveIcon';
 import AddBookmarkModal from '@/components/pages/Places/AddBookmarkModal';
+import TripAddButton from '@/components/pages/Trips/[scheduleId]/TripAddButton';
 import { usePlaceMarker } from '@/hooks/useMap';
 import {
   useGetPlaceDetailKakaoId,
@@ -14,6 +15,7 @@ import type {
   PlaceDetailKakaoIdRequest,
 } from '@/types/place';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 
 interface CategorySearchListProps {
   searchParams: CategoryPlacesRequest;
@@ -31,6 +33,8 @@ const PIN: { category: CategoryType; code: CategoryCodeType | 'CT1,AT4' }[] = [
 
 const CategorySearchList = ({ searchParams }: CategorySearchListProps) => {
   const { t } = useTranslation('category');
+  const [sp] = useSearchParams();
+  const mode = sp.get('mode') as null | 'schedule';
   const { data: places } = useSearchCategoryPlaces(searchParams);
   const { mutateAsync, isPending } = useGetPlaceDetailKakaoId();
 
@@ -57,10 +61,13 @@ const CategorySearchList = ({ searchParams }: CategorySearchListProps) => {
         <ListItem
           key={idx}
           RightIcon={
-            <AddBookmarkModal data={{ ...place }}>
-              <SaveIcon isActive={place.bookmarkedIdList.length > 0} />
-            </AddBookmarkModal>
+            mode !== 'schedule' && (
+              <AddBookmarkModal data={{ ...place }}>
+                <SaveIcon isActive={place.bookmarkedIdList.length > 0} />
+              </AddBookmarkModal>
+            )
           }
+          LeftIcon={<TripAddButton place={place} />}
           title={place.placeName}
           description={t(place.type)}
           onClick={() => handlePlaceDetail(place)}

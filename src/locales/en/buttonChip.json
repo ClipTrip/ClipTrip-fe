@@ -1,4 +1,8 @@
 {
   "button-chip_edit": "edit",
-  "button-chip_done": "done"
+  "button-chip_done": "done",
+  "button-chip_addStays": "add to itinerary",
+  "button-chip_addLikesList": "add Likes List",
+  "button-chip_search": "Search Here",
+  "button-chip_addPlace": "add Place"
 }

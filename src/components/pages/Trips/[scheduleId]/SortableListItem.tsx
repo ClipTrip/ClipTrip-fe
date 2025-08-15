@@ -2,14 +2,17 @@ import { useSortable } from '@dnd-kit/sortable';
 import DragIcon from '@/components/icons/system/DragIcon';
 import PinNumberIcon from '@/components/icons/system/PinNumberIcon';
 import RemoveCircleIcon from '@/components/icons/system/RemoveCircleIcon';
-import ListItem from '@/components/common/ListItem';
+import TripDetailListItem from '@/components/pages/Trips/[scheduleId]/TripDetailListItem';
+import { formatSeconds } from '@/utils/format';
 
 interface Props {
   id: number;
   idx: number;
   title: string;
-  description?: string;
-  mode: 'view' | 'edit';
+  category: string;
+  time?: number;
+  mode: 'view' | 'edit' | 'add';
+  onClick?: () => void;
   onRemove?: () => void;
 }
 
@@ -17,7 +20,9 @@ const SortableListItem = ({
   id,
   idx,
   title,
-  description,
+  category,
+  time,
+  onClick,
   mode,
   onRemove,
 }: Props) => {
@@ -34,9 +39,11 @@ const SortableListItem = ({
       ref={setNodeRef}
       style={style}
     >
-      <ListItem
+      <TripDetailListItem
         title={title}
-        description={description}
+        category={category}
+        time={time ? formatSeconds(time) : undefined}
+        onClick={onClick}
         Pin={
           mode === 'edit'
             ? RemoveCircleIcon

@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Sheet, type SheetRef } from 'react-modal-sheet';
+import { useSearchParams } from 'react-router-dom';
 
 const pixel = 104;
 const height = window.innerHeight;
@@ -34,6 +35,8 @@ const BookmarkListSheet = () => {
   const ref = useRef<SheetRef>(null);
   const { data: places } = useGetBookmark();
   const { mutateAsync, isPending } = useCreateBookmark();
+  const [sp] = useSearchParams();
+  const mode = sp.get('mode') as null | 'schedule';
 
   const handleCreateBookmark = async () => {
     if (isPending) return null;
@@ -58,18 +61,23 @@ const BookmarkListSheet = () => {
       >
         <Sheet.Container style={{ boxShadow: 'none' }}>
           <Sheet.Header className='flex h-12 items-center' />
-          <Sheet.Content className={cn('gap-016 pb-[104px]')}>
+          <Sheet.Content
+            className={cn('gap-016 pb-[104px]')}
+            disableDrag
+          >
             <div className={'flex flex-col items-end'}>
               <SectionTitle
                 size='l'
                 title={t('sectionTitle:sectionTitle_likesList')}
               />
-              <ButtonChip
-                className='mr-6'
-                Icon={AddIcon}
-                label={t('buttonAction:button-action_addLikesList')}
-                onClick={handleCreateBookmark}
-              />
+              {mode !== 'schedule' && (
+                <ButtonChip
+                  className='mr-6'
+                  Icon={AddIcon}
+                  label={t('buttonAction:button-action_addLikesList')}
+                  onClick={handleCreateBookmark}
+                />
+              )}
             </div>
 
             <ScrollArea className={cn('h-[calc(60dvh-270px)] w-full')}>

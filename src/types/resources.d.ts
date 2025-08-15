@@ -17,6 +17,8 @@ import searchField from '@/locales/ko/searchField.json';
 import termsOfService2 from '@/locales/ko/termsOfService2.json';
 import textField from '@/locales/ko/textField.json';
 import category from '@/locales/ko/category.json';
+import calendar from '@/locales/ko/calendar.json';
+import toast from '@/locales/ko/toast.json';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
@@ -39,6 +41,8 @@ declare module 'i18next' {
       termsOfService2: typeof termsOfService2;
       textField: typeof textField;
       category: typeof category;
+      calendar: typeof calendar;
+      toast: typeof toast;
     };
   }
 }
