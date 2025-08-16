@@ -161,8 +161,10 @@ const VideoPlaceList = ({
                     key={place.placeId}
                     id={place.placeId}
                     idx={idx}
-                    title={place.placeName}
-                    description={place.roadAddress}
+                    title={place.translatedPlaceName ?? place.placeName}
+                    description={
+                      place.translatedRoadAddress ?? place.roadAddress
+                    }
                     mode={mode}
                     onRemove={() => handleRemove(place.placeId)}
                   />

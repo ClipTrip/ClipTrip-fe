@@ -1,5 +1,6 @@
 import type { ApiSuccessResponse } from '@/types/api';
 import type { CategoryType } from '@/types/place';
+import type { LanguageName } from '@/types/type';
 
 export interface VideosRequest {
   youtubeUrl: string;
@@ -25,8 +26,11 @@ export interface VideosResponse extends ApiSuccessResponse {
         type: CategoryType;
         longitude: number;
         latitude: number;
-        placeOrder: number;
+        translatedPlaceName: string | null;
+        translatedRoadAddress: string | null;
+        language: LanguageName;
         kakaoPlaceId: string;
+        bookmarkedIdList: number[];
       }[];
     };
   };
