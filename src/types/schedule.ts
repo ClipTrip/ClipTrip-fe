@@ -15,8 +15,8 @@ export interface DeleteScheduleResponse extends ApiSuccessResponse {
 
 export interface GetScheduleDetailResponse extends ApiSuccessResponse {
   data: {
-    scheduleId: number;
-    scheduleName: string;
+    id: number;
+    name: string;
     description: string;
     placeList: {
       placeId: number;
@@ -26,6 +26,8 @@ export interface GetScheduleDetailResponse extends ApiSuccessResponse {
       type: CategoryType;
       longitude: number;
       latitude: number;
+      translatedPlaceName: string | null;
+      translatedRoadAddress: string | null;
       placeOrder: number;
       kakaoPlaceId: string;
     }[];

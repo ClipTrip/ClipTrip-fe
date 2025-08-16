@@ -157,7 +157,7 @@ const TripDetailListSheet = ({
             <div className={'flex flex-col items-end'}>
               <SectionTitle
                 size='l'
-                title={scheduleDetail.data.scheduleName}
+                title={scheduleDetail.data.name}
                 description={
                   <button
                     className='px-012 text-sy_label-light gap-008 flex cursor-pointer items-center'
@@ -181,7 +181,7 @@ const TripDetailListSheet = ({
                           <Menu.Item
                             title={t('menu:menu_rename')}
                             onClick={() => {
-                              setDefaultName(scheduleDetail.data.scheduleName);
+                              setDefaultName(scheduleDetail.data.name);
                               setOpen(true);
                             }}
                           />
