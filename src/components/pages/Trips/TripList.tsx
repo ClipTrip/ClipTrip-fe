@@ -22,7 +22,7 @@ interface TripListProps {
 }
 
 const TripList = ({ data, isPending, error }: TripListProps) => {
-  const { t } = useTranslation(['menu']);
+  const { t } = useTranslation(['menu', 'sectionTitle']);
   const { mutateAsync, isPending: deleteIsPending } = useDeleteSchedule();
   const { mutateAsync: addMutate, isPending: addIsPending } = useAddSchedule();
 
@@ -44,7 +44,9 @@ const TripList = ({ data, isPending, error }: TripListProps) => {
     <div className='pb-[104px]'>
       <header className='px-012 flex h-[69px] items-center justify-between'>
         <div className='gap-004 flex h-12 items-center'>
-          <h2 className='pl-012 title_l text-sy_label-normal'>내 일정</h2>
+          <h2 className='pl-012 title_l text-sy_label-normal'>
+            {t('sectionTitle:sectionTitle_tripList')}
+          </h2>
           <span className='title_m text-sy_label-light'>({data?.length})</span>
         </div>
 

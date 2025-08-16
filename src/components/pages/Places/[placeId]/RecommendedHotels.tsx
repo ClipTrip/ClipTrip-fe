@@ -5,12 +5,14 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
+import { useTranslation } from 'react-i18next';
 
 const RecommendedHotels = () => {
+  const { t } = useTranslation('sectionTitle');
   return (
     <div className='gap-008 flex flex-col'>
       <header className='flex h-[70px] items-center'>
-        <SectionTitle title='추천 숙소' />
+        <SectionTitle title={t('sectionTitle_stays')} />
       </header>
 
       <div className='w-[360px] pl-4'>

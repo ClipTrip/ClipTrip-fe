@@ -1,3 +1,4 @@
+import FullPageLoading from '@/components/common/FullPageLoading';
 import ListItem from '@/components/common/ListItem';
 import SaveIcon from '@/components/icons/system/SaveIcon';
 import AddBookmarkModal from '@/components/pages/Places/AddBookmarkModal';
@@ -21,7 +22,8 @@ interface KeywordSearchListProps {
 const KeywordSearchList = ({ searchParams }: KeywordSearchListProps) => {
   const { t } = useTranslation('category');
   const [sp] = useSearchParams();
-  const { data: placesData } = useSearchKeywordPlaces(searchParams);
+  const { data: placesData, isPending: searchIsPending } =
+    useSearchKeywordPlaces(searchParams);
   const { mutateAsync, isPending } = useGetPlaceDetailKakaoId();
 
   const places = placesData?.data;
@@ -41,6 +43,7 @@ const KeywordSearchList = ({ searchParams }: KeywordSearchListProps) => {
 
   return (
     <>
+      {(isPending || searchIsPending) && <FullPageLoading />}
       {places?.map((place, idx) => (
         <ListItem
           key={idx}

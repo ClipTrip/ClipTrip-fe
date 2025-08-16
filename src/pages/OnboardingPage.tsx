@@ -59,7 +59,7 @@ const OnboardingPage = () => {
   return (
     <>
       {selectLanguage ? (
-        <SelectLanguage onBackClick={() => setSelectLanguage(false)} />
+        <SelectLanguage onSelect={() => setSelectLanguage(false)} />
       ) : (
         <Carousel
           setApi={setApi}

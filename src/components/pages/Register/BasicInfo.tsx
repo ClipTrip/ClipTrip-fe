@@ -9,7 +9,12 @@ interface BasicInfoProps {
   handleNextButton?: () => void;
 }
 
-const BasicInfo = ({ emailValue, passwordValue, onChangeValue , handleNextButton }: BasicInfoProps) => {
+const BasicInfo = ({
+  emailValue,
+  passwordValue,
+  onChangeValue,
+  handleNextButton,
+}: BasicInfoProps) => {
   const { t } = useTranslation(['textField', 'buttonAction']);
 
   return (
@@ -18,13 +23,13 @@ const BasicInfo = ({ emailValue, passwordValue, onChangeValue , handleNextButton
         type='email'
         placeholder={t('textField:textField_signUp-id')}
         value={emailValue}
-        onChange={(event) => onChangeValue("email", event.target.value)}
+        onChange={(event) => onChangeValue('email', event.target.value)}
       />
       <TextField
         type='password'
         placeholder={t('textField:textField_signUp-password')}
         value={passwordValue}
-        onChange={(event) => onChangeValue("password", event.target.value)}
+        onChange={(event) => onChangeValue('password', event.target.value)}
       />
       <ButtonActionFill
         variant='primary'

@@ -1,5 +1,7 @@
 {
   "sectionTitle_placeList": "Place List",
   "sectionTitle_likesList": "Likes List",
-  "sectionTitle_tripList": "Trips List"
+  "sectionTitle_tripList": "My Trips",
+  "sectionTitle_stays": "Recommended Stays",
+  "sectionTitle_add_schedule": "Add a schedule"
 }

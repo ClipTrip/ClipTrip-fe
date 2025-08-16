@@ -1,6 +1,9 @@
 import SelectField from '@/components/common/SelectField.tsx';
-import TextField from "@/components/common/TextField.tsx";
-import SearchFieldv2 from "@/components/pages/Register/SearchFieldv2.tsx";
+import TextField from '@/components/common/TextField.tsx';
+import SearchFieldv2 from '@/components/pages/Register/SearchFieldv2.tsx';
+import { LANGUAGE } from '@/constants/language';
+import { setLanguage } from '@/lib/i18n';
+import type { LanguageName } from '@/types/type';
 import { useTranslation } from 'react-i18next';
 
 interface RegisterInfo {
@@ -11,10 +14,11 @@ interface RegisterInfo {
 }
 
 interface DetailInfoProps {
+  ageValue: number;
   onChange: (field: keyof RegisterInfo, value: string) => void;
 }
 
-const DetailInfo = ({ onChange }: DetailInfoProps) => {
+const DetailInfo = ({ ageValue, onChange }: DetailInfoProps) => {
   const { t } = useTranslation(['selectField', 'buttonAction', 'searchField']);
 
   const genderOptions = [
@@ -54,12 +58,18 @@ const DetailInfo = ({ onChange }: DetailInfoProps) => {
       />
       <TextField
         placeholder={t('selectField_age')}
+        type='number'
         onChange={(event) => onChange('age', event.target.value)}
+        value={ageValue === 0 ? '' : ageValue}
+        onIconClick={() => onChange('age', '')}
       />
       <SelectField
         datas={languageOptions}
         placeHolder={t('selectField_language')}
-        onChange={(val) => onChange('language', val)}
+        onChange={(val) => {
+          onChange('language', val);
+          setLanguage(LANGUAGE[val as LanguageName]);
+        }}
       />
       <SearchFieldv2
         placeHolder={t('searchField:country')}

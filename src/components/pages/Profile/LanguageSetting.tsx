@@ -12,11 +12,11 @@ interface LanguageSettingProps {
 const LanguageSetting = ({ onClickBackIcon }: LanguageSettingProps) => {
   const { t } = useTranslation(['appBar', 'buttonAction']);
 
-  const languageOptions = [
-    { value: 'ENGLISH', label: t('buttonAction:button-action_language-01') },
-    { value: 'KOREAN', label: t('buttonAction:button-action_language-02') },
-    { value: 'JAPANESE', label: t('buttonAction:button-action_language-03') },
-    { value: 'CHINESE', label: t('buttonAction:button-action_language-04') },
+  const languageOptions: { value: LanguageCode; label: string }[] = [
+    { value: 'en', label: t('buttonAction:button-action_language-01') },
+    { value: 'ko', label: t('buttonAction:button-action_language-02') },
+    { value: 'ja', label: t('buttonAction:button-action_language-03') },
+    { value: 'zh', label: t('buttonAction:button-action_language-04') },
   ];
 
   const findLanguageOptions = () => {

@@ -14,7 +14,11 @@ const ProtectedRouteLayout = () => {
   if (isError || !data.data.isTokenVerified)
     return (
       <Navigate
-        to={`/login?redirect=${encodeURIComponent(currentPath)}`}
+        to={
+          localStorage.getItem('language')
+            ? `/login?redirect=${encodeURIComponent(currentPath)}`
+            : '/onboarding'
+        }
         replace
       />
     );

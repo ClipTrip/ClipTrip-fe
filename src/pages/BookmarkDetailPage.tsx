@@ -7,11 +7,13 @@ import BookmarkDetailListSheet from '@/components/pages/Places/bookmark/[bookmar
 import { usePatchBookmark } from '@/hooks/useBookmark';
 import type { BookmarkDetailResponse } from '@/types/bookmarks';
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 type placeListType = BookmarkDetailResponse['data']['placeList'];
 
 const BookmarkDetailPage = () => {
+  const { t } = useTranslation('appBar');
   const navigate = useNavigate();
   const { bookmarkId } = useParams<{ bookmarkId: string }>();
   const [sp] = useSearchParams();
@@ -45,7 +47,7 @@ const BookmarkDetailPage = () => {
         ThirdIcon={
           mode !== 'schedule' && (
             <ButtonText
-              title='저장'
+              title={t('appBar_save')}
               onClick={handleSave}
             />
           )
