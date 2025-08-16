@@ -31,7 +31,9 @@ instance.interceptors.response.use(
           alert('로그인이 만료되었습니다.');
           await authApi.logout();
           const currentPath = window.location.pathname + window.location.search;
-          window.location.href = `/login?redirect=${encodeURIComponent(currentPath)}`;
+          window.location.href = localStorage.getItem('language')
+            ? `/login?redirect=${encodeURIComponent(currentPath)}`
+            : '/onboarding';
           return Promise.reject(refreshErr);
         }
       }
