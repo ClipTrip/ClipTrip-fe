@@ -11,6 +11,8 @@ export interface PlaceList {
   type: CategoryType;
   longitude: number;
   latitude: number;
+  translatedPlaceName: string | null;
+  translatedRoadAddress: string | null;
   placeOrder: number;
   kakaoPlaceId: string;
   bookmarkedIdList: number[];

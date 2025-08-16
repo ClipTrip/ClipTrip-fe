@@ -38,7 +38,7 @@ const TripDetailPage = () => {
       {scheduleDetail && (
         <TripDetailListSheet
           mode={mode}
-          scheduleId={scheduleDetail.data.scheduleId}
+          scheduleId={scheduleDetail.data.id}
           scheduleDetail={scheduleDetail}
           durationData={durationData}
           setMode={setMode}
