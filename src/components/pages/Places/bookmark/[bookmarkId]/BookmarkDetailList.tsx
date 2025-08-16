@@ -108,8 +108,8 @@ const BookmarkDetailList = ({
                 </DropdownMenu>
               )
             }
-            title={place.placeName}
-            description={place.roadAddress}
+            title={place.translatedPlaceName ?? place.placeName}
+            description={place.translatedRoadAddress ?? place.roadAddress}
             LeftIcon={<TripAddButton place={place} />}
             Pin={
               mode !== 'schedule'
