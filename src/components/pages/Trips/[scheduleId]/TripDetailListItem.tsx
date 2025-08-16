@@ -25,12 +25,12 @@ const TripDetailListItem = ({
   return (
     <div
       className={cn(
-        'pt-008 pr-012 pl-024 bg-sy_container-neutral-white active:bg-sy_container-neutral-normal flex cursor-pointer items-center',
+        'pt-008 pr-012 pl-024 bg-sy_container-neutral-white active:bg-sy_container-neutral-normal flex cursor-pointer',
         className
       )}
     >
       {Pin && (
-        <div className='pr-012 relative h-[82px] w-9'>
+        <div className='pr-012 relative w-9'>
           <button onClick={onPinClick}>
             <Pin />
           </button>

@@ -1,36 +1,21 @@
-import ButtonIcon from '@/components/common/ButtonIcon.tsx';
-import { type ElementType, type ReactNode } from 'react';
+import ChevronRightIcon from '@/components/icons/system/ChevronRightIcon';
 
 interface ListItemProps {
   title: string;
-  RightIcon?: ElementType | ReactNode;
-  onRightIconClick?: () => void;
+  onClick?: () => void;
 }
 
-const MyPageListItem = ({
-  title,
-  RightIcon,
-  onRightIconClick,
-}: ListItemProps) => {
-  const renderRightIcon = () => {
-    if (!RightIcon) return null;
-
-    if (typeof RightIcon === 'function') {
-      return (
-        <ButtonIcon
-          Icon={RightIcon}
-          onClick={onRightIconClick}
-        />
-      );
-    }
-
-    return null;
-  };
+const MyPageListItem = ({ title, onClick }: ListItemProps) => {
   return (
-    <div className='px-024 py-008 flex items-center justify-between'>
+    <button
+      className='px-024 py-008 flex cursor-pointer items-center justify-between'
+      onClick={onClick}
+    >
       <p className={'title_m text-sy_label-normal'}>{title}</p>
-      {renderRightIcon()}
-    </div>
+      <div className='flex size-12 items-center justify-center'>
+        <ChevronRightIcon className='size-6' />
+      </div>
+    </button>
   );
 };
 

@@ -1,5 +1,7 @@
 {
   "sectionTitle_placeList": "장소 리스트",
   "sectionTitle_likesList": "북마크 리스트",
-  "sectionTitle_tripList": "일정 리스트"
+  "sectionTitle_tripList": "내 일정",
+  "sectionTitle_stays": "추천 숙소",
+  "sectionTitle_add_schedule": "일정을 추가해보세요"
 }

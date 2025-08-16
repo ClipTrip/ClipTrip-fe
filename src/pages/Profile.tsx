@@ -1,11 +1,10 @@
 import AppBar from '@/components/common/AppBar.tsx';
 import MyPageListItem from '@/components/pages/Profile/MyPageListItem.tsx';
-import ChevronRightIcon from '@/components/icons/system/ChevronRightIcon.tsx';
 import Terms from '@/components/common/Terms.tsx';
 import LanguageSetting from '@/components/pages/Profile/LanguageSetting.tsx';
 import ChangePassword from '@/components/pages/Profile/ChangePassword.tsx';
 import Dialog from '@/components/pages/Profile/Dialog.tsx';
-import Navigation from "@/components/common/Navigation.tsx";
+import Navigation from '@/components/common/Navigation.tsx';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useLogout } from '@/hooks/useAuth.ts';
@@ -24,7 +23,8 @@ const Profile = () => {
     privacy: false,
     service: false,
   });
-  const isOpenPage = open.language || open.password || open.privacy || open.service;
+  const isOpenPage =
+    open.language || open.password || open.privacy || open.service;
 
   const handleOpenAndClose = (
     key: 'language' | 'password' | 'privacy' | 'service',
@@ -45,23 +45,19 @@ const Profile = () => {
       <div className='mt-[8px] flex flex-col'>
         <MyPageListItem
           title={t('listItem:listItem_set-01')}
-          RightIcon={ChevronRightIcon}
-          onRightIconClick={() => handleOpenAndClose('language', true)}
+          onClick={() => handleOpenAndClose('language', true)}
         />
         <MyPageListItem
           title={t('listItem:listItem_set-02')}
-          RightIcon={ChevronRightIcon}
-          onRightIconClick={() => handleOpenAndClose('password', true)}
+          onClick={() => handleOpenAndClose('password', true)}
         />
         <MyPageListItem
           title={t('listItem:listItem_set-03')}
-          RightIcon={ChevronRightIcon}
-          onRightIconClick={() => handleOpenAndClose('privacy', true)}
+          onClick={() => handleOpenAndClose('privacy', true)}
         />
         <MyPageListItem
           title={t('listItem:listItem_set-04')}
-          RightIcon={ChevronRightIcon}
-          onRightIconClick={() => handleOpenAndClose('service', true)}
+          onClick={() => handleOpenAndClose('service', true)}
         />
         <Dialog
           trigger={
@@ -110,7 +106,7 @@ const Profile = () => {
           onClose={() => handleOpenAndClose('service', false)}
         />
       )}
-      {!isOpenPage && <Navigation className="fixed bottom-0"/>}
+      {!isOpenPage && <Navigation className='fixed bottom-0' />}
     </div>
   );
 };

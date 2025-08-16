@@ -5,8 +5,10 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useAddSchedule } from '@/hooks/useSchedule';
 import type { ApiFailResponse } from '@/types/api';
 import type { GetSchedulesResponse } from '@/types/schedule';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 interface TripCardListProps {
@@ -17,6 +19,14 @@ interface TripCardListProps {
 
 const TripCardList = ({ data, error, isPending }: TripCardListProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation('sectionTitle');
+  const { mutateAsync: addMutate, isPending: addIsPending } = useAddSchedule();
+
+  const handleAdd = async () => {
+    if (addIsPending) return null;
+
+    await addMutate();
+  };
 
   return (
     <div className='mb-4 w-[360px] pl-4'>
@@ -40,7 +50,12 @@ const TripCardList = ({ data, error, isPending }: TripCardListProps) => {
             </CarouselItem>
           ))}
           {!isPending && data?.length === 0 && (
-            <TripCard title='일정을 추가해보세요' />
+            <button
+              className='cursor-pointer text-left'
+              onClick={handleAdd}
+            >
+              <TripCard title={t('sectionTitle_add_schedule')} />
+            </button>
           )}
           {isPending
             && [1, 2, 3, 4].map((v) => (

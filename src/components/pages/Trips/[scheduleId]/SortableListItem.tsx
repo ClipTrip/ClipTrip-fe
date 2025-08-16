@@ -57,7 +57,7 @@ const SortableListItem = ({
             <button
               {...attributes}
               {...listeners}
-              className='cursor-pointer'
+              className='cursor-pointer touch-none'
             >
               <DragIcon />
             </button>

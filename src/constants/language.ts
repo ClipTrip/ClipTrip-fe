@@ -1,10 +1,8 @@
-import type { LoginResponse } from '@/types/auth';
-import type { LanguageCode } from '@/types/type';
+import type { LanguageCode, LanguageName } from '@/types/type';
 
-export const LANGUAGE: Record<LoginResponse['data']['language'], LanguageCode> =
-  {
-    KOREAN: 'ko',
-    ENGLISH: 'en',
-    JAPANESE: 'ja',
-    CHINESE: 'zh',
-  } as const;
+export const LANGUAGE: Record<LanguageName, LanguageCode> = {
+  KOREAN: 'ko',
+  ENGLISH: 'en',
+  JAPANESE: 'ja',
+  CHINESE: 'zh',
+} as const;

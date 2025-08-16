@@ -1,15 +1,13 @@
-import AppBar from '@/components/common/AppBar';
 import ButtonActionFill from '@/components/common/ButtonActionFill';
 import Headline from '@/components/common/Headline';
-import ArrowBackIcon from '@/components/icons/system/ArrowBackIcon';
 import { setLanguage } from '@/lib/i18n';
 import { useTranslation } from 'react-i18next';
 
 interface SelectLanguageProps {
-  onBackClick?: () => void;
+  onSelect?: () => void;
 }
 
-const SelectLanguage = ({ onBackClick }: SelectLanguageProps) => {
+const SelectLanguage = ({ onSelect }: SelectLanguageProps) => {
   const { t } = useTranslation(['headline', 'buttonAction']);
 
   const languages = [
@@ -21,11 +19,6 @@ const SelectLanguage = ({ onBackClick }: SelectLanguageProps) => {
 
   return (
     <>
-      <AppBar
-        LeadingIcon={ArrowBackIcon}
-        onLeadingIconClick={onBackClick}
-      />
-
       <Headline
         title={t('headline_title_onb-00')}
         description={t('headline_supportingText_onb-00')}
@@ -37,7 +30,10 @@ const SelectLanguage = ({ onBackClick }: SelectLanguageProps) => {
           <ButtonActionFill
             key={lang.code}
             variant='neutral'
-            onClick={() => setLanguage(lang.code)}
+            onClick={() => {
+              setLanguage(lang.code);
+              onSelect?.();
+            }}
           >
             {lang.label}
           </ButtonActionFill>

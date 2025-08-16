@@ -8,13 +8,13 @@ import TermsAgreement from '@/components/pages/Register/TermsAgreement.tsx';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import {useRegister} from "@/hooks/useAuth.ts";
-import type {RegisterRequest} from "@/types/auth.ts";
+import { useRegister } from '@/hooks/useAuth.ts';
+import type { RegisterRequest } from '@/types/auth.ts';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation(['headline']);
-  const {mutateAsync, isPending} = useRegister();
+  const { mutateAsync, isPending } = useRegister();
 
   const [isNext, setIsNext] = useState(false);
   const [registerInfo, setRegisterInfo] = useState<{
@@ -41,7 +41,11 @@ const RegisterPage = () => {
     privacy: false,
     service: false,
   });
-  const isAllFilled = registerInfo.gender !== '' && registerInfo.age !== 0 && registerInfo.language !== '' && registerInfo.countryCode !== '';
+  const isAllFilled =
+    registerInfo.gender !== ''
+    && registerInfo.age !== 0
+    && registerInfo.language !== ''
+    && registerInfo.countryCode !== '';
 
   const handleRegisterInfo = (field: string, value: string) => {
     setRegisterInfo((prev) => ({
@@ -74,8 +78,8 @@ const RegisterPage = () => {
 
   const handleSubmitRegisterInfo = async () => {
     if (isPending) return null;
-    await mutateAsync({...registerInfo} as RegisterRequest)
-  }
+    await mutateAsync({ ...registerInfo } as RegisterRequest);
+  };
 
   return (
     <div className='flex flex-col items-center'>
@@ -85,8 +89,14 @@ const RegisterPage = () => {
       />
       <Headline
         className='mt-7 w-[195px]'
-        title={isNext ? t('headline_title_signUp-02') : t('headline_title_signUp-01')}
-        description={isNext ? t('headline_supportingText_signUp-02') : t('headline_supportingText_signUp-01')}
+        title={
+          isNext ? t('headline_title_signUp-02') : t('headline_title_signUp-01')
+        }
+        description={
+          isNext
+            ? t('headline_supportingText_signUp-02')
+            : t('headline_supportingText_signUp-01')
+        }
       />
       {!isNext && (
         <BasicInfo
@@ -99,6 +109,7 @@ const RegisterPage = () => {
       {isNext && (
         <>
           <DetailInfo
+            ageValue={registerInfo.age}
             onChange={(field, value) => handleRegisterInfo(field, value)}
           />
           <TermsAgreement

@@ -31,12 +31,12 @@ const ListItem = ({
   return (
     <div
       className={cn(
-        'py-008 pr-012 pl-024 bg-sy_container-neutral-white active:bg-sy_container-neutral-normal flex cursor-pointer items-center',
+        'py-008 pr-012 pl-024 bg-sy_container-neutral-white active:bg-sy_container-neutral-normal flex cursor-pointer',
         className
       )}
     >
       {Pin && (
-        <div className='pr-012 h-[51px] w-9 py-[3px]'>
+        <div className='pr-012 w-9 py-[3px]'>
           <button
             onClick={onPinClick}
             className={cn(!!onPinClick && 'cursor-pointer')}

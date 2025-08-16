@@ -35,7 +35,8 @@ const CategorySearchList = ({ searchParams }: CategorySearchListProps) => {
   const { t } = useTranslation('category');
   const [sp] = useSearchParams();
   const mode = sp.get('mode') as null | 'schedule';
-  const { data: places } = useSearchCategoryPlaces(searchParams);
+  const { data: places, isPending: searchIsPending } =
+    useSearchCategoryPlaces(searchParams);
   const { mutateAsync, isPending } = useGetPlaceDetailKakaoId();
 
   const pin = PIN.find(
@@ -56,7 +57,7 @@ const CategorySearchList = ({ searchParams }: CategorySearchListProps) => {
 
   return (
     <>
-      {isPending && <FullPageLoading />}
+      {(isPending || searchIsPending) && <FullPageLoading />}
       {places?.map((place, idx) => (
         <ListItem
           key={idx}
@@ -68,7 +69,7 @@ const CategorySearchList = ({ searchParams }: CategorySearchListProps) => {
             )
           }
           LeftIcon={<TripAddButton place={place} />}
-          title={place.placeName}
+          title={place.translatedPlaceName ?? place.placeName}
           description={t(place.type)}
           onClick={() => handlePlaceDetail(place)}
         />

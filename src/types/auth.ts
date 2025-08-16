@@ -11,9 +11,24 @@ export interface RegisterRequest {
   password: string;
   gender: 'MALE' | 'FEMALE';
   age: number;
-  language: 'KOREAN' | 'ENGLISH';
-  countryCode: 'US' | 'KR' | 'CN' | 'JP' | 'TW' | 'HK' | 'TH' | 'IN' | 'DE' | 'FR' | 'UK' | 'CA' | 'AU';
+  language: LanguageName;
+  countryCode: CountryCode;
 }
+
+export type CountryCode =
+  | 'US'
+  | 'KR'
+  | 'CN'
+  | 'JP'
+  | 'TW'
+  | 'HK'
+  | 'TH'
+  | 'IN'
+  | 'DE'
+  | 'FR'
+  | 'UK'
+  | 'CA'
+  | 'AU';
 
 export interface LoginResponse extends ApiSuccessResponse {
   data: {

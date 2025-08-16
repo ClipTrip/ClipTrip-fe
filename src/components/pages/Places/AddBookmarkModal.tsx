@@ -13,6 +13,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useAddBookmark, useGetBookmark } from '@/hooks/useBookmark';
 import type {
   LuggagePlaces,
+  PlaceDetailResponse,
   PlaceList,
   SearchResponsePlace,
 } from '@/types/place';
@@ -22,7 +23,11 @@ import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface AddBookmarkModalContentProps {
-  data: SearchResponsePlace | LuggagePlaces | PlaceList;
+  data:
+    | SearchResponsePlace
+    | LuggagePlaces
+    | PlaceList
+    | PlaceDetailResponse['data'];
 }
 
 const AddBookmarkModalContent = ({ data }: AddBookmarkModalContentProps) => {
@@ -50,7 +55,11 @@ const AddBookmarkModalContent = ({ data }: AddBookmarkModalContentProps) => {
 
 interface AddBookmarkModalProps {
   open?: boolean;
-  data: SearchResponsePlace | LuggagePlaces | PlaceList;
+  data:
+    | SearchResponsePlace
+    | LuggagePlaces
+    | PlaceList
+    | PlaceDetailResponse['data'];
   children?: ReactNode;
   setOpen?: (open: boolean) => void;
 }
