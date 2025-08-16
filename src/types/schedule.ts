@@ -6,6 +6,7 @@ export interface GetSchedulesResponse extends ApiSuccessResponse {
     scheduleId: number;
     scheduleName: string;
     description: string;
+    schedulePlaceCount: number;
   }[];
 }
 

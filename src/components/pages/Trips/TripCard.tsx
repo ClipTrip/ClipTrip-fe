@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 const CARD = [
   'bg-[url("/card01.png")]',
@@ -14,6 +15,7 @@ interface TripCardProps {
 }
 
 const TripCard = ({ size, title, description }: TripCardProps) => {
+  const { t } = useTranslation('info');
   const random = Math.floor(Math.random() * 4);
   const randomCard = CARD[random];
   const textColor =
@@ -26,8 +28,8 @@ const TripCard = ({ size, title, description }: TripCardProps) => {
         randomCard
       )}
     >
-      <span className={cn('body_s', textColor)}>
-        {size && `${size}개의 장소`}
+      <span className={cn('body_s whitespace-pre', textColor)}>
+        {size !== undefined && `${t('places', { count: size })}`}
       </span>
 
       <div>

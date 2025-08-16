@@ -42,7 +42,7 @@ const TripCardList = ({ data, error, isPending }: TripCardListProps) => {
                 onClick={() => navigate(`/trips/${v.scheduleId}`)}
               >
                 <TripCard
-                  size={data.length}
+                  size={v.schedulePlaceCount || data.length}
                   title={v.scheduleName}
                   description={v.description}
                 />
