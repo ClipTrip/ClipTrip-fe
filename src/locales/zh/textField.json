@@ -1,0 +1,12 @@
+{
+  "textField_logIn-id": "您的电子邮箱",
+  "textField_logIn-password": "您的密码",
+  "textField_signUp-id": "您的电子邮箱",
+  "textField_signUp-password": "您的密码",
+  "textField_currentPassword": "当前密码",
+  "textField_newPassword": "新密码",
+  "textField_url": "粘贴视频网址",
+  "textField_likesList": "收藏列表名称",
+  "textField_addMember": "电子邮箱",
+  "textField_checkID": "检查"
+}

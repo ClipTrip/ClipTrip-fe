@@ -1,0 +1,22 @@
+{
+  "termsOfService_title_01": "第1条（目的）",
+  "termsOfService_title_02": "第2条（定义）",
+  "termsOfService_title_03": "第3条（条款的效力与修改）",
+  "termsOfService_title_04": "第4条（服务协议的订立）",
+  "termsOfService_title_05": "第5条（服务的提供）",
+  "termsOfService_title_06": "第6条（个人信息保护）",
+  "termsOfService_title_07": "第7条（用户义务）",
+  "termsOfService_title_08": "第8条（知识产权）",
+  "termsOfService_title_09": "第9条（责任限制）",
+  "termsOfService_title_10": "第10条（管辖法律与司法管辖）",
+  "termsOfService_supportingText_01": "本服务条款（“条款”）旨在定义CLIP TRIP（“公司”）与用户之间关于使用其基于视频的旅行摘要和行程推荐服务（“服务”）的权利、义务和责任。",
+  "termsOfService_supportingText_02": "1. “服务”是指基于视频字幕自动生成旅行地点、摘要和时间线的AI功能。\n2. “用户”是指同意本条款并使用本服务的任何个人或实体。\n3. “内容”包括用户输入或生成的任何字幕、位置信息或摘要。",
+  "termsOfService_supportingText_03": "1. 公司将在服务屏幕上显示本条款或以其他方式通知用户，用户必须同意本条款才能使用服务。\n2. 公司可根据适用法律修订本条款，并会提前通知用户任何变更。",
+  "termsOfService_supportingText_04": "1. 当用户在注册时同意本条款且公司批准申请时，服务协议即告成立。\n2. 如果出现虚假信息、冒名或违反相关法律的情况，公司可以拒绝或终止协议。",
+  "termsOfService_supportingText_05": "1. 公司提供以下服务：\n- 基于字幕的旅行地点提取和摘要\n- 简易/多语言摘要\n- 行程创建和地图可视化\n- 行程保存和共享\n2. 公司可在事先通知后修改服务的特性和内容。",
+  "termsOfService_supportingText_06": "1. 公司根据适用法律及其[隐私政策]合法收集和处理用户的个人数据。\n2. 收集的数据用于：\n- 服务提供和运营\n- 个性化推荐和内容\n- 统计分析和服务改进\n3. 若经同意，假名化数据可用于分析和研究。",
+  "termsOfService_supportingText_07": "1. 用户不得：\n- 未经许可输入或使用他人信息\n- 未经授权复制或分发生成的内容\n- 将服务用于非法目的",
+  "termsOfService_supportingText_08": "1. 用户对其输入的原始字幕内容保留版权。\n2. AI生成的摘要和行程的版权归公司所有，未经事先同意不得用于商业用途。",
+  "termsOfService_supportingText_09": "1. 公司不保证服务中所含信息的准确性或完整性，也不对任何旅行结果负责。\n2. 除非因重大过失或故意不当行为造成，否则公司对任何数据丢失或错误概不负责。",
+  "termsOfService_supportingText_10": "1. 本条款受大韩民国法律管辖。\n2. 公司与用户之间发生的任何争议，均应由公司主要营业地点的法院管辖。"
+}

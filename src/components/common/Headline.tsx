@@ -24,7 +24,7 @@ const Headline = ({
     >
       <h1
         className={cn(
-          'display_l text-sy_label-strong break-keep',
+          'display_l text-sy_label-strong',
           textAlign === 'center' && 'text-center',
           textAlign === 'left' && 'text-left',
           className

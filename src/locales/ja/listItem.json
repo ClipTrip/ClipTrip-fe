@@ -1,0 +1,15 @@
+{
+  "listItem_term-all": "すべての規約に同意する",
+  "listItem_term-01": "プライバシーポリシー（必須）",
+  "listItem_term-02": "利用規約（必須）",
+  "listItem_set-01": "言語設定",
+  "listItem_set-02": "パスワード変更",
+  "listItem_set-03": "プライバシーポリシー",
+  "listItem_set-04": "利用規約",
+  "listItem_set-05": "ログアウト",
+  "listItem_set-06": "アカウント削除",
+  "listItem_placeName": "場所名",
+  "listItem_descriptionPlace": "場所の説明",
+  "listItem_newTrip": "新規日程",
+  "listItem_descriptionNewTrip": "新規日程の説明"
+}
