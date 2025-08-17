@@ -1,0 +1,22 @@
+{
+  "LARGE_MART": "大型スーパー",
+  "CONVENIENCE_STORE": "コンビニエンスストア",
+  "CHILD_CARE": "保育園",
+  "SCHOOL": "学校",
+  "ACADEMY": "学習塾",
+  "PARKING_LOT": "駐車場",
+  "GAS_STATION": "ガソリンスタンド・充電所",
+  "SUBWAY_STATION": "地下鉄駅",
+  "BANK": "銀行",
+  "CULTURAL_FACILITY": "文化施設",
+  "REAL_ESTATE_AGENCY": "不動産仲介業者",
+  "PUBLIC_INSTITUTION": "公共機関",
+  "TOURIST_ATTRACTION": "観光名所",
+  "ACCOMMODATION": "宿泊施設",
+  "RESTAURANT": "レストラン",
+  "CAFE": "カフェ",
+  "HOSPITAL": "病院",
+  "PHARMACY": "薬局",
+  "LUGGAGE_STORAGE": "荷物預かり所",
+  "ETC": "その他"
+}

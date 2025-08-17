@@ -1,7 +1,7 @@
 {
   "listItem_term-all": "약관 모두 동의하기",
-  "listItem_term-01": "개인정보처리방침",
-  "listItem_term-02": "이용약관동의",
+  "listItem_term-01": "개인정보처리방침 (필수)",
+  "listItem_term-02": "이용약관동의 (선택)",
   "listItem_set-01": "언어 변경",
   "listItem_set-02": "비밀번호 변경",
   "listItem_set-03": "개인정보처리방침",

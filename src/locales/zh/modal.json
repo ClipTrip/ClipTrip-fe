@@ -1,0 +1,8 @@
+{
+  "modal_title_error": "不支持的视频。",
+  "modal_title_deleteTrip": "删除此行程吗？",
+  "modal_title_logOut": "您确定要退出登录吗？",
+  "modal_title_deleteAccount": "永久删除账户吗？",
+  "modal_supportingText_error": "请上传带字幕的视频或附上有效链接。",
+  "modal_supportingText_deleteAccount": "一旦删除，将无法恢复。"
+}

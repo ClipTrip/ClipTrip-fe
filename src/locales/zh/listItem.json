@@ -1,0 +1,15 @@
+{
+  "listItem_term-all": "同意所有条款",
+  "listItem_term-01": "隐私政策（必填）",
+  "listItem_term-02": "服务条款（必填）",
+  "listItem_set-01": "语言设置",
+  "listItem_set-02": "更改密码",
+  "listItem_set-03": "隐私政策",
+  "listItem_set-04": "服务条款",
+  "listItem_set-05": "退出登录",
+  "listItem_set-06": "删除账户",
+  "listItem_placeName": "地点名称",
+  "listItem_descriptionPlace": "地点说明",
+  "listItem_newTrip": "新旅程",
+  "listItem_descriptionNewTrip": "旅程描述"
+}

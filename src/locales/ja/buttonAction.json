@@ -1,0 +1,19 @@
+{
+  "button-action_next": "次へ",
+  "button-action_login": "ログイン",
+  "button-action_start": "旅行を開始！",
+  "button-action_ok": "OK",
+  "button-action_plan": "新しい日程を計画",
+  "button-action_delete": "削除",
+  "button-action_logOut": "ログアウト",
+  "button-action_cancel": "キャンセル",
+  "button-action_create": "作成",
+  "button-action_accept": "同意して続行",
+  "button-action_signUp": "新規登録",
+  "button-action_addLikesList": "新しいブックマークリスト",
+  "button-action_addMember": "追加",
+  "button-action_language-01": "English",
+  "button-action_language-02": "한국어",
+  "button-action_language-03": "日本語",
+  "button-action_language-04": "中文"
+}

@@ -29,7 +29,7 @@ const VideoDetail = ({ data, onBack }: VideoDetailProps) => {
           summary={data.videoResponse.summary}
         />
         <VideoPlaceList
-          scheduleId={data.scheduleInfoResponse.scheduleId}
+          scheduleId={data.scheduleInfoResponse.id}
           placeList={data.scheduleInfoResponse.placeList}
         />
       </div>

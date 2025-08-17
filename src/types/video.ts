@@ -15,8 +15,8 @@ export interface VideosResponse extends ApiSuccessResponse {
       summary: string;
     };
     scheduleInfoResponse: {
-      scheduleId: number;
-      scheduleName: string;
+      id: number;
+      name: string;
       description: string;
       placeList: {
         placeId: number;

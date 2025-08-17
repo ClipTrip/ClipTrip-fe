@@ -1,0 +1,14 @@
+{
+  "appBar_signUp": "注册",
+  "appBar_logIn": "登录",
+  "appBar_create": "创建",
+  "appBar_save": "保存",
+  "appBar_navi-01": "首页",
+  "appBar_navi-02": "旅行",
+  "appBar_navi-03": "书签",
+  "appBar_navi-04": "我的",
+  "appBar_set-01": "语言设置",
+  "appBar_set-02": "更改密码",
+  "appBar_set-03": "隐私政策",
+  "appBar_set-04": "服务条款"
+}

@@ -1,0 +1,22 @@
+{
+  "LARGE_MART": "大型超市",
+  "CONVENIENCE_STORE": "便利店",
+  "CHILD_CARE": "幼儿园",
+  "SCHOOL": "学校",
+  "ACADEMY": "补习班",
+  "PARKING_LOT": "停车场",
+  "GAS_STATION": "加油站/充电站",
+  "SUBWAY_STATION": "地铁站",
+  "BANK": "银行",
+  "CULTURAL_FACILITY": "文化设施",
+  "REAL_ESTATE_AGENCY": "房地产中介",
+  "PUBLIC_INSTITUTION": "公共机构",
+  "TOURIST_ATTRACTION": "旅游景点",
+  "ACCOMMODATION": "住宿",
+  "RESTAURANT": "餐厅",
+  "CAFE": "咖啡馆",
+  "HOSPITAL": "医院",
+  "PHARMACY": "药店",
+  "LUGGAGE_STORAGE": "行李寄存处",
+  "ETC": "其他"
+}
