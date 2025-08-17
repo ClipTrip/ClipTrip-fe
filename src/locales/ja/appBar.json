@@ -1,0 +1,14 @@
+{
+  "appBar_signUp": "新規登録",
+  "appBar_logIn": "ログイン",
+  "appBar_create": "作成",
+  "appBar_save": "保存",
+  "appBar_navi-01": "ホーム",
+  "appBar_navi-02": "日程",
+  "appBar_navi-03": "ブックマーク",
+  "appBar_navi-04": "マイページ",
+  "appBar_set-01": "言語設定",
+  "appBar_set-02": "パスワード変更",
+  "appBar_set-03": "プライバシーポリシー",
+  "appBar_set-04": "利用規約"
+}

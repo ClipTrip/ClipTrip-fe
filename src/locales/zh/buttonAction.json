@@ -1,0 +1,19 @@
+{
+  "button-action_next": "下一步",
+  "button-action_login": "登录",
+  "button-action_start": "开始旅程！",
+  "button-action_ok": "好的",
+  "button-action_plan": "计划新旅程",
+  "button-action_delete": "删除",
+  "button-action_logOut": "退出登录",
+  "button-action_cancel": "取消",
+  "button-action_create": "创建",
+  "button-action_accept": "同意并继续",
+  "button-action_signUp": "注册",
+  "button-action_addLikesList": "新的书签列表",
+  "button-action_addMember": "添加",
+  "button-action_language-01": "English",
+  "button-action_language-02": "한국어",
+  "button-action_language-03": "日本語",
+  "button-action_language-04": "中文"
+}

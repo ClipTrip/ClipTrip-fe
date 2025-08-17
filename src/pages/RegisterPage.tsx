@@ -88,7 +88,7 @@ const RegisterPage = () => {
         onLeadingIconClick={() => (isNext ? setIsNext(false) : navigate(-1))}
       />
       <Headline
-        className='mt-7 w-[195px]'
+        className='mt-7 whitespace-pre'
         title={
           isNext ? t('headline_title_signUp-02') : t('headline_title_signUp-01')
         }

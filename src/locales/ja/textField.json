@@ -1,0 +1,12 @@
+{
+  "textField_logIn-id": "メールアドレス",
+  "textField_logIn-password": "パスワード",
+  "textField_signUp-id": "メールアドレス",
+  "textField_signUp-password": "パスワード",
+  "textField_currentPassword": "現在のパスワード",
+  "textField_newPassword": "新しいパスワード",
+  "textField_url": "動画URLを貼り付け",
+  "textField_likesList": "いいねリスト名",
+  "textField_addMember": "メールアドレス",
+  "textField_checkID": "重複確認"
+}

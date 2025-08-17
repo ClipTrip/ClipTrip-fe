@@ -1,0 +1,8 @@
+{
+  "modal_title_error": "サポートされていない動画です。",
+  "modal_title_deleteTrip": "この日程を削除しますか？",
+  "modal_title_logOut": "ログアウトしますか？",
+  "modal_title_deleteAccount": "アカウントを完全に削除しますか？",
+  "modal_supportingText_error": "字幕付きの動画をアップロードするか、有効なリンクを添付してください。",
+  "modal_supportingText_deleteAccount": "一度削除すると、元に戻すことはできません。"
+}
