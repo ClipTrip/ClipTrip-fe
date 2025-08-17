@@ -38,7 +38,7 @@ const Home = () => {
       <div className='mt-[155px] flex flex-col items-center gap-[35px]'>
         <Headline
           title={t('headline:headline_title_home')}
-          className='w-[250px]'
+          className='w-[250px] whitespace-pre'
           description={t('headline:headline_supportingText_home')}
           descriptionClassName='text-sy_label-normal'
         />
