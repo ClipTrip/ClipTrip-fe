@@ -32,7 +32,6 @@ export const useLogin = () => {
   const [searchParam] = useSearchParams();
 
   const redirectPath = searchParam.get('redirect') || '/';
-  const token = useAuthStore((state) => state.accessToken);
   const setAccessToken = useAuthStore((state) => state.setAccessToken);
 
   return useMutation<LoginResponse, AxiosError<ApiFailResponse>, LoginRequest>({
@@ -40,7 +39,6 @@ export const useLogin = () => {
     onSuccess: async (res) => {
       try {
         setAccessToken(res.data.accessToken);
-        console.log(token);
         const verifyResult = await authApi.verify();
         if (verifyResult.data.isTokenVerified) {
           setLanguage(LANGUAGE[res.data.language]);
