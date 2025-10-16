@@ -33,6 +33,7 @@ export type CountryCode =
 export interface LoginResponse extends ApiSuccessResponse {
   data: {
     language: LanguageName;
+    accessToken: string;
   };
 }
 
@@ -44,3 +45,9 @@ export interface AuthenticationResponse extends ApiSuccessResponse {
 
 export interface LogOutResponse extends ApiSuccessResponse {}
 export interface RegisterResponse extends ApiSuccessResponse {}
+
+export interface TokenRefreshResponse extends ApiSuccessResponse {
+  data: {
+    accessToken: string;
+  };
+}
