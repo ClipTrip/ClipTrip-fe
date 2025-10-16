@@ -14,6 +14,7 @@ import type { ApiFailResponse } from '@/types/api';
 import type { AxiosError } from 'axios';
 import { setLanguage } from '@/lib/i18n';
 import { LANGUAGE } from '@/constants/language';
+import { useAuthStore } from '@/store/tokenStore';
 
 export const useAuthentication = () => {
   return useQuery<AuthenticationResponse, Error, AuthenticationResponse>({
@@ -31,11 +32,13 @@ export const useLogin = () => {
   const [searchParam] = useSearchParams();
 
   const redirectPath = searchParam.get('redirect') || '/';
+  const setAccessToken = useAuthStore((state) => state.setAccessToken);
 
   return useMutation<LoginResponse, AxiosError<ApiFailResponse>, LoginRequest>({
     mutationFn: (data) => authApi.login(data),
     onSuccess: async (res) => {
       try {
+        setAccessToken(res.data.accessToken);
         const verifyResult = await authApi.verify();
         if (verifyResult.data.isTokenVerified) {
           setLanguage(LANGUAGE[res.data.language]);
@@ -56,17 +59,21 @@ export const useLogin = () => {
 export const useRegister = () => {
   const navigate = useNavigate();
 
-  return useMutation<RegisterResponse, AxiosError<ApiFailResponse>, RegisterRequest>({
+  return useMutation<
+    RegisterResponse,
+    AxiosError<ApiFailResponse>,
+    RegisterRequest
+  >({
     mutationFn: (data) => authApi.register(data),
     onSuccess: () => {
-      toast.success("회원가입이 완료되었습니다.")
+      toast.success('회원가입이 완료되었습니다.');
       navigate('/login');
     },
     onError: (error) => {
       toast.error(error.response?.data.message);
     },
-  })
-}
+  });
+};
 
 export const useLogout = () => {
   const navigate = useNavigate();
