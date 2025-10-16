@@ -644,6 +644,11 @@
   dependencies:
     minipass "^7.0.4"
 
+"@jjjk0605/axios-token-refresh@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@jjjk0605/axios-token-refresh/-/axios-token-refresh-0.0.2.tgz#249ed72d028a4eacb30e37bf38db938f6e170cc3"
+  integrity sha512-D3DblpCM8x3klNbM4P3Z9kF3PzK4XUMFn7SLowTr89mNGXJrMAObhWXnH2F6Sro37pPFtLE7PfBfl0Oa3om59A==
+
 "@jridgewell/gen-mapping@^0.3.12", "@jridgewell/gen-mapping@^0.3.5":
   version "0.3.12"
   resolved "https://registry.yarnpkg.com/@jridgewell/gen-mapping/-/gen-mapping-0.3.12.tgz#2234ce26c62889f03db3d7fea43c1932ab3e927b"
