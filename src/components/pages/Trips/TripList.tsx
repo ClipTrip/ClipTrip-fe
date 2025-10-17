@@ -41,7 +41,7 @@ const TripList = ({ data, isPending, error }: TripListProps) => {
   };
 
   return (
-    <div className='pb-[104px]'>
+    <div className='notranslate pb-[104px]'>
       <header className='px-012 flex h-[69px] items-center justify-between'>
         <div className='gap-004 flex h-12 items-center'>
           <h2 className='pl-012 title_l text-sy_label-normal'>

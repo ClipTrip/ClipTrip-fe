@@ -9,6 +9,7 @@ interface SectionTitleProps {
   LeadingIcon?: ElementType;
   RightIcon?: ElementType | ReactNode;
   size?: 'm' | 'l';
+  classNme?: string;
 }
 
 const SectionTitle = ({
@@ -17,9 +18,10 @@ const SectionTitle = ({
   LeadingIcon,
   RightIcon,
   size = 'm',
+  classNme,
 }: SectionTitleProps) => {
   return (
-    <div className='px-012 w-full'>
+    <div className={cn('px-012 w-full', classNme)}>
       <div className='flex items-center'>
         {LeadingIcon && <ButtonIcon Icon={LeadingIcon} />}
         <h2

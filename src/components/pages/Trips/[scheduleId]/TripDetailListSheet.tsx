@@ -156,6 +156,7 @@ const TripDetailListSheet = ({
           >
             <div className={'flex flex-col items-end'}>
               <SectionTitle
+                classNme='notranslate'
                 size='l'
                 title={scheduleDetail.data.name}
                 description={
@@ -201,7 +202,7 @@ const TripDetailListSheet = ({
                 }
               />
 
-              <div className='gap-008 mr-6 flex'>
+              <div className='notranslate gap-008 mr-6 flex'>
                 <ButtonChip
                   Icon={AddIcon}
                   label={t('buttonChip:button-chip_addPlace')}
