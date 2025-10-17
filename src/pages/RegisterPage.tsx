@@ -82,7 +82,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className='flex flex-col items-center'>
+    <div className='notranslate flex flex-col items-center'>
       <AppBar
         LeadingIcon={ArrowBackIcon}
         onLeadingIconClick={() => (isNext ? setIsNext(false) : navigate(-1))}

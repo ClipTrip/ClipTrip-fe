@@ -65,7 +65,7 @@ const BookmarkListSheet = () => {
             className={cn('gap-016 pb-[104px]')}
             disableDrag
           >
-            <div className={'flex flex-col items-end'}>
+            <div className={'notranslate flex flex-col items-end'}>
               <SectionTitle
                 size='l'
                 title={t('sectionTitle:sectionTitle_likesList')}
@@ -80,7 +80,9 @@ const BookmarkListSheet = () => {
               )}
             </div>
 
-            <ScrollArea className={cn('h-[calc(60dvh-270px)] w-full')}>
+            <ScrollArea
+              className={cn('notranslate h-[calc(60dvh-270px)] w-full')}
+            >
               {places && <BookmarkList places={places.data} />}
             </ScrollArea>
           </Sheet.Content>

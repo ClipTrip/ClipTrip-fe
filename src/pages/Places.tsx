@@ -94,7 +94,7 @@ const Places = () => {
         />
       )}
 
-      <div className='pl-024 gap-012 flex w-[360px] flex-col'>
+      <div className='notranslate pl-024 gap-012 flex w-[360px] flex-col'>
         <PlaceSearch
           onSearch={handleKeywordSearch}
           defaultValue={query || ''}

@@ -32,7 +32,7 @@ const Home = () => {
     );
 
   return (
-    <div className="relative h-dvh w-[360px] bg-[url('/bg.png')] bg-center">
+    <div className="notranslate relative h-dvh w-[360px] bg-[url('/bg.png')] bg-center">
       <AppBar title={t('appBar_navi-01')} />
 
       <div className='mt-[155px] flex flex-col items-center gap-[35px]'>

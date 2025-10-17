@@ -63,7 +63,7 @@ const OnboardingPage = () => {
       ) : (
         <Carousel
           setApi={setApi}
-          className='w-[360px] pt-9'
+          className='notranslate w-[360px] pt-9'
           opts={{ watchDrag: true }}
         >
           <CarouselContent>

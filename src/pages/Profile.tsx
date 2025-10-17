@@ -40,7 +40,7 @@ const Profile = () => {
   };
 
   return (
-    <div className='relative h-screen w-full'>
+    <div className='notranslate relative h-screen w-full'>
       <AppBar title={t('appBar_navi-04')} />
       <div className='mt-[8px] flex flex-col'>
         <MyPageListItem

@@ -62,7 +62,7 @@ const RenameModal = ({
         </VisuallyHidden>
 
         <TextField
-          className='px-024'
+          className='notranslate px-024'
           placeholder={t('textField:textField_likesList')}
           checkText={t('textField:textField_checkID')}
           value={name}
@@ -70,7 +70,7 @@ const RenameModal = ({
           onIconClick={() => setName('')}
         />
 
-        <div className='gap-008 flex justify-center'>
+        <div className='notranslate gap-008 flex justify-center'>
           <ButtonActionFill
             variant='neutral'
             className='w-32'

@@ -538,3 +538,21 @@ html[lang='ko'] {
   animation: bounce3 1.5s ease-in-out infinite;
   animation-delay: 0.3s;
 }
+
+body {
+  position: static !important;
+  top: 0px !important;
+}
+iframe.goog-te-banner-frame {
+  display: none !important;
+}
+.skiptranslate {
+  display: none !important;
+}
+.goog-logo-link {
+  display: none !important;
+}
+.goog-te-gadget {
+  color: transparent !important;
+  overflow: hidden;
+}

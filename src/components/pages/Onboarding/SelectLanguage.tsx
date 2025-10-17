@@ -22,10 +22,11 @@ const SelectLanguage = ({ onSelect }: SelectLanguageProps) => {
       <Headline
         title={t('headline_title_onb-00')}
         description={t('headline_supportingText_onb-00')}
-        className='mt-24 w-[230px]'
+        className='notranslate mt-24 w-[230px]'
+        descriptionClassName='notranslate'
       />
 
-      <div className='mt-12 flex flex-col items-center gap-4'>
+      <div className='notranslate mt-12 flex flex-col items-center gap-4'>
         {languages.map((lang) => (
           <ButtonActionFill
             key={lang.code}
