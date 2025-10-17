@@ -18,7 +18,8 @@ const TripsPage = () => {
       <Headline
         title={t('headline:headline_title_trips')}
         textAlign='left'
-        className='mb-7 mt-10 w-[250px] whitespace-pre-line'
+        className='notranslate mb-7 mt-10 w-[250px] whitespace-pre-line'
+        descriptionClassName='notranslate'
       />
 
       <TripCardList

@@ -29,7 +29,7 @@ const TripCardList = ({ data, error, isPending }: TripCardListProps) => {
   };
 
   return (
-    <div className='mb-4 w-[360px] pl-4'>
+    <div className='notranslate mb-4 w-[360px] pl-4'>
       <Carousel className='w-full'>
         <CarouselContent className='pl-3'>
           {data?.map((v) => (

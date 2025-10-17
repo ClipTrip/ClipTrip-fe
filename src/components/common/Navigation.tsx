@@ -27,7 +27,7 @@ const Navigation = ({ className }: NavigationProps) => {
   return createPortal(
     <div
       className={cn(
-        'pt-004 px-024 pb-028 bg-sy_container-neutral-white w-[360px]',
+        'notranslate pt-004 px-024 pb-028 bg-sy_container-neutral-white w-[360px]',
         className
       )}
     >

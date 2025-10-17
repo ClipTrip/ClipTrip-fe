@@ -46,7 +46,7 @@ const AppBar = ({
   onThirdIconClick,
 }: AppBarProps) => {
   return (
-    <header className='px-012 flex h-[52px] w-[360px] items-center'>
+    <header className='notranslate px-012 flex h-[52px] w-[360px] items-center'>
       <div className='flex w-full items-center'>
         {LeadingIcon && (
           <IconButton

@@ -50,7 +50,7 @@ const SelectField = ({ datas, placeHolder, onChange }: SelectFieldProps) => {
           </button>
         </PopoverTrigger>
         <PopoverContent
-          className='bg-sy_container-neutral-normal rounded-020 z-40 mt-[-20px] w-[312px] border-none p-0 shadow-lg'
+          className='notranslate bg-sy_container-neutral-normal rounded-020 z-40 mt-[-20px] w-[312px] border-none p-0 shadow-lg'
           align='start'
         >
           <Command className='bg-sy_container-neutral-normal'>
