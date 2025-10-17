@@ -31,7 +31,7 @@ const useGoogleTranslate = () => {
     window.googleTranslateElementInit = () => {
       if (window.google && window.google.translate) {
         new window.google.translate.TranslateElement(
-          { autoDisplay: false },
+          { pageLanguage: 'ko', autoDisplay: false },
           'google_translate_element'
         );
         setTimeout(() => setIsInitialized(true), 1000);
