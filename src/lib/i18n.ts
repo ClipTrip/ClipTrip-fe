@@ -90,6 +90,7 @@ import type { LanguageCode } from '@/types/type';
 export const setLanguage = (lang: LanguageCode) => {
   i18n.changeLanguage(lang);
   localStorage.setItem('language', lang);
+  window.dispatchEvent(new Event('languageChange'));
 };
 
 export const getLanguage = () =>
