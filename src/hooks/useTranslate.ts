@@ -58,7 +58,18 @@ const useGoogleTranslate = () => {
           { pageLanguage: 'ko', autoDisplay: false },
           'google_translate_element'
         );
-        setTimeout(() => setIsInitialized(true), 1000);
+        let attempts = 0;
+        const maxAttempts = 50;
+        const intervalId = window.setInterval(() => {
+          attempts++;
+          if (document.querySelector('.goog-te-combo')) {
+            setIsInitialized(true);
+            clearInterval(intervalId);
+          } else if (attempts >= maxAttempts) {
+            console.error('Google Translate initialization timed out');
+            clearInterval(intervalId);
+          }
+        }, 200);
       }
     };
 

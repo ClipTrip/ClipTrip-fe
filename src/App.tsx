@@ -7,12 +7,14 @@ import i18n from '@/lib/i18n';
 function App() {
   useGoogleTranslate();
   useEffect(() => {
-    window.addEventListener('storage', (e) => {
+    const onStorage = (e: StorageEvent) => {
       if (e.key === 'language' && e.newValue) {
         i18n.changeLanguage(e.newValue);
       }
-    });
-  });
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
 
   return (
     <>
