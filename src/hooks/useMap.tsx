@@ -53,11 +53,11 @@ export const usePlaceMarker = ({ places, pin }: usePlaceMarkerProps) => {
 
   useEffect(() => {
     clearMarkers();
-    if (!map || !places?.length) return;
+    if (!map || !places?.length || !window.naver?.maps) return;
 
     places.forEach((place, idx) => {
-      const marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(place.latitude, place.longitude),
+      const marker = new window.naver.maps.Marker({
+        position: new window.naver.maps.LatLng(place.latitude, place.longitude),
         map,
         icon:
           (pinImg && Array.isArray(pinImg) ? pinImg[idx] : pinImg)
@@ -65,7 +65,7 @@ export const usePlaceMarker = ({ places, pin }: usePlaceMarkerProps) => {
       });
       addMarker(marker);
     });
-  }, [places]);
+  }, [places, map]);
 };
 
 interface usePlaceCenterProps {
@@ -78,11 +78,11 @@ export const usePlaceCenter = (coords?: usePlaceCenterProps) => {
   const setCenter = useMapStore((state) => state.setCenter);
 
   useEffect(() => {
-    if (!map || !coords) return;
+    if (!map || !coords || !window.naver?.maps) return;
 
     const { latitude, longitude } = coords;
 
-    const center = new naver.maps.LatLng(latitude, longitude);
+    const center = new window.naver.maps.LatLng(latitude, longitude);
     map.setCenter(center);
     setCenter(latitude, longitude);
   }, [coords, map, setCenter]);
@@ -140,7 +140,7 @@ export const useDrawPolyline = (
   }, [placeList]);
 
   useEffect(() => {
-    if (!map || !routeData) return;
+    if (!map || !routeData || !window.naver?.maps) return;
 
     clearPolyline();
 
@@ -150,10 +150,10 @@ export const useDrawPolyline = (
         const verts = segment.vertexes;
 
         for (let i = 0; i < verts.length; i += 2) {
-          coords.push(new naver.maps.LatLng(verts[i + 1], verts[i]));
+          coords.push(new window.naver.maps.LatLng(verts[i + 1], verts[i]));
         }
 
-        const polyline = new naver.maps.Polyline({
+        const polyline = new window.naver.maps.Polyline({
           map: map,
           path: coords,
           strokeWeight: 3,
