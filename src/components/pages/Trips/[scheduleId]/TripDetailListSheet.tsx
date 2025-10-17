@@ -156,7 +156,7 @@ const TripDetailListSheet = ({
           >
             <div className={'flex flex-col items-end'}>
               <SectionTitle
-                classNme='notranslate'
+                className='notranslate'
                 size='l'
                 title={scheduleDetail.data.name}
                 description={
