@@ -97,7 +97,8 @@ const useGoogleTranslate = () => {
     };
 
     const onStorage = (e: StorageEvent) => {
-      if (e.key === 'language' && e.newValue) changeLanguage(e.newValue);
+      if (e.key === 'language' && e.newValue)
+        changeLanguage(e.newValue === 'zh' ? 'zh-CN' : e.newValue);
     };
 
     translateInitial();
