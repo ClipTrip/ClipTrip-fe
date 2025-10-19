@@ -36,6 +36,9 @@ const Home = () => {
     const body = sessionStorage.getItem(IDEMPOTENCY_KEY_BODY_STORAGE_KEY);
     if (body) {
       handleSearch(JSON.parse(body).youtubeUrl);
+    } else {
+      setAnalysisJobId(null);
+      clearIdempotencyKey();
     }
   }, [analysisJobId]);
 
