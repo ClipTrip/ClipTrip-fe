@@ -8,6 +8,13 @@ const useGoogleTranslate = () => {
     (lang: string): void => {
       if (!isInitialized) return;
 
+      const cookieMatch = document.cookie.match(/googtrans=([^;]+)/);
+      const currentLang = cookieMatch ? cookieMatch[1].split('/')[2] : 'ko';
+
+      if (currentLang === lang) {
+        return;
+      }
+
       const googleTranslateSelect =
         document.querySelector<HTMLSelectElement>('.goog-te-combo');
       if (googleTranslateSelect) {
