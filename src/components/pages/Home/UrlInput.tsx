@@ -1,5 +1,4 @@
 import ButtonIcon from '@/components/common/ButtonIcon';
-import FullPageLoading from '@/components/common/FullPageLoading';
 import ArrowUpIcon from '@/components/icons/system/ArrowUpIcon';
 import { cn } from '@/lib/utils';
 import { useRef } from 'react';
@@ -21,7 +20,6 @@ const UrlInput = ({ onSearch, isPending }: UrlInputProps) => {
 
   return (
     <>
-      {isPending && <FullPageLoading />}
       <div className='bg-sy_container-neutral-normal rounded-016 h-fit w-[312px]'>
         <form
           onSubmit={handleSubmit}

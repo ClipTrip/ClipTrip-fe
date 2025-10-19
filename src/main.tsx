@@ -9,16 +9,30 @@ import I18nProvider from '@/providers/I18nProvider.tsx';
 import { Toaster } from '@/components/ui/sonner.tsx';
 import { Analytics } from '@vercel/analytics/react';
 
+async function prepareApp() {
+  if (process.env.NODE_ENV === 'development') {
+    const { worker } = await import('./mocks/browser');
+
+    return worker.start({
+      onUnhandledRequest: 'bypass',
+    });
+  }
+
+  return Promise.resolve();
+}
+
 const queryClient = new QueryClient();
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <I18nProvider>
-        <App />
-        <Toaster />
-      </I18nProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <Analytics />
-    </QueryClientProvider>
-  </StrictMode>
-);
+prepareApp().then(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <I18nProvider>
+          <App />
+          <Toaster />
+        </I18nProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <Analytics />
+      </QueryClientProvider>
+    </StrictMode>
+  );
+});
