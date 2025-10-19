@@ -4,6 +4,7 @@ import type { LanguageName } from '@/types/type';
 
 export interface VideosRequest {
   youtubeUrl: string;
+  signal: AbortSignal;
 }
 
 export interface VideosResponse extends ApiSuccessResponse {
